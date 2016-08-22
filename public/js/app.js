@@ -1,0 +1,1 @@
+angular.module('uia-logging', ['ui.bootstrap', 'ui.router', 'appRoutes', 'MainCtrl', 'LogsCtrl', 'AddLogsCtrl', 'EditLogsCtrl', 'PendingCtrl', 'UsersCtrl', 'EditUsersCtrl', 'EditProfileCtrl', 'AuthService', 'starter']);

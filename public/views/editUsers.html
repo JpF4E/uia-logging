@@ -1,0 +1,251 @@
+<div class="row">
+		<div class="col-md-2 vert-div">
+			<div class="jumbotron no-pad the-menu">
+			<h3 align="left">Menu</h3>
+				<ul class="nav nav-pills nav-stacked">
+					<li role="presentation" align="left"><a ui-sref="main">Home</a></li>
+					<br ng-if="!memberCatsEmpty[0]">
+					<div ng-if="!memberCatsEmpty[0]" class="strike"><span>Logs</span></div>
+					<li ng-class="{'active': currentState.current.name == 'training-logs' || currentState.current.name == 'edit-training-logs'}" ng-if="memberRoles['training-logs'][1]" role="presentation" align="left">
+						<div class="outer-item">
+							<div class="inner-flex">
+								<a href="" ui-sref="training-logs">Training Logs</a>
+							</div>
+							<div class="inner-fixed">
+								<a ui-sref="add-training-logs" ng-if="memberRoles['training-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+							</div>
+						</div>
+					</li>
+					<li ng-class="{'active': currentState.current.name == 'promotion-logs' || currentState.current.name == 'edit-promotion-logs'}" ng-if="memberRoles['promotion-logs'][1]" role="presentation" align="left">
+						<div class="outer-item">
+							<div class="inner-flex">
+								<a href="" ui-sref="promotion-logs">Promotion Logs</a>
+							</div>
+							<div class="inner-fixed">
+								<a ui-sref="add-promotion-logs" ng-if="memberRoles['promotion-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+							</div>
+						</div>
+					</li>
+					<br ng-if="!memberCatsEmpty[1]">
+					<div ng-if="!memberCatsEmpty[1]" class="strike"><span>Discipline Logs</span></div>
+					<li ng-class="{'active': currentState.current.name == 'warning-logs' || currentState.current.name == 'edit-warning-logs'}" ng-if="memberRoles['warning-logs'][1]" role="presentation" align="left">
+						<div class="outer-item">
+							<div class="inner-flex">
+								<a href="" ui-sref="warning-logs">Warning Logs</a>
+							</div>
+							<div class="inner-fixed">
+								<a ui-sref="add-warning-logs" ng-if="memberRoles['warning-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+							</div>
+						</div>
+					</li>
+					<li ng-class="{'active': currentState.current.name == 'demotion-logs' || currentState.current.name == 'edit-demotion-logs'}" ng-if="memberRoles['demotion-logs'][1]" role="presentation" align="left">
+						<div class="outer-item">
+							<div class="inner-flex">
+								<a href="" ui-sref="demotion-logs">Demotion Logs</a>
+							</div>
+							<div class="inner-fixed">
+								<a ui-sref="add-demotion-logs" ng-if="memberRoles['demotion-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+							</div>
+						</div>
+					</li>
+					<li ng-class="{'active': currentState.current.name == 'strike-logs' || currentState.current.name == 'edit-strike-logs'}" ng-if="memberRoles['strike-logs'][1]" role="presentation" align="left">
+						<div class="outer-item">
+							<div class="inner-flex">
+								<a href="" ui-sref="strike-logs">Strike Logs</a>
+							</div>
+							<div class="inner-fixed">
+								<a ui-sref="add-strike-logs" ng-if="memberRoles['strike-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+							</div>
+						</div>
+					</li>
+					<li ng-class="{'active': currentState.current.name == 'fired-logs' || currentState.current.name == 'edit-fired-logs'}" ng-if="memberRoles['fired-logs'][1]" role="presentation" align="left">
+						<div class="outer-item">
+							<div class="inner-flex">
+								<a href="" ui-sref="fired-logs">Fired Logs</a>
+							</div>
+							<div class="inner-fixed">
+								<a ui-sref="add-fired-logs" ng-if="memberRoles['fired-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+							</div>
+						</div>
+					</li>
+					<br ng-if="!memberCatsEmpty[2]">
+					<div ng-if="!memberCatsEmpty[2]" class="strike"><span>Other Logs</span></div>
+					<li ng-class="{'active': currentState.current.name == 'transfer-logs' || currentState.current.name == 'edit-transfer-logs'}" ng-if="memberRoles['transfer-logs'][1]" role="presentation" align="left">
+						<div class="outer-item">
+							<div class="inner-flex">
+								<a href="" ui-sref="transfer-logs">Transfer Logs</a>
+							</div>
+							<div class="inner-fixed">
+								<a ui-sref="add-transfer-logs" ng-if="memberRoles['transfer-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+							</div>
+						</div>
+					</li>
+					<li ng-class="{'active': currentState.current.name == 'rank-selling-logs' || currentState.current.name == 'edit-rank-selling-logs'}" ng-if="memberRoles['rank-selling-logs'][1]" role="presentation" align="left">
+						<div class="outer-item">
+							<div class="inner-flex">
+								<a href="" ui-sref="rank-selling-logs">Rank Selling Logs</a>
+							</div>
+							<div class="inner-fixed">
+								<a ui-sref="add-rank-selling-logs" ng-if="memberRoles['rank-selling-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+							</div>
+						</div>
+					</li>
+					<li ng-class="{'active': currentState.current.name == 'loa-logs' || currentState.current.name == 'edit-loa-logs'}" ng-if="memberRoles['loa-logs'][1]" role="presentation" align="left">
+						<div class="outer-item">
+							<div class="inner-flex">
+								<a href="" ui-sref="loa-logs">LoA Logs</a>
+							</div>
+							<div class="inner-fixed">
+								<a ui-sref="add-loa-logs" ng-if="memberRoles['loa-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-md-10 main-content">
+			<div class="jumbotron no-pad">
+				<div class="outer-item">
+					<h3 class="inner-flex" align="left"><span ng-class="'glyphicon glyphicon-' + logIcon" aria-hidden="true"></span> {{logTitle}}</h3>
+					<div class="inner-fixed">
+						<h4 align="right">{{clockDate}}</h4>
+						<h4 align="right"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> {{clockTime}}</h4>
+					</div>
+				</div>
+				<ul class="nav nav-tabs">
+					<li role="presentation"><a href="" ui-sref="pending">Pending Members</a></li>
+					<li role="presentation"><a href="" ui-sref="users">All Members</a></li>
+					<li role="presentation" class="active"><a>Edit Member</a></li>
+				</ul>
+				<div class="panel panel-default custom-panel">
+					<!--<div class="panel-heading">
+						<h3 text-align="left" class="panel-title">Edit a {{logTitleSingular}}</h3>
+					</div>-->
+					<div class="panel-body">
+						<form class="main-add-form">
+							<div ng-if="addForm.name.show" class="a-control">
+								<label>{{addForm.name.tip1}}:</label>
+								<input ng-disabled="addForm.name.dis" required="" autofocus="" type="text" class="form-control" placeholder="{{addForm.name.tip2}}" ng-model="addForm.name.val"></input>
+							</div>
+							<div ng-if="addForm.valid.show" class="a-control">
+								<label>{{addForm.valid.tip1}}:</label>
+								<div class="checkbox">
+									<label>
+										<input ng-disabled="addForm.valid.dis" type="checkbox" ng-model="addForm.valid.val">
+										Accepted
+									</label>
+								</div>
+							</div>
+							<div ng-if="addForm.type.show" class="a-control">
+								<label>{{addForm.type.tip1}}:</label>
+								<div class="radio">
+									<label>
+										<input ng-disabled="addForm.type.dis || memberType == 'Admin'" required="" value="Owner" type="radio" name="optionsRadios2" id="optionsRadios21" ng-model="addForm.type.val">
+										Owner
+									</label>
+								</div>
+								<div class="radio">
+									<label>
+										<input ng-disabled="addForm.type.dis || memberType == 'Admin'" required="" value="Admin" type="radio" name="optionsRadios2" id="optionsRadios22" ng-model="addForm.type.val">
+										Admin
+									</label>
+								</div>
+								<div class="radio">
+									<label>
+										<input ng-disabled="addForm.type.dis || memberType == 'Admin'" required="" value="Regular" type="radio" name="optionsRadios2" id="optionsRadios23" ng-model="addForm.type.val">
+										Regular
+									</label>
+								</div>
+							</div>
+							<div ng-if="addForm.promoTag.show" class="a-control">
+								<label>{{addForm.promoTag.tip1}}:</label>
+								<div class="input-group">
+									<span class="input-group-addon">[</span>
+									<input ng-disabled="addForm.promoTag.dis" required="" type="text" class="form-control" placeholder="{{addForm.promoTag.tip2}}" ng-model="addForm.promoTag.val"></input>
+									<span class="input-group-addon">]</span>
+								</div>
+							</div>
+							<div ng-if="addForm.rank.show" class="a-control">
+								<label>{{addForm.rank.tip1}}:</label>
+								<div class="input-group">
+									<span class="input-group-addon">[UIA]</span>
+									<input ng-disabled="addForm.rank.dis" required="" type="text" class="form-control" placeholder="{{addForm.rank.tip2}}" ng-model="addForm.rank.val"></input>
+								</div>
+							</div>
+							<div ng-if="addForm.email.show" class="a-control">
+								<label>{{addForm.email.tip1}}:</label>
+								<input ng-disabled="addForm.email.dis" required="" type="email" class="form-control" placeholder="{{addForm.email.tip2}}" ng-model="addForm.email.val"></input>
+							</div>
+							<div ng-if="addForm.tokenTimestamp.show" class="a-control">
+								<label>{{addForm.tokenTimestamp.tip1}}:</label>
+								<input ng-disabled="addForm.tokenTimestamp.dis" required="" type="date" class="form-control" placeholder="{{addForm.tokenTimestamp.tip2}}" ng-model="addForm.tokenTimestamp.val"></input>
+							</div>
+							<div ng-if="addForm.firstLogin.show" class="a-control">
+								<label>{{addForm.firstLogin.tip1}}:</label>
+								<div class="checkbox">
+									<label>
+										<input ng-disabled="addForm.firstLogin.dis" type="checkbox" ng-model="addForm.firstLogin.val">
+										Show Welcome Message in the next Login
+									</label>
+								</div>
+							</div>
+							<div ng-if="addForm.createdAt.show" class="a-control">
+								<label>{{addForm.createdAt.tip1}}:</label>
+								<input ng-disabled="addForm.createdAt.dis" required="" type="date" class="form-control" placeholder="{{addForm.createdAt.tip2}}" ng-model="addForm.createdAt.val"></input>
+							</div>
+							<div ng-if="addForm.updatedAt.show" class="a-control">
+								<label>{{addForm.updatedAt.tip1}}:</label>
+								<input ng-disabled="addForm.updatedAt.dis" required="" type="date" class="form-control" placeholder="{{addForm.updatedAt.tip2}}" ng-model="addForm.updatedAt.val"></input>
+							</div>
+							<div ng-if="addForm.allowedRoles.show" class="a-control">
+								<label>{{addForm.allowedRoles.tip1}}:</label>
+								<div class="table-responsive main-table-content">
+									<table class="table table-hover">
+										<thead>
+											<tr>
+												<th>Log</th>
+												<th>Add</th>
+												<th>View</th>
+												<th>Edit</th>
+												<th>Delete</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="w in addForm.allowedRoles.val">
+												<td>{{normalizeRole(w.role)}}</td>
+												<td>
+													<label>
+														<input type="checkbox" ng-model="w.perm[0]">
+													</label>
+												</td>
+												<td>
+													<label>
+														<input type="checkbox" ng-model="w.perm[1]">
+													</label>
+												</td>
+												<td>
+													<label>
+														<input type="checkbox" ng-model="w.perm[2]">
+													</label>
+												</td>
+												<td>
+													<label>
+														<input ng-disabled="memberType == 'Admin'" type="checkbox" ng-model="w.perm[3]">
+													</label>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<button class="btn btn-lg btn-primary" type="submit" ng-click="editUser()">Edit Member</button>
+							<!-- <button class="btn btn-lg" type="reset" ng-click="resetForm()">Clear</button> -->
+							<br ng-show="alert != null">
+							<br ng-show="alert != null">
+							<div ng-show="alert != null" uib-alert ng-class="'alert-' + (alert.type || 'danger')" close="closeAlert()"><strong>{{alert.strong}}</strong> {{alert.msg}}</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

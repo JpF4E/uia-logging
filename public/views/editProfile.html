@@ -1,0 +1,225 @@
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">First Login</h4>
+			</div>
+			<div class="modal-body">
+				Welcome to the UIA Portal.
+				<br>
+				<br>
+				Please enter your current rank and pick a promotion tag. After editing the fields click the "Edit Profile" button and wait for a green alert confirming it.
+				<br>
+				<br>
+				Not updating this information correctly will prevent you from adding logs.
+				<br>
+				<br>
+				The promotion tag should be a short version (4 characters max)
+				of your username without adding any brackets.
+				<br>
+				<br>
+				Whenever you are promoted, please update your rank in your
+				profile. Forgetting to maintain it up to date may cause problems when your logs are later reviewed.
+				<br>
+				<br>
+				After successfully updating your rank and promotion tag, click the "Home" button on the left side (or top on smaller screens) and explore the UIA Portal.
+				<br>
+				<br>
+				See you in base!
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+		<div class="col-md-2 vert-div">
+			<div class="jumbotron no-pad the-menu">
+			<h3 align="left">Menu</h3>
+				<ul class="nav nav-pills nav-stacked">
+					<li role="presentation" align="left"><a ui-sref="main">Home</a></li>
+					<br ng-if="!memberCatsEmpty[0]">
+					<div ng-if="!memberCatsEmpty[0]" class="strike"><span>Logs</span></div>
+					<li ng-class="{'active': currentState.current.name == 'training-logs' || currentState.current.name == 'edit-training-logs'}" ng-if="memberRoles['training-logs'][1]" role="presentation" align="left">
+						<div class="outer-item">
+							<div class="inner-flex">
+								<a href="" ui-sref="training-logs">Training Logs</a>
+							</div>
+							<div class="inner-fixed">
+								<a ui-sref="add-training-logs" ng-if="memberRoles['training-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+							</div>
+						</div>
+					</li>
+					<li ng-class="{'active': currentState.current.name == 'promotion-logs' || currentState.current.name == 'edit-promotion-logs'}" ng-if="memberRoles['promotion-logs'][1]" role="presentation" align="left">
+						<div class="outer-item">
+							<div class="inner-flex">
+								<a href="" ui-sref="promotion-logs">Promotion Logs</a>
+							</div>
+							<div class="inner-fixed">
+								<a ui-sref="add-promotion-logs" ng-if="memberRoles['promotion-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+							</div>
+						</div>
+					</li>
+					<br ng-if="!memberCatsEmpty[1]">
+					<div ng-if="!memberCatsEmpty[1]" class="strike"><span>Discipline Logs</span></div>
+					<li ng-class="{'active': currentState.current.name == 'warning-logs' || currentState.current.name == 'edit-warning-logs'}" ng-if="memberRoles['warning-logs'][1]" role="presentation" align="left">
+						<div class="outer-item">
+							<div class="inner-flex">
+								<a href="" ui-sref="warning-logs">Warning Logs</a>
+							</div>
+							<div class="inner-fixed">
+								<a ui-sref="add-warning-logs" ng-if="memberRoles['warning-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+							</div>
+						</div>
+					</li>
+					<li ng-class="{'active': currentState.current.name == 'demotion-logs' || currentState.current.name == 'edit-demotion-logs'}" ng-if="memberRoles['demotion-logs'][1]" role="presentation" align="left">
+						<div class="outer-item">
+							<div class="inner-flex">
+								<a href="" ui-sref="demotion-logs">Demotion Logs</a>
+							</div>
+							<div class="inner-fixed">
+								<a ui-sref="add-demotion-logs" ng-if="memberRoles['demotion-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+							</div>
+						</div>
+					</li>
+					<li ng-class="{'active': currentState.current.name == 'strike-logs' || currentState.current.name == 'edit-strike-logs'}" ng-if="memberRoles['strike-logs'][1]" role="presentation" align="left">
+						<div class="outer-item">
+							<div class="inner-flex">
+								<a href="" ui-sref="strike-logs">Strike Logs</a>
+							</div>
+							<div class="inner-fixed">
+								<a ui-sref="add-strike-logs" ng-if="memberRoles['strike-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+							</div>
+						</div>
+					</li>
+					<li ng-class="{'active': currentState.current.name == 'fired-logs' || currentState.current.name == 'edit-fired-logs'}" ng-if="memberRoles['fired-logs'][1]" role="presentation" align="left">
+						<div class="outer-item">
+							<div class="inner-flex">
+								<a href="" ui-sref="fired-logs">Fired Logs</a>
+							</div>
+							<div class="inner-fixed">
+								<a ui-sref="add-fired-logs" ng-if="memberRoles['fired-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+							</div>
+						</div>
+					</li>
+					<br ng-if="!memberCatsEmpty[2]">
+					<div ng-if="!memberCatsEmpty[2]" class="strike"><span>Other Logs</span></div>
+					<li ng-class="{'active': currentState.current.name == 'transfer-logs' || currentState.current.name == 'edit-transfer-logs'}" ng-if="memberRoles['transfer-logs'][1]" role="presentation" align="left">
+						<div class="outer-item">
+							<div class="inner-flex">
+								<a href="" ui-sref="transfer-logs">Transfer Logs</a>
+							</div>
+							<div class="inner-fixed">
+								<a ui-sref="add-transfer-logs" ng-if="memberRoles['transfer-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+							</div>
+						</div>
+					</li>
+					<li ng-class="{'active': currentState.current.name == 'rank-selling-logs' || currentState.current.name == 'edit-rank-selling-logs'}" ng-if="memberRoles['rank-selling-logs'][1]" role="presentation" align="left">
+						<div class="outer-item">
+							<div class="inner-flex">
+								<a href="" ui-sref="rank-selling-logs">Rank Selling Logs</a>
+							</div>
+							<div class="inner-fixed">
+								<a ui-sref="add-rank-selling-logs" ng-if="memberRoles['rank-selling-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+							</div>
+						</div>
+					</li>
+					<li ng-class="{'active': currentState.current.name == 'loa-logs' || currentState.current.name == 'edit-loa-logs'}" ng-if="memberRoles['loa-logs'][1]" role="presentation" align="left">
+						<div class="outer-item">
+							<div class="inner-flex">
+								<a href="" ui-sref="loa-logs">LoA Logs</a>
+							</div>
+							<div class="inner-fixed">
+								<a ui-sref="add-loa-logs" ng-if="memberRoles['loa-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-md-10 main-content">
+			<div class="jumbotron no-pad">
+				<div class="outer-item">
+					<h3 class="inner-flex" align="left"><span aria-hidden="true"></span><img onerror="$(this).hide()" ng-src="http://www.habbo.com/habbo-imaging/avatarimage?user={{memberName}}&direction=3&head_direction=3&action=wav&gesture=sml" alt="{{memberName}}" /> {{logTitle}}</h3>
+					<div class="inner-fixed">
+						<h4 align="right">{{clockDate}}</h4>
+						<h4 align="right"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> {{clockTime}}</h4>
+					</div>
+				</div>
+<!-- 				<ul class="nav nav-tabs">
+					<li role="presentation"><a href="" ui-sref="{{currentState.current.name.substring(5)}}">View</a></li>
+					<li role="presentation"><a href="" ui-sref="{{'add-' + currentState.current.name.substring(5)}}">Add</a></li>
+					<li role="presentation" class="active"><a>Edit</a></li>
+				</ul> -->
+				<!--<div class="panel panel-default custom-panel">-->
+					<!--<div class="panel-heading">
+						<h3 text-align="left" class="panel-title">Edit a {{logTitleSingular}}</h3>
+					</div>-->
+					<!--<div class="panel-body">-->
+				<div>
+					<form class="main-add-form">
+						<div ng-if="addForm.username.show" class="a-control">
+							<label>{{addForm.username.tip1}}:</label>
+							<input ng-disabled="addForm.username.dis" required="" autofocus="" type="text" class="form-control" placeholder="{{addForm.username.tip2}}" ng-model="addForm.username.val"></input>
+						</div>
+						<div ng-if="addForm.rank.show" class="a-control">
+							<label>{{addForm.rank.tip1}}:</label>
+							<div class="input-group">
+								<span class="input-group-addon">[UIA]</span>
+								<input ng-disabled="addForm.rank.dis" required="" type="text" class="form-control" placeholder="{{addForm.rank.tip2}}" ng-model="addForm.rank.val"></input>
+							</div>
+						</div>
+						<div ng-if="addForm.promoTag.show" class="a-control">
+							<label>{{addForm.promoTag.tip1}}:</label>
+							<div class="input-group">
+								<span class="input-group-addon">[</span>
+								<input ng-disabled="addForm.promoTag.dis" required="" type="text" class="form-control" placeholder="{{addForm.promoTag.tip2}}" ng-model="addForm.promoTag.val"></input>
+								<span class="input-group-addon">]</span>
+							</div>
+						</div>
+						<div ng-if="addForm.type.show" class="a-control">
+							<label>{{addForm.type.tip1}}:</label>
+							<input ng-disabled="addForm.type.dis" required="" type="text" class="form-control" placeholder="{{addForm.type.tip2}}" ng-model="addForm.type.val"></input>
+						</div>
+						<div ng-if="addForm.email.show" class="a-control">
+							<label>{{addForm.email.tip1}}:</label>
+							<input ng-disabled="addForm.email.dis" required="" type="email" class="form-control" placeholder="{{addForm.email.tip2}}" ng-model="addForm.email.val"></input>
+						</div>
+						<button class="btn btn-lg btn-primary" type="submit" ng-click="editProfile()">Edit Profile</button>
+						<!-- <button class="btn btn-lg" type="reset" ng-click="resetForm()">Clear</button> -->
+						<br ng-show="alert != null">
+						<br ng-show="alert != null">
+						<div ng-show="alert != null" uib-alert ng-class="'alert-' + (alert.type || 'danger')" close="closeAlert()"><strong>{{alert.strong}}</strong> {{alert.msg}}</div>
+					</form>
+					<br>
+					<hr>
+					<br>
+					<h3 align="left"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Password Change</h3>
+					<form class="main-add-form">
+						<div ng-if="addForm.oldPass.show" class="a-control">
+							<label>{{addForm.oldPass.tip1}}:</label>
+							<input ng-disabled="addForm.oldPass.dis" required="" autofocus="" type="password" class="form-control" placeholder="{{addForm.oldPass.tip2}}" ng-model="addForm.oldPass.val"></input>
+						</div>
+						<div ng-if="addForm.pass.show" class="a-control">
+							<label>{{addForm.pass.tip1}}:</label>
+							<input ng-disabled="addForm.pass.dis" required="" autofocus="" type="password" class="form-control" placeholder="{{addForm.pass.tip2}}" ng-model="addForm.pass.val"></input>
+						</div>
+						<div ng-if="addForm.passC.show" class="a-control">
+							<label>{{addForm.passC.tip1}}:</label>
+							<input ng-disabled="addForm.passC.dis" required="" autofocus="" type="password" class="form-control" placeholder="{{addForm.passC.tip2}}" ng-model="addForm.passC.val"></input>
+						</div>
+						<button class="btn btn-lg btn-primary" type="submit" ng-click="changePw()">Change Password</button>
+						<!-- <button class="btn btn-lg" type="reset" ng-click="resetForm()">Clear</button> -->
+						<br ng-show="alert2 != null">
+						<br ng-show="alert2 != null">
+						<div ng-show="alert2 != null" uib-alert ng-class="'alert-' + (alert2.type || 'danger')" close="closeAlert2()"><strong>{{alert2.strong}}</strong> {{alert2.msg}}</div>
+					</form>
+					<!--</div>-->
+				</div>
+			</div>
+		</div>
+	</div>

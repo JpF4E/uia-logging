@@ -1,0 +1,31 @@
+<div class="row">
+		<div class="col-md-12 main-content">
+			<div class="jumbotron text-center">
+				<form class="form-signin">
+					<h2 class="form-signin-heading">Please sign in</h2>
+					<!--<label for="inputEmail" class="sr-only">Email address</label>-->
+					<input type="username" id="inputUsername" class="form-control" placeholder="Habbo username" required="" autofocus="" ng-model="user.name">
+					<!--<label for="inputPassword" class="sr-only">Password</label>-->
+					<input type="password" id="inputPassword" class="form-control" placeholder="Password" required="" ng-model="user.password">
+					<button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="login()">Sign in</button>
+				</form>
+				<br ng-show="alert != null">
+				<div ng-show="alert != null" uib-alert ng-class="'alert-' + (alert.type || 'danger')" close="closeAlert()"><strong>{{alert.strong}}</strong> {{alert.msg}}</div>
+				<br>
+				<hr>
+				<br>
+				<form class="form-register">
+					<h2 class="form-register-heading">Or sign up</h2>
+					<input type="username" id="inputRegUsername" class="form-control" placeholder="Habbo username" ng-required="requesting" ng-model="user.registerName" ng-show="requesting">
+					<input type="email" id="inputRegEmail" class="form-control" placeholder="Email" ng-required="requesting" ng-model="user.registerEmail" ng-show="requesting">
+					<!--<label for="inputPassword" class="sr-only">Password</label>-->
+					<input type="password" id="inputRegPassword" class="form-control" placeholder="Password" ng-required="requesting" ng-model="user.registerPassword" ng-show="requesting">
+					<input type="password" id="inputRegRepPassword" class="form-control" placeholder="Repeat password" ng-required="requesting" ng-model="user.registerRepeatPassword" ng-show="requesting">
+					<button ng-class="{'btn btn-lg btn-default btn-block': !requesting, 'btn btn-lg btn-primary btn-block': requesting}" ng-attr-type="(requesting)?'submit':'button'" ng-click="signup()">
+						<div ng-if="!requesting">Request Membership <span class="caret"></span></div>
+						<div ng-if="requesting">Request Membership</div>
+					</button>
+				</form>
+				<br ng-show="alert2 != null">
+				<div ng-show="alert2 != null" uib-alert ng-class="'alert-' + (alert2.type || 'danger')" close="closeAlert2()"><strong>{{alert2.strong}}</strong> {{alert2.msg}}</div>
+			</div>

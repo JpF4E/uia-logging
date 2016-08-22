@@ -1,0 +1,280 @@
+<div class="row">
+		<div class="col-md-2 vert-div">
+			<div class="jumbotron no-pad the-menu">
+			<h3 align="left">Menu</h3>
+				<ul class="nav nav-pills nav-stacked">
+					<li role="presentation" align="left"><a ui-sref="main">Home</a></li>
+					<br ng-if="!memberCatsEmpty[0]">
+					<div ng-if="!memberCatsEmpty[0]" class="strike"><span>Logs</span></div>
+					<li ng-class="{'active': currentState.current.name == 'training-logs' || currentState.current.name == 'add-training-logs'}" ng-if="memberRoles['training-logs'][1]" role="presentation" align="left">
+						<div class="outer-item">
+							<div class="inner-flex">
+								<a href="" ui-sref="training-logs">Training Logs</a>
+							</div>
+							<div class="inner-fixed">
+								<a ui-sref="add-training-logs" ng-if="memberRoles['training-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+							</div>
+						</div>
+					</li>
+					<li ng-class="{'active': currentState.current.name == 'promotion-logs' || currentState.current.name == 'add-promotion-logs'}" ng-if="memberRoles['promotion-logs'][1]" role="presentation" align="left">
+						<div class="outer-item">
+							<div class="inner-flex">
+								<a href="" ui-sref="promotion-logs">Promotion Logs</a>
+							</div>
+							<div class="inner-fixed">
+								<a ui-sref="add-promotion-logs" ng-if="memberRoles['promotion-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+							</div>
+						</div>
+					</li>
+					<br ng-if="!memberCatsEmpty[1]">
+					<div ng-if="!memberCatsEmpty[1]" class="strike"><span>Discipline Logs</span></div>
+					<li ng-class="{'active': currentState.current.name == 'warning-logs' || currentState.current.name == 'add-warning-logs'}" ng-if="memberRoles['warning-logs'][1]" role="presentation" align="left">
+						<div class="outer-item">
+							<div class="inner-flex">
+								<a href="" ui-sref="warning-logs">Warning Logs</a>
+							</div>
+							<div class="inner-fixed">
+								<a ui-sref="add-warning-logs" ng-if="memberRoles['warning-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+							</div>
+						</div>
+					</li>
+					<li ng-class="{'active': currentState.current.name == 'demotion-logs' || currentState.current.name == 'add-demotion-logs'}" ng-if="memberRoles['demotion-logs'][1]" role="presentation" align="left">
+						<div class="outer-item">
+							<div class="inner-flex">
+								<a href="" ui-sref="demotion-logs">Demotion Logs</a>
+							</div>
+							<div class="inner-fixed">
+								<a ui-sref="add-demotion-logs" ng-if="memberRoles['demotion-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+							</div>
+						</div>
+					</li>
+					<li ng-class="{'active': currentState.current.name == 'strike-logs' || currentState.current.name == 'add-strike-logs'}" ng-if="memberRoles['strike-logs'][1]" role="presentation" align="left">
+						<div class="outer-item">
+							<div class="inner-flex">
+								<a href="" ui-sref="strike-logs">Strike Logs</a>
+							</div>
+							<div class="inner-fixed">
+								<a ui-sref="add-strike-logs" ng-if="memberRoles['strike-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+							</div>
+						</div>
+					</li>
+					<li ng-class="{'active': currentState.current.name == 'fired-logs' || currentState.current.name == 'add-fired-logs'}" ng-if="memberRoles['fired-logs'][1]" role="presentation" align="left">
+						<div class="outer-item">
+							<div class="inner-flex">
+								<a href="" ui-sref="fired-logs">Fired Logs</a>
+							</div>
+							<div class="inner-fixed">
+								<a ui-sref="add-fired-logs" ng-if="memberRoles['fired-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+							</div>
+						</div>
+					</li>
+					<br ng-if="!memberCatsEmpty[2]">
+					<div ng-if="!memberCatsEmpty[2]" class="strike"><span>Other Logs</span></div>
+					<li ng-class="{'active': currentState.current.name == 'transfer-logs' || currentState.current.name == 'add-transfer-logs'}" ng-if="memberRoles['transfer-logs'][1]" role="presentation" align="left">
+						<div class="outer-item">
+							<div class="inner-flex">
+								<a href="" ui-sref="transfer-logs">Transfer Logs</a>
+							</div>
+							<div class="inner-fixed">
+								<a ui-sref="add-transfer-logs" ng-if="memberRoles['transfer-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+							</div>
+						</div>
+					</li>
+					<li ng-class="{'active': currentState.current.name == 'rank-selling-logs' || currentState.current.name == 'add-rank-selling-logs'}" ng-if="memberRoles['rank-selling-logs'][1]" role="presentation" align="left">
+						<div class="outer-item">
+							<div class="inner-flex">
+								<a href="" ui-sref="rank-selling-logs">Rank Selling Logs</a>
+							</div>
+							<div class="inner-fixed">
+								<a ui-sref="add-rank-selling-logs" ng-if="memberRoles['rank-selling-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+							</div>
+						</div>
+					</li>
+					<li ng-class="{'active': currentState.current.name == 'loa-logs' || currentState.current.name == 'add-loa-logs'}" ng-if="memberRoles['loa-logs'][1]" role="presentation" align="left">
+						<div class="outer-item">
+							<div class="inner-flex">
+								<a href="" ui-sref="loa-logs">LoA Logs</a>
+							</div>
+							<div class="inner-fixed">
+								<a ui-sref="add-loa-logs" ng-if="memberRoles['loa-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-md-10 main-content">
+			<div class="jumbotron no-pad">
+				<div class="outer-item">
+					<h3 class="inner-flex" align="left"><span ng-class="'glyphicon glyphicon-' + logIcon" aria-hidden="true"></span> {{logTitle}}</h3>
+					<div class="inner-fixed">
+						<h4 align="right">{{clockDate}}</h4>
+						<h4 align="right"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> {{clockTime}}</h4>
+					</div>
+				</div>
+				<ul class="nav nav-tabs">
+					<li ng-if="memberRoles[currentState.current.name.slice(4)][1]" role="presentation"><a href="" ui-sref="{{currentState.current.name.substring(4)}}">View</a></li>
+					<li ng-if="memberRoles[currentState.current.name.slice(4)][0]" role="presentation" class="active"><a>Add</a></li>
+				</ul>
+				<div class="panel panel-default custom-panel">
+					<!--<div class="panel-heading">
+						<h3 text-align="left" class="panel-title">Add a {{logTitleSingular}}</h3>
+					</div>-->
+					<div class="panel-body">
+						<form class="main-add-form">
+							<div ng-if="addForm.username.show" class="a-control">
+								<label>{{addForm.username.tip1}}:</label>
+								<input ng-disabled="addForm.username.dis" required="" autofocus="" type="text" class="form-control" placeholder="{{addForm.username.tip2}}" ng-model="addForm.username.val"></input>
+							</div>
+							<div ng-if="addForm.loggerRank.show" class="a-control">
+								<label>{{addForm.loggerRank.tip1}}:</label>
+								<div class="input-group">
+									<span class="input-group-addon">[UIA]</span>
+									<input ng-disabled="addForm.loggerRank.dis" required="" type="text" class="form-control" placeholder="{{addForm.loggerRank.tip2}}" ng-model="addForm.loggerRank.val"></input>
+								</div>
+							</div>
+							<div ng-if="addForm.recSecTrainOrHR.show" class="a-control">
+								<label>{{addForm.recSecTrainOrHR.tip1}}:</label>
+								<div class="radio">
+									<label>
+										<input ng-disabled="addForm.recSecTrainOrHR.dis" required="" value="rec" type="radio" name="optionsRadios2" id="optionsRadios21" ng-model="addForm.recSecTrainOrHR.val">
+										Recruit Training
+									</label>
+								</div>
+								<div class="radio">
+									<label>
+										<input ng-disabled="addForm.recSecTrainOrHR.dis" required="" value="sec" type="radio" name="optionsRadios2" id="optionsRadios22" ng-model="addForm.recSecTrainOrHR.val">
+										Security Training
+									</label>
+								</div>
+								<div class="radio">
+									<label>
+										<input ng-disabled="addForm.recSecTrainOrHR.dis" required="" value="train" type="radio" name="optionsRadios2" id="optionsRadios23" ng-model="addForm.recSecTrainOrHR.val">
+										Trainer Training
+									</label>
+								</div>
+								<div class="radio">
+									<label>
+										<input ng-disabled="addForm.recSecTrainOrHR.dis" required="" value="hr" type="radio" name="optionsRadios2" id="optionsRadios24" ng-model="addForm.recSecTrainOrHR.val">
+										High Rank Training
+									</label>
+								</div>
+							</div>
+							<div ng-if="addForm.passOrFail.show" class="a-control">
+								<label>{{addForm.passOrFail.tip1}}:</label>
+								<div class="radio">
+									<label>
+										<input ng-disabled="addForm.passOrFail.dis" required="" value="pass" type="radio" name="optionsRadios" id="optionsRadios1" ng-model="addForm.passOrFail.val">
+										Pass
+									</label>
+								</div>
+								<div class="radio">
+									<label>
+										<input ng-disabled="addForm.passOrFail.dis" required="" value="fail" type="radio" name="optionsRadios" id="optionsRadios2" ng-model="addForm.passOrFail.val">
+										Fail
+									</label>
+								</div>
+							</div>
+							<div ng-if="addForm.prevRank.show" class="a-control">
+								<label>{{addForm.prevRank.tip1}}:</label>
+								<div class="input-group">
+									<span class="input-group-addon">[UIA]</span>
+									<input ng-disabled="addForm.prevRank.dis" required="" type="text" class="form-control" placeholder="{{addForm.prevRank.tip2}}" ng-model="addForm.prevRank.val"></input>
+								</div>
+							</div>
+							<div ng-if="addForm.agency.show" class="a-control">
+								<label>{{addForm.agency.tip1}}:</label>
+								<input ng-disabled="addForm.agency.dis" required="" type="text" class="form-control" placeholder="{{addForm.agency.tip2}}" ng-model="addForm.agency.val" ng-change="agencyChange()"></input>
+							</div>
+							<div ng-if="addForm.oldRank.show" class="a-control">
+								<label>{{addForm.oldRank.tip1}}:</label>
+								<div class="input-group">
+									<span class="input-group-addon">[{{agencyHelper}}]</span>
+									<input ng-disabled="addForm.oldRank.dis" required="" type="text" class="form-control" placeholder="{{addForm.oldRank.tip2}}" ng-model="addForm.oldRank.val"></input>
+								</div>
+							</div>
+							<div ng-if="addForm.offeredRank.show" class="a-control">
+								<label>{{addForm.offeredRank.tip1}}:</label>
+								<div class="input-group">
+									<span class="input-group-addon">[UIA]</span>
+									<input ng-disabled="addForm.offeredRank.dis" required="" type="text" class="form-control" placeholder="{{addForm.offeredRank.tip2}}" ng-model="addForm.offeredRank.val"></input>
+								</div>
+							</div>
+							<div ng-if="addForm.fullTransferOrNearMiss.show" class="a-control">
+								<label>{{addForm.fullTransferOrNearMiss.tip1}}:</label>
+								<div class="radio">
+									<label>
+										<input ng-disabled="addForm.fullTransferOrNearMiss.dis" required="" value="fullTransfer" type="radio" name="optionsRadios3" id="optionsRadios31" ng-model="addForm.fullTransferOrNearMiss.val">
+										Full Transfer
+									</label>
+								</div>
+								<div class="radio">
+									<label>
+										<input ng-disabled="addForm.fullTransferOrNearMiss.dis" required="" value="nearMiss" type="radio" name="optionsRadios3" id="optionsRadios32" ng-model="addForm.fullTransferOrNearMiss.val">
+										Near Miss
+									</label>
+								</div>
+							</div>
+							<div ng-if="addForm.warnNumber.show" class="a-control">
+								<label>{{addForm.warnNumber.tip1}}:</label>
+								<div class="input-group">
+									<span class="input-group-addon">x</span>
+									<input ng-disabled="addForm.warnNumber.dis" required="" type="number" class="form-control" placeholder="{{addForm.warnNumber.tip2}}" min="1" max="3" ng-model="addForm.warnNumber.val">
+								</div>
+							</div>
+							<div ng-if="addForm.strikeNumber.show" class="a-control">
+								<label>{{addForm.strikeNumber.tip1}}:</label>
+								<div class="input-group">
+									<span class="input-group-addon">x</span>
+									<input ng-disabled="addForm.strikeNumber.dis" required="" type="number" class="form-control" placeholder="{{addForm.strikeNumber.tip2}}" min="1" max="3" ng-model="addForm.strikeNumber.val">
+								</div>
+							</div>
+							<div ng-if="addForm.newRank.show" class="a-control">
+								<label>{{addForm.newRank.tip1}}:</label>
+								<div class="input-group">
+									<span class="input-group-addon">[UIA]</span>
+									<input ng-disabled="addForm.newRank.dis" required="" type="text" class="form-control" placeholder="{{addForm.newRank.tip2}}" ng-model="addForm.newRank.val"></input>
+								</div>
+							</div>
+							<div ng-if="addForm.startDate.show" class="a-control">
+								<label>{{addForm.startDate.tip1}}:</label>
+								<input ng-disabled="addForm.startDate.dis" required="" type="date" class="form-control" placeholder="{{addForm.startDate.tip2}}" ng-model="addForm.startDate.val"></input>
+							</div>
+							<div ng-if="addForm.endDate.show" class="a-control">
+								<label>{{addForm.endDate.tip1}}:</label>
+								<input ng-disabled="addForm.endDate.dis" required="" type="date" class="form-control" placeholder="{{addForm.endDate.tip2}}" ng-model="addForm.endDate.val"></input>
+							</div>
+							<div ng-if="addForm.reason.show" class="a-control">
+								<label>{{addForm.reason.tip1}}:</label>
+								<textarea ng-disabled="addForm.reason.dis" required="" pattern=".{20,}" rows="3" type="text" class="form-control" placeholder="{{addForm.reason.tip2}}" ng-model="addForm.reason.val"></textarea>
+							</div>
+							<div ng-if="addForm.screenshots.show" class="a-control">
+								<label>{{addForm.screenshots.tip1}}:</label>
+								<textarea ng-disabled="addForm.screenshots.dis" required="" rows="3" class="form-control" placeholder="{{addForm.screenshots.tip2}}" ng-model="addForm.screenshots.val"></textarea>
+							</div>
+							<div ng-if="addForm.price.show" class="a-control">
+								<label>{{addForm.price.tip1}}:</label>
+								<div class="input-group">
+									<input ng-disabled="addForm.price.dis" required="" type="number" class="form-control" placeholder="{{addForm.price.tip2}}" min="0" ng-model="addForm.price.val">
+									<span class="input-group-addon">coins</span>
+								</div>
+							</div>
+							<div ng-if="addForm.approvedBy.show" class="a-control">
+								<label>{{addForm.approvedBy.tip1}}:</label>
+								<input ng-disabled="addForm.approvedBy.dis" required="" type="text" class="form-control" placeholder="{{addForm.approvedBy.tip2}}" ng-model="addForm.approvedBy.val"></input>
+							</div>
+							<div ng-if="addForm.notes.show" class="a-control">
+								<label>{{addForm.notes.tip1}}:</label>
+								<textarea ng-disabled="addForm.notes.dis" rows="3" type="text" class="form-control" placeholder="{{addForm.notes.tip2}}" ng-model="addForm.notes.val"></textarea>
+							</div>
+							<button class="btn btn-lg btn-primary" type="submit" ng-click="addLog()">Add Log</button>
+							<button class="btn btn-lg" type="reset" ng-click="resetForm()">Clear</button>
+							<br ng-show="alert != null">
+							<br ng-show="alert != null">
+							<div ng-show="alert != null" uib-alert ng-class="'alert-' + (alert.type || 'danger')" close="closeAlert()"><strong>{{alert.strong}}</strong> {{alert.msg}}</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

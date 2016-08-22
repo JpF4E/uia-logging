@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<base href="/">
+
+	<title>UIA Portal</title>
+
+	<!-- CSS -->
+	<script src="libs/jquery/dist/jquery.min.js"></script>
+	<script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css"> <!-- custom styles -->
+
+	<!-- JS -->
+	<script src="libs/angular/angular.min.js"></script>
+	<!--<script src="libs/angular-route/angular-route.min.js"></script>-->
+	<script src="libs/angular-ui-router/release/angular-ui-router.js"></script>
+	<script src="libs/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+	<script type="text/ng-template" id="alert.html">
+		<div ng-transclude></div>
+	</script>
+
+	<!-- ANGULAR CUSTOM -->
+	<script src="js/constants.js"></script>
+	<script src="js/controllers/MainCtrl.js"></script>
+	<script src="js/controllers/LogsCtrl.js"></script>
+	<script src="js/controllers/AddLogsCtrl.js"></script>
+	<script src="js/controllers/EditLogsCtrl.js"></script>
+	<script src="js/controllers/EditProfileCtrl.js"></script>
+	<script src="js/controllers/PendingCtrl.js"></script>
+	<script src="js/controllers/UsersCtrl.js"></script>
+	<script src="js/controllers/EditUsersCtrl.js"></script>
+	<script src="js/services/AuthService.js"></script>
+	<!--<script src="js/services/LogService.js"></script>-->
+	<script src="js/appRoutes.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/ServerDate.js"></script>
+</head>
+<body ng-app="uia-logging" ng-controller="MainController">
+
+<div style="width:100%" class="container">
+	<!-- ANGULAR DYNAMIC CONTENT -->
+	<center><img width="100%" style="max-width:1020px" src="imgs/portal_logo.png"></center>
+	<nav class="navbar navbar-inverse">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="/">
+				<span><img width="30px" src="imgs/uia_logo.png">
+				</span>UIA Portal
+			</a>
+		</div>
+		<ul class="nav navbar-nav navbar-right">
+			<li ng-if="currentState.current.name != 'home' && (memberInfo.type == 'Owner' || memberInfo.type == 'Admin')"><a href="" ui-sref="pending">Administration</a></li>
+			<li ng-if="currentState.current.name != 'home'"><a href="" ui-sref="edit-profile">Profile</a></li>
+			<li ng-if="currentState.current.name != 'home'"><a href="" ng-click="logout()">Logout</a></li>
+		</ul>
+	</nav>
+
+	<div ui-view></div>
+
+	<footer>
+		<p>&copy; 2016 UIA - BETA v0.1.0<p>
+	</footer>
+
+</div>
+</body>
+</html>
