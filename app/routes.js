@@ -852,6 +852,11 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 
 	// frontend routes =========================================================
 	// route to handle all angular requests
+
+	app.get('/libs/jquery/dist/jquery.min.js', function(req, res) {
+		res.sendfile('./public/libs/jquery/dist/jquery.min.js');
+	});
+
 	app.get('*', function(req, res) {
 		res.sendfile('./public/index.html');
 	});
