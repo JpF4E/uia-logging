@@ -16,11 +16,11 @@
 				<br>
 				<form class="form-register">
 					<h2 class="form-register-heading">Or sign up</h2>
-					<input type="username" id="inputRegUsername" class="form-control" placeholder="Habbo username" ng-required="requesting" ng-model="user.registerName" ng-show="requesting">
-					<input type="email" id="inputRegEmail" class="form-control" placeholder="Email" ng-required="requesting" ng-model="user.registerEmail" ng-show="requesting">
+					<input type="username" id="inputRegUsername" class="form-control" placeholder="Habbo username" ng-model="user.registerName" ng-show="requesting">
+					<input type="email" id="inputRegEmail" class="form-control" placeholder="Email" ng-model="user.registerEmail" ng-show="requesting">
 					<!--<label for="inputPassword" class="sr-only">Password</label>-->
-					<input type="password" id="inputRegPassword" class="form-control" placeholder="Password" ng-required="requesting" ng-model="user.registerPassword" ng-show="requesting">
-					<input type="password" id="inputRegRepPassword" class="form-control" placeholder="Repeat password" ng-required="requesting" ng-model="user.registerRepeatPassword" ng-show="requesting">
+					<input type="password" id="inputRegPassword" class="form-control" placeholder="Password" ng-model="user.registerPassword" ng-show="requesting">
+					<input type="password" id="inputRegRepPassword" class="form-control" placeholder="Repeat password" ng-model="user.registerRepeatPassword" ng-show="requesting">
 					<button ng-class="{'btn btn-lg btn-default btn-block': !requesting, 'btn btn-lg btn-primary btn-block': requesting}" ng-attr-type="(requesting)?'submit':'button'" ng-click="signup()">
 						<div ng-if="!requesting">Request Membership <span class="caret"></span></div>
 						<div ng-if="requesting">Request Membership</div>
