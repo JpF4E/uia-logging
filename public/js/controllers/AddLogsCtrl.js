@@ -9,6 +9,7 @@ angular.module('AddLogsCtrl', []).controller('AddLogsController', function($http
 	$scope.memberCatsEmpty = [true, true, true];
 	$scope.memberRoles = {};
 	$scope.memberName = "";
+	$scope.memberRank = "";
 
 	$scope.currentState = $state;
 	$scope.logTitle = null;
@@ -64,6 +65,10 @@ angular.module('AddLogsCtrl', []).controller('AddLogsController', function($http
 			$scope.memberCatsEmpty = AuthService.getMemberCatsEmpty();
 			$scope.memberRoles = AuthService.getMemberRoles();
 			$scope.memberName = AuthService.getMemberName();
+			$scope.memberRank = AuthService.getMemberInfo().rank;
+			if(!$scope.memberRoles[$scope.currentState.current.name.substring(4)][0]) {
+				$state.go('home');
+			}
 		}
 	}, true);
 

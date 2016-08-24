@@ -122,16 +122,16 @@
 					</div>-->
 					<div class="panel-body">
 						<form class="main-add-form">
-							<div ng-if="addForm.username.show" class="a-control">
-								<label>{{addForm.username.tip1}}:</label>
-								<input ng-disabled="addForm.username.dis" required="" autofocus="" type="text" class="form-control" placeholder="{{addForm.username.tip2}}" ng-model="addForm.username.val"></input>
-							</div>
 							<div ng-if="addForm.loggerRank.show" class="a-control">
 								<label>{{addForm.loggerRank.tip1}}:</label>
 								<div class="input-group">
 									<span class="input-group-addon">[UIA]</span>
-									<input ng-disabled="addForm.loggerRank.dis" required="" type="text" class="form-control" placeholder="{{addForm.loggerRank.tip2}}" ng-model="addForm.loggerRank.val"></input>
+									<input ng-disabled="addForm.loggerRank.dis" required="" type="text" class="form-control" placeholder="{{addForm.loggerRank.tip2}}" ng-model="memberRank"></input>
 								</div>
+							</div>
+							<div ng-if="addForm.username.show" class="a-control">
+								<label>{{addForm.username.tip1}}:</label>
+								<input ng-disabled="addForm.username.dis" required="" autofocus="" type="text" class="form-control" placeholder="{{addForm.username.tip2}}" ng-model="addForm.username.val"></input>
 							</div>
 							<div ng-if="addForm.recSecTrainOrHR.show" class="a-control">
 								<label>{{addForm.recSecTrainOrHR.tip1}}:</label>

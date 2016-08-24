@@ -70,6 +70,9 @@ angular.module('UsersCtrl', []).controller('UsersController', function($http, $s
 			$scope.memberRoles = AuthService.getMemberRoles();
 			$scope.memberName = AuthService.getMemberName();
 			$scope.memberType = AuthService.getMemberType();
+			if($scope.memberType != "Admin" && $scope.memberType != "Owner") {
+				$state.go('home');
+			}
 		}
 	}, true);
 

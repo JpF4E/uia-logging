@@ -71,6 +71,9 @@ angular.module('PendingCtrl', []).controller('PendingController', function($http
 			$scope.memberRoles = AuthService.getMemberRoles();
 			$scope.memberName = AuthService.getMemberName();
 			$scope.memberType = AuthService.getMemberType();
+			if($scope.memberType != "Admin" && $scope.memberType != "Owner") {
+				$state.go('home');
+			}
 		}
 	}, true);
 

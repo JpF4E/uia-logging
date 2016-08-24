@@ -50,7 +50,7 @@
 		</div>
 		<ul class="nav navbar-nav navbar-right">
 			<li ng-if="currentState.current.name != 'home' && (memberInfo.type == 'Owner' || memberInfo.type == 'Admin')"><a href="" ui-sref="pending">Administration</a></li>
-			<li ng-if="currentState.current.name != 'home'"><a href="" ui-sref="edit-profile">Profile</a></li>
+			<li ng-if="currentState.current.name != 'home'"><a href="" ui-sref="edit-profile">{{memberName}}'s Profile</a></li>
 			<li ng-if="currentState.current.name != 'home'"><a href="" ng-click="logout()">Logout</a></li>
 		</ul>
 	</nav>

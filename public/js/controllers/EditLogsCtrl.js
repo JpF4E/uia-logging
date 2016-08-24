@@ -64,6 +64,9 @@ angular.module('EditLogsCtrl', []).controller('EditLogsController', function($ht
 			$scope.memberCatsEmpty = AuthService.getMemberCatsEmpty();
 			$scope.memberRoles = AuthService.getMemberRoles();
 			$scope.memberName = AuthService.getMemberName();
+			if(!$scope.memberRoles[$scope.currentState.current.name.substring(5)][2]) {
+				$state.go('home');
+			}
 		}
 	}, true);
 

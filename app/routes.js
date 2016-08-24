@@ -688,17 +688,44 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 									newLog.email = req.body.email;
 									newLog.firstLogin = req.body.firstLogin;
 
-									if(user.type == 'Owner')
-										newLog.allowedRoles = req.body.allowedRoles;
-									else {
-										for (var i = req.body.allowedRoles.length - 1; i >= 0; i--) {
-											for (var j = req.body.allowedRoles[i].perm.length - 1; j >= 0; j--) {
-												if(j != req.body.allowedRoles[i].perm.length - 1) {
-													newLog.allowedRoles[i].perm[j] = req.body.allowedRoles[i].perm[j];
+									if(user.type == 'Owner') {
+										if(req.body.type == 'Owner') {
+											for (var i = req.body.allowedRoles.length - 1; i >= 0; i--) {
+												for (var j = req.body.allowedRoles[i].perm.length - 1; j >= 0; j--) {
+													newLog.allowedRoles[i].perm[j] = true;
 													newLog.markModified('allowedRoles.' + i + '.perm.' + j);
 												}
 											}
+										} else if(req.body.type == 'Admin') {
+											for (var i = req.body.allowedRoles.length - 1; i >= 0; i--) {
+												for (var j = req.body.allowedRoles[i].perm.length - 1; j >= 0; j--) {
+													if(j != req.body.allowedRoles[i].perm.length - 1) {
+														newLog.allowedRoles[i].perm[j] = true;
+														newLog.markModified('allowedRoles.' + i + '.perm.' + j);
+													} else {
+														newLog.allowedRoles[i].perm[j] = req.body.allowedRoles[i].perm[j];
+														newLog.markModified('allowedRoles.' + i + '.perm.' + j);
+													}
+												}
+											}
+										} else {
+											newLog.allowedRoles = req.body.allowedRoles;
 										}
+									} else if(user.type == 'Admin') {
+										if(req.body.type == 'Owner' || req.body.type == 'Admin') {
+											return res.status(403).send({success: false, msg: 'User with no permissions to do this operation.'});
+										} else {
+											for (var i = req.body.allowedRoles.length - 1; i >= 0; i--) {
+												for (var j = req.body.allowedRoles[i].perm.length - 1; j >= 0; j--) {
+													if(j != req.body.allowedRoles[i].perm.length - 1) {
+														newLog.allowedRoles[i].perm[j] = req.body.allowedRoles[i].perm[j];
+														newLog.markModified('allowedRoles.' + i + '.perm.' + j);
+													}
+												}
+											}
+										}
+									} else {
+										return res.status(403).send({success: false, msg: 'User with no permissions to do this operation.'});
 									}
 
 									newLog.save(function(err) {

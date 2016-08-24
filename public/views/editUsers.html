@@ -140,19 +140,19 @@
 								<label>{{addForm.type.tip1}}:</label>
 								<div class="radio">
 									<label>
-										<input ng-disabled="addForm.type.dis || memberType == 'Admin'" required="" value="Owner" type="radio" name="optionsRadios2" id="optionsRadios21" ng-model="addForm.type.val">
+										<input ng-disabled="addForm.type.dis || memberType == 'Admin'" required="" value="Owner" type="radio" name="optionsRadios2" id="optionsRadios21" ng-model="addForm.type.val" ng-click="changeType()">
 										Owner
 									</label>
 								</div>
 								<div class="radio">
 									<label>
-										<input ng-disabled="addForm.type.dis || memberType == 'Admin'" required="" value="Admin" type="radio" name="optionsRadios2" id="optionsRadios22" ng-model="addForm.type.val">
+										<input ng-disabled="addForm.type.dis || memberType == 'Admin'" required="" value="Admin" type="radio" name="optionsRadios2" id="optionsRadios22" ng-model="addForm.type.val" ng-click="changeType()">
 										Admin
 									</label>
 								</div>
 								<div class="radio">
 									<label>
-										<input ng-disabled="addForm.type.dis || memberType == 'Admin'" required="" value="Regular" type="radio" name="optionsRadios2" id="optionsRadios23" ng-model="addForm.type.val">
+										<input ng-disabled="addForm.type.dis || memberType == 'Admin'" required="" value="Regular" type="radio" name="optionsRadios2" id="optionsRadios23" ng-model="addForm.type.val" ng-click="changeType()">
 										Regular
 									</label>
 								</div>
@@ -185,7 +185,7 @@
 								<div class="checkbox">
 									<label>
 										<input ng-disabled="addForm.firstLogin.dis" type="checkbox" ng-model="addForm.firstLogin.val">
-										Show Welcome Message in the next Login
+										Will show Welcome Message in the next Login
 									</label>
 								</div>
 							</div>
@@ -199,6 +199,20 @@
 							</div>
 							<div ng-if="addForm.allowedRoles.show" class="a-control">
 								<label>{{addForm.allowedRoles.tip1}}:</label>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h5 text-align="left" class="panel-title">Shortcuts</h5>
+									</div>
+									<div class="panel-body no-pad">
+										<button ng-click="shortcut('Trainer')" ng-disabled="addForm.type.val != 'Regular'" class="btn btn-primary shortcut-button">Trainer</button>
+										<button ng-click="shortcut('High Rank')" ng-disabled="addForm.type.val != 'Regular'" class="btn btn-primary shortcut-button">High<br>Rank</button>
+										<button ng-click="shortcut('TU Member')" ng-disabled="addForm.type.val != 'Regular'" class="btn btn-info shortcut-button">TU<br>Member</button>
+										<button ng-click="shortcut('Rank Seller')" ng-disabled="addForm.type.val != 'Regular'" class="btn btn-info shortcut-button">Rank<br>Seller</button>
+										<hr>
+										<button ng-click="shortcut('Reset')" class="btn btn-default shortcut-button">Reset</button>
+										<button ng-click="shortcut('Clear')" class="btn btn-default shortcut-button">Clear</button>
+									</div>
+								</div>
 								<div class="table-responsive main-table-content">
 									<table class="table table-hover">
 										<thead>
@@ -215,22 +229,22 @@
 												<td>{{normalizeRole(w.role)}}</td>
 												<td>
 													<label>
-														<input type="checkbox" ng-model="w.perm[0]">
+														<input ng-disabled="addForm.type.val != 'Regular'" type="checkbox" ng-model="w.perm[0]">
 													</label>
 												</td>
 												<td>
 													<label>
-														<input type="checkbox" ng-model="w.perm[1]">
+														<input ng-disabled="addForm.type.val != 'Regular'" type="checkbox" ng-model="w.perm[1]">
 													</label>
 												</td>
 												<td>
 													<label>
-														<input type="checkbox" ng-model="w.perm[2]">
+														<input ng-disabled="addForm.type.val != 'Regular'" type="checkbox" ng-model="w.perm[2]">
 													</label>
 												</td>
 												<td>
 													<label>
-														<input ng-disabled="memberType == 'Admin'" type="checkbox" ng-model="w.perm[3]">
+														<input ng-disabled="memberType == 'Admin' || addForm.type.val == 'Owner'" type="checkbox" ng-model="w.perm[3]">
 													</label>
 												</td>
 											</tr>

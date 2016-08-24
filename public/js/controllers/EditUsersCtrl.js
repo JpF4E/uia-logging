@@ -66,6 +66,9 @@ angular.module('EditUsersCtrl', []).controller('EditUsersController', function($
 			$scope.memberRoles = AuthService.getMemberRoles();
 			$scope.memberName = AuthService.getMemberName();
 			$scope.memberType = AuthService.getMemberType();
+			if($scope.memberType != "Admin" && $scope.memberType != "Owner") {
+				$state.go('home');
+			}
 		}
 	}, true);
 
@@ -139,6 +142,91 @@ angular.module('EditUsersCtrl', []).controller('EditUsersController', function($
 
 	function checkMaxLength(val, length) {
 		return val.length <= length;
+	}
+
+	var tempRoles = [];
+
+	$scope.changeType = function() {
+		if($scope.addForm.type.val == "Owner") {
+			for (var i = $scope.addForm.allowedRoles.val.length - 1; i >= 0; i--) {
+				$scope.addForm.allowedRoles.val[i].perm = [true, true, true, true];
+			}
+		} else if($scope.addForm.type.val == "Admin") {
+			for (var i = $scope.addForm.allowedRoles.val.length - 1; i >= 0; i--) {
+				$scope.addForm.allowedRoles.val[i].perm[0] = true;
+				$scope.addForm.allowedRoles.val[i].perm[1] = true;
+				$scope.addForm.allowedRoles.val[i].perm[2] = true;
+				$scope.addForm.allowedRoles.val[i].perm[3] = tempRoles[i].perm[3];
+			}
+		} else {
+			for (var i = $scope.addForm.allowedRoles.val.length - 1; i >= 0; i--) {
+				$scope.addForm.allowedRoles.val[i].perm[0] = tempRoles[i].perm[0];
+				$scope.addForm.allowedRoles.val[i].perm[1] = tempRoles[i].perm[1];
+				$scope.addForm.allowedRoles.val[i].perm[2] = tempRoles[i].perm[2];
+				$scope.addForm.allowedRoles.val[i].perm[3] = tempRoles[i].perm[3];
+			}
+		}
+	}
+
+	var toChangeTr = false, toChangeHr = false, toChangeTu = false, toChangeRs = false;
+	$scope.shortcut = function(stype) {
+		if(stype == "Trainer") {
+			for (var i = $scope.addForm.allowedRoles.val.length - 1; i >= 0; i--) {
+				if($scope.addForm.allowedRoles.val[i].role == "training-logs" ||
+					$scope.addForm.allowedRoles.val[i].role == "loa-logs") {
+					$scope.addForm.allowedRoles.val[i].perm[0] = !toChangeTr;
+					$scope.addForm.allowedRoles.val[i].perm[1] = !toChangeTr;
+					$scope.addForm.allowedRoles.val[i].perm[2] = !toChangeTr;
+				}
+			}
+			toChangeTr = !toChangeTr;
+		} else if(stype == "High Rank") {
+			for (var i = $scope.addForm.allowedRoles.val.length - 1; i >= 0; i--) {
+				if($scope.addForm.allowedRoles.val[i].role != "transfer-logs" &&
+					$scope.addForm.allowedRoles.val[i].role != "rank-selling-logs") {
+					$scope.addForm.allowedRoles.val[i].perm[0] = !toChangeHr;
+					$scope.addForm.allowedRoles.val[i].perm[1] = !toChangeHr;
+					$scope.addForm.allowedRoles.val[i].perm[2] = !toChangeHr;
+				} else {
+					$scope.addForm.allowedRoles.val[i].perm[1] = !toChangeHr;
+				}
+			}
+			toChangeHr = !toChangeHr;
+		} else if(stype == "TU Member") {
+			for (var i = $scope.addForm.allowedRoles.val.length - 1; i >= 0; i--) {
+				if($scope.addForm.allowedRoles.val[i].role == "transfer-logs") {
+					$scope.addForm.allowedRoles.val[i].perm[0] = !toChangeTu;
+					$scope.addForm.allowedRoles.val[i].perm[1] = !toChangeTu;
+					$scope.addForm.allowedRoles.val[i].perm[2] = !toChangeTu;
+				}
+			}
+			toChangeTu = !toChangeTu;
+		} else if(stype == "Rank Seller") {
+			for (var i = $scope.addForm.allowedRoles.val.length - 1; i >= 0; i--) {
+				if($scope.addForm.allowedRoles.val[i].role == "rank-selling-logs") {
+					$scope.addForm.allowedRoles.val[i].perm[0] = !toChangeRs;
+					$scope.addForm.allowedRoles.val[i].perm[1] = !toChangeRs;
+					$scope.addForm.allowedRoles.val[i].perm[2] = !toChangeRs;
+				}
+			}
+			toChangeRs = !toChangeRs;
+		} else if(stype == "Reset") {
+			for (var i = $scope.addForm.allowedRoles.val.length - 1; i >= 0; i--) {
+				$scope.addForm.allowedRoles.val[i].perm[0] = tempRoles[i].perm[0];
+				$scope.addForm.allowedRoles.val[i].perm[1] = tempRoles[i].perm[1];
+				$scope.addForm.allowedRoles.val[i].perm[2] = tempRoles[i].perm[2];
+				$scope.addForm.allowedRoles.val[i].perm[3] = tempRoles[i].perm[3];
+			}
+		} else if(stype == "Clear") {
+			for (var i = $scope.addForm.allowedRoles.val.length - 1; i >= 0; i--) {
+				$scope.addForm.allowedRoles.val[i].perm[0] = false;
+				$scope.addForm.allowedRoles.val[i].perm[1] = false;
+				$scope.addForm.allowedRoles.val[i].perm[2] = false;
+				if($scope.memberType == 'Owner') {
+					$scope.addForm.allowedRoles.val[i].perm[3] = false;
+				}
+			}
+		}
 	}
 
 	$scope.editUser = function() {
@@ -221,6 +309,14 @@ angular.module('EditUsersCtrl', []).controller('EditUsersController', function($
 		$scope.addForm.tokenTimestamp = {show: true, tip1: "Last Active", tip2: "The date this member was last active", dis: true, val: new Date($state.params.obj.tokenTimestamp)};
 		$scope.addForm.firstLogin = {show: true, tip1: "Never Logged In", tip2: "Whether this member has never logged in or not", dis: false, val: $state.params.obj.firstLogin};
 		$scope.addForm.allowedRoles = {show: true, tip1: "Permissions", tip2: "This member can perform these operations", dis: false, val: $state.params.obj.allowedRoles};
+		tempRoles = [];
+		for (var i = $scope.addForm.allowedRoles.val.length - 1; i >= 0; i--) {
+			tempRoles[i] = {perm: []};
+			tempRoles[i].perm[0] = $scope.addForm.allowedRoles.val[i].perm[0];
+			tempRoles[i].perm[1] = $scope.addForm.allowedRoles.val[i].perm[1];
+			tempRoles[i].perm[2] = $scope.addForm.allowedRoles.val[i].perm[2];
+			tempRoles[i].perm[3] = $scope.addForm.allowedRoles.val[i].perm[3];
+		}
 	}, true);
 
 	Date.prototype.addMinutes= function(h){

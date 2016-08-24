@@ -10,6 +10,7 @@ angular.module('MainCtrl', []).controller('MainController', function($http, $roo
 
 	$scope.memberCatsEmpty = [true, true, true];
 	$scope.memberRoles = {};
+	$scope.memberName = "";
 
 	var locale = window.navigator.userLanguage || window.navigator.language || window.navigator.browserLanguage || window.navigator.systemLanguage || "en-us";
 	var options1 = {weekday: "short", year:"numeric", month:"long", day:"numeric"};
@@ -73,6 +74,7 @@ angular.module('MainCtrl', []).controller('MainController', function($http, $roo
 			$scope.memberCatsEmpty = AuthService.getMemberCatsEmpty();
 			$scope.memberRoles = AuthService.getMemberRoles();
 			$scope.memberInfo = AuthService.getMemberInfo();
+			$scope.memberName = AuthService.getMemberName();
 			if(AuthService.isFirstLogin()) {
 				$state.go('edit-profile');
 			}

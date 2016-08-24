@@ -87,6 +87,9 @@ angular.module('LogsCtrl', []).controller('LogsController', function($http, $sco
 			$scope.memberRoles = AuthService.getMemberRoles();
 			$scope.memberName = AuthService.getMemberName();
 			$scope.memberType = AuthService.getMemberType();
+			if(!$scope.memberRoles[$scope.currentState.current.name][1]) {
+				$state.go('home');
+			}
 		}
 	}, true);
 
