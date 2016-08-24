@@ -584,7 +584,7 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 						}, function(err, promoUser) {
 							if (err) throw err;
 
-							if (promoUser) {
+							if (promoUser && promoUser.name != user.name) {
 								return res.status(403).send({success: false, msg: 'This promotion tag is already in use. Please pick another.'});
 							}
 							
