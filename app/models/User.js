@@ -25,7 +25,6 @@ var UserSchema = new Schema({
   name: {
 		type: String,
 		unique: true,
-		sparse: true,
 		required: [true, 'Please fill your Habbo username.'],
 		trim: true
 	},
@@ -56,7 +55,6 @@ var UserSchema = new Schema({
   email: {
   		type: String,
   		unique: true,
-		sparse: true,
   		required: [true, 'Please fill an email address.'],
   		match: [emailRegEx, 'Please fill a valid email address.'],
 		trim: true
@@ -72,7 +70,11 @@ var UserSchema = new Schema({
   firstLogin: {
   		type: Boolean,
   		default: true
-  }
+    },
+  banned: {
+  		type: Boolean,
+  		default: false
+    }
 }, {timestamps: true});
 
 function permSize(val) {

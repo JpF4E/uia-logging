@@ -90,6 +90,7 @@ angular.module('EditUsersCtrl', []).controller('EditUsersController', function($
 		email : {show: false, tip1: "", tip2: "", val: "", dis: false},
 		tokenTimestamp : {show: false, tip1: "", tip2: "", val: "", dis: false},
 		firstLogin : {show: false, tip1: "", tip2: "", val: "", dis: false},
+		banned : {show: false, tip1: "", tip2: "", val: "", dis: false},
 		createdAt : {show: false, tip1: "", tip2: "", val: "", dis: false},
 		updatedAt : {show: false, tip1: "", tip2: "", val: "", dis: false},
 		allowedRoles : {show: false, tip1: "", tip2: "", val: "", dis: false},
@@ -142,6 +143,10 @@ angular.module('EditUsersCtrl', []).controller('EditUsersController', function($
 
 	function checkMaxLength(val, length) {
 		return val.length <= length;
+	}
+
+	function checkPromoTag(val) {
+		return /^[a-zA-Z0-9]{0,4}$/.test(val);
 	}
 
 	var tempRoles = [];
@@ -219,11 +224,21 @@ angular.module('EditUsersCtrl', []).controller('EditUsersController', function($
 			}
 		} else if(stype == "Clear") {
 			for (var i = $scope.addForm.allowedRoles.val.length - 1; i >= 0; i--) {
-				$scope.addForm.allowedRoles.val[i].perm[0] = false;
-				$scope.addForm.allowedRoles.val[i].perm[1] = false;
-				$scope.addForm.allowedRoles.val[i].perm[2] = false;
 				if($scope.memberType == 'Owner') {
-					$scope.addForm.allowedRoles.val[i].perm[3] = false;
+					if($scope.addForm.type.val == 'Admin') {
+						$scope.addForm.allowedRoles.val[i].perm[3] = false;
+					} else if($scope.addForm.type.val == 'Regular') {
+						$scope.addForm.allowedRoles.val[i].perm[0] = false;
+						$scope.addForm.allowedRoles.val[i].perm[1] = false;
+						$scope.addForm.allowedRoles.val[i].perm[2] = false;
+						$scope.addForm.allowedRoles.val[i].perm[3] = false;
+					}
+				} else {
+					if($scope.addForm.type.val == 'Regular') {
+						$scope.addForm.allowedRoles.val[i].perm[0] = false;
+						$scope.addForm.allowedRoles.val[i].perm[1] = false;
+						$scope.addForm.allowedRoles.val[i].perm[2] = false;
+					}
 				}
 			}
 		}
@@ -239,6 +254,7 @@ angular.module('EditUsersCtrl', []).controller('EditUsersController', function($
 		content.rank = $scope.addForm.rank.val;
 		content.email = $scope.addForm.email.val;
 		content.firstLogin = $scope.addForm.firstLogin.val;
+		content.banned = $scope.addForm.banned.val;
 		content.allowedRoles = $scope.addForm.allowedRoles.val;
 		if(!checkRequired(content.name)) {
 			$scope.alert = {msg: "The username is invalid.", strong: "Failed to edit " + $scope.logTitleSingular + "!"};
@@ -264,6 +280,10 @@ angular.module('EditUsersCtrl', []).controller('EditUsersController', function($
 			$scope.alert = {msg: "The promotion tag must be entered and cannot exceed 4 characters.", strong: "Failed to edit " + $scope.logTitleSingular + "!"};
 			return;
 		}
+		if(!checkPromoTag(content.promoTag)) {
+			$scope.alert = {msg: "The promotion tag must can only contain letters and digits.", strong: "Failed to edit " + $scope.logTitleSingular + "!"};
+			return;
+		}
 		if(!checkRequired(content.rank)) {
 			$scope.alert = {msg: "The rank is invalid.", strong: "Failed to edit " + $scope.logTitleSingular + "!"};
 			return;
@@ -274,6 +294,10 @@ angular.module('EditUsersCtrl', []).controller('EditUsersController', function($
 		}
 		if(!checkRequired(content.firstLogin)) {
 			$scope.alert = {msg: "The first login option is invalid.", strong: "Failed to edit " + $scope.logTitleSingular + "!"};
+			return;
+		}
+		if(!checkRequired(content.banned)) {
+			$scope.alert = {msg: "The banned option is invalid.", strong: "Failed to edit " + $scope.logTitleSingular + "!"};
 			return;
 		}
 		if(!checkRequired(content.allowedRoles)) {
@@ -308,6 +332,7 @@ angular.module('EditUsersCtrl', []).controller('EditUsersController', function($
 		$scope.addForm.email = {show: true, tip1: "Email", tip2: "The member's email", dis: false, val: $state.params.obj.email};
 		$scope.addForm.tokenTimestamp = {show: true, tip1: "Last Active", tip2: "The date this member was last active", dis: true, val: new Date($state.params.obj.tokenTimestamp)};
 		$scope.addForm.firstLogin = {show: true, tip1: "Never Logged In", tip2: "Whether this member has never logged in or not", dis: false, val: $state.params.obj.firstLogin};
+		$scope.addForm.banned = {show: true, tip1: "Banned", tip2: "Whether this member has been banned or not", dis: false, val: $state.params.obj.banned};
 		$scope.addForm.allowedRoles = {show: true, tip1: "Permissions", tip2: "This member can perform these operations", dis: false, val: $state.params.obj.allowedRoles};
 		tempRoles = [];
 		for (var i = $scope.addForm.allowedRoles.val.length - 1; i >= 0; i--) {

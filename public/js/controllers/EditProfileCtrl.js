@@ -108,6 +108,10 @@ angular.module('EditProfileCtrl', []).controller('EditProfileController', functi
 		return val1 === val2;
 	}
 
+	function checkPromoTag(val) {
+		return /^[a-zA-Z0-9]{0,4}$/.test(val);
+	}
+
 	$scope.editProfile = function() {
 		var content = {};
 		content.rank = $scope.addForm.rank.val;
@@ -123,6 +127,10 @@ angular.module('EditProfileCtrl', []).controller('EditProfileController', functi
 		}
 		if(!checkMaxLength(content.promoTag, 4)) {
 			$scope.alert = {msg: "The promotion tag must be entered and cannot exceed 4 characters.", strong: "Failed to edit " + $scope.logTitleSingular + "!"};
+			return;
+		}
+		if(!checkPromoTag(content.promoTag)) {
+			$scope.alert = {msg: "The promotion tag must can only contain letters and digits.", strong: "Failed to edit " + $scope.logTitleSingular + "!"};
 			return;
 		}
 		if(!checkRequired(content.email)) {

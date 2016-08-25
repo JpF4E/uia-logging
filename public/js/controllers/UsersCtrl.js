@@ -17,6 +17,7 @@ angular.module('UsersCtrl', []).controller('UsersController', function($http, $s
 	$scope.logTitleSingular = null;
 	$scope.logIcon = null;
 	$scope.users = [];
+	$scope.logToUsers = null;
 
 	$scope.comments = [];
 
@@ -98,12 +99,14 @@ angular.module('UsersCtrl', []).controller('UsersController', function($http, $s
 		tokenTimestamp : {show: false, tip1: ""},
 		firstLogin : {show: false, tip1: ""},
 		createdAt : {show: false, tip1: ""},
+		banned : {show: false, tip1: ""},
 		allowedRoles : {show: false, tip1: ""}
 	}
 
 	$scope.resetForm = function() {
 		$scope.search.name = null;
 		$scope.search.promoTag = null;
+		$scope.search.banned = false;
 	}
 
 	var lastCreatedAt = null;
@@ -112,7 +115,7 @@ angular.module('UsersCtrl', []).controller('UsersController', function($http, $s
 		if(reload) {
 			lastCreatedAt = null;
 		}
-		$http.post(API_ENDPOINT.url + '/searchUsers', {name: $scope.search.name, promoTag: $scope.search.promoTag, lastCreatedAt: lastCreatedAt || ServerDate()}).then(function(result) {
+		$http.post(API_ENDPOINT.url + '/searchUsers', {name: $scope.search.name, banned: $scope.search.banned, promoTag: $scope.search.promoTag, lastCreatedAt: lastCreatedAt || ServerDate()}).then(function(result) {
 			if (result.data.success) {
 				if(result.data.users.length > 0)
 					lastCreatedAt = result.data.users[result.data.users.length-1].createdAt;
@@ -161,6 +164,29 @@ angular.module('UsersCtrl', []).controller('UsersController', function($http, $s
 
 	function normalizeRole(role) {
 		return role.replace(/-/g, ' ').replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}) + ':';
+	}
+
+	$scope.prepareBan = function(x) {
+		$scope.logToUsers = {_id: x._id};
+		$scope.modal = 'ban ';
+		$scope.modal += x.name + "'s access to the UIA Portal";
+	}
+
+	$scope.decidedBan = function() {
+		$http.post(API_ENDPOINT.url + '/decidedPendingBan', $scope.logToUsers).then(function(result) {
+			if (result.data.success) {
+				//$scope.alert = {type: "success", msg: result.data.msg, strong: $scope.logTitleSingular + " deleted successfully!"};
+				for (var i = $scope.users.length - 1; i >= 0; i--) {
+					if($scope.users[i]._id == $scope.logToUsers._id) {
+						$scope.users[i].banned = true;
+						break;
+					}
+				}
+				//$scope.searchTheLogs(true);
+			} else {
+				$scope.alert = {msg: result.data.msg, strong: "Failed to do this operation on this " + $scope.logTitleSingular + "!"};
+			}
+		});
 	}
 
 	$scope.editUser = function(x) {
@@ -228,6 +254,7 @@ angular.module('UsersCtrl', []).controller('UsersController', function($http, $s
 		$scope.addForm.email = {show: true, tip1: "Email"};
 		$scope.addForm.tokenTimestamp = {show: true, tip1: "Last Active"};
 		$scope.addForm.firstLogin = {show: true, tip1: "Has Logged In"};
+		$scope.addForm.banned = {show: true, tip1: "Banned"};
 		$scope.addForm.createdAt = {show: true, tip1: "Created At"};
 		$scope.addForm.allowedRoles = {show: true, tip1: "Member Permissions"};
 

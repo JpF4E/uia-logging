@@ -39,7 +39,7 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 			// save the user
 			newUser.save(function(err) {
 				if (err) {
-					return res.json({success: false, msg: 'An account already exists.'});
+					return res.json({success: false, msg: 'An account already exists with that username or email.'});
 				}
 				res.json({success: true, msg: 'Requested membership successfully. Please wait for an admin to accept it.'});
 			});
@@ -58,7 +58,10 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 				// check if password matches
 				user.comparePassword(req.body.password, function (err, isMatch) {
 					if (isMatch && !err) {
-						if(!user.valid) {
+						if(user.banned) {
+							res.send({success: false, msg: 'Authentication failed. Your account has been disabled. Please contact the founders in base.'});
+						}
+						else if(!user.valid) {
 							res.send({success: false, msg: 'Authentication failed. Your account has not been accepted yet.'});
 						} else {
 							user.tokenTimestamp = new Date();
@@ -446,22 +449,47 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 						if(valid) {
 							var query;
 							if(user.type == 'Owner') {
-								query = {
-									createdAt: {
-										$lte: req.body.lastCreatedAt
-									},
-									name: {
-										$ne: user.name
+								if(!req.body.banned) {
+									query = {
+										createdAt: {
+											$lte: req.body.lastCreatedAt
+										},
+										name: {
+											$ne: user.name
+										}
+									}
+								} else {
+									query = {
+										createdAt: {
+											$lte: req.body.lastCreatedAt
+										},
+										name: {
+											$ne: user.name
+										},
+										banned: true
 									}
 								}
 							} else {
-								query = {
-									createdAt: {
-										$lte: req.body.lastCreatedAt
-									},
-									type: "Regular",
-									name: {
-										$ne: user.name
+								if(!req.body.banned) {
+									query = {
+										createdAt: {
+											$lte: req.body.lastCreatedAt
+										},
+										type: "Regular",
+										name: {
+											$ne: user.name
+										}
+									}
+								} else {
+									query = {
+										createdAt: {
+											$lte: req.body.lastCreatedAt
+										},
+										type: "Regular",
+										name: {
+											$ne: user.name
+										},
+										banned: true
 									}
 								}
 							}
@@ -524,7 +552,7 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 								if (!pending) {
 									return res.status(403).send({success: false, msg: 'Member not found.'});
 								}
-								
+
 								if(req.body.accept) {
 									pending.valid = true;
 					
@@ -542,6 +570,63 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 										res.json({success: true, msg: "The member's request has been denied."});
 									});
 								}
+
+								//res.json({success: true, pending: pending});
+							});
+						} else {
+							return res.status(403).send({success: false, msg: 'User with no permissions to do this operation.'});
+						}
+					});
+				}
+			});
+		} else {
+			return res.status(403).send({success: false, msg: 'No token provided.'});
+		}
+	});
+
+	app.post('/api/decidedPendingBan', passport.authenticate('jwt', { session: false}), function(req, res) {
+		var token = getToken(req.headers);
+		if (token) {
+			var decoded = jwt.decode(token, config.secret);
+			User.findOne({
+				name: decoded.name
+			}, function(err, user) {
+				if (err) throw err;
+
+				if (!user) {
+					return res.status(403).send({success: false, msg: 'Authentication failed. User not found.'});
+				} else {
+					handleTokenTimeout(user, res, function(){
+						var valid = (user.type == 'Admin' || user.type == 'Owner');
+
+						if(valid) {
+							var query;
+							if(user.type == 'Owner') {
+								query = {
+									_id: req.body._id
+								}
+							} else {
+								query = {
+									type: "Regular",
+									_id: req.body._id
+								}
+							}
+
+							User.findOne(query, function(err, newUser) {
+								if (err) throw err;
+
+								if (!newUser) {
+									return res.status(403).send({success: false, msg: 'Member not found.'});
+								}
+
+								newUser.banned = true;
+				
+								newUser.save(function(err) {
+									if (err) {
+										return handleError(err, res);
+									}
+									res.json({success: true, msg: "The member has been banned."});
+								});
 
 								//res.json({success: true, pending: pending});
 							});
@@ -687,6 +772,7 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 									newLog.rank = req.body.rank;
 									newLog.email = req.body.email;
 									newLog.firstLogin = req.body.firstLogin;
+									newLog.banned = req.body.banned;
 
 									if(user.type == 'Owner') {
 										if(req.body.type == 'Owner') {
@@ -752,7 +838,9 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 	}
 
 	function handleTokenTimeout(user, res, cb) {
-		if(new Date().getTime() > user.tokenTimestamp.addMinutes(TOKEN_TIMEOUT).getTime()) {
+		if(user.banned) {
+			return res.status(401).send({success: false, msg: 'Authentication failed. Your account has been disabled. Please contact the founders in base.'});
+		} else if(new Date().getTime() > user.tokenTimestamp.addMinutes(TOKEN_TIMEOUT).getTime()) {
 			return res.status(401).send({success: false, msg: 'Token expired.'});
 		} else if(!user.valid) {
 			return res.status(401).send({success: false, msg: 'User is not valid.'});

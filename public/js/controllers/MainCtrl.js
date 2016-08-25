@@ -21,7 +21,7 @@ angular.module('MainCtrl', []).controller('MainController', function($http, $roo
 		$rootScope.clockTime = ServerDate.toLocaleString(locale, options2);
 	}
 	tick();
-	$interval(tick, 100);
+	$interval(tick, 500);
 
 	$scope.login = function() {
 		AuthService.login($scope.user).then(function(msg) {

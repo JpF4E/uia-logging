@@ -132,7 +132,7 @@
 								<div class="checkbox">
 									<label>
 										<input ng-disabled="addForm.valid.dis" type="checkbox" ng-model="addForm.valid.val">
-										Accepted
+										Allows the member to login
 									</label>
 								</div>
 							</div>
@@ -185,7 +185,16 @@
 								<div class="checkbox">
 									<label>
 										<input ng-disabled="addForm.firstLogin.dis" type="checkbox" ng-model="addForm.firstLogin.val">
-										Will show Welcome Message in the next Login
+										Shows the welcome message in the next login
+									</label>
+								</div>
+							</div>
+							<div ng-if="addForm.banned.show" class="a-control">
+								<label>{{addForm.banned.tip1}}:</label>
+								<div class="checkbox">
+									<label>
+										<input ng-disabled="addForm.banned.dis" type="checkbox" ng-model="addForm.banned.val">
+										Prevents this member from using the UIA Portal
 									</label>
 								</div>
 							</div>

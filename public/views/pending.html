@@ -185,8 +185,8 @@
 									<td ng-if="addForm.createdAt.show">{{getDate(x.createdAt)}}<br>{{getTime(x.createdAt)}}</td>
 									<td>
 										<!--<a class="icon-hide icon-padding" href="" ng-click="comments[$index] = !comments[$index]" type="button" role="button"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a>-->
-										<a class="icon-hide icon-padding" href="" type="button" role="button" data-toggle="modal" data-target="#myModal" ng-click="prepare(x, true)"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></a>
-										<a class="icon-hide icon-padding" href="" type="button" role="button" data-toggle="modal" data-target="#myModal" ng-click="prepare(x, false)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+										<a data-toggle="tooltip" title="Accept Member" class="icon-hide icon-padding" href="" type="button" role="button" data-toggle="modal" data-target="#myModal" ng-click="prepare(x, true)"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></a>
+										<a data-toggle="tooltip" title="Deny Member" class="icon-hide icon-padding" href="" type="button" role="button" data-toggle="modal" data-target="#myModal" ng-click="prepare(x, false)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
 									</td>
 								</tr>
 								<tr class="table-grey" ng-if="comments[$index]">
