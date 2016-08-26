@@ -333,8 +333,8 @@ angular.module('LogsCtrl', []).controller('LogsController', function($http, $sco
 				$scope.addForm.notes = {show: true, tip1: "Notes"};
 				$scope.addForm.createdAt = {show: true, tip1: "Created At"};
 				$scope.addForm.updatedAt = {show: false, tip1: "Updated At"};
-				$scope.addForm.logger = {show: true, tip1: "LoA User"};
-				$scope.addForm.loggerRank = {show: true, tip1: "LoA User Rank"};
+				$scope.addForm.logger = {show: true, tip1: "LoA Requester"};
+				$scope.addForm.loggerRank = {show: true, tip1: "LoA Requester Rank"};
 				break;
 			default:
 				return;

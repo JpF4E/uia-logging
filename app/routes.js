@@ -768,8 +768,10 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 									newLog.valid = req.body.valid;
 									if(user.type == 'Owner')
 										newLog.type = req.body.type;
-									newLog.promoTag = req.body.promoTag;
-									newLog.rank = req.body.rank;
+									if(req.body.promoTag)
+										newLog.promoTag = req.body.promoTag;
+									if(req.body.rank)
+										newLog.rank = req.body.rank;
 									newLog.email = req.body.email;
 									newLog.firstLogin = req.body.firstLogin;
 									newLog.banned = req.body.banned;

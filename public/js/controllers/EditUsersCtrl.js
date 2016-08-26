@@ -272,22 +272,24 @@ angular.module('EditUsersCtrl', []).controller('EditUsersController', function($
 			$scope.alert = {msg: "The membership type option is invalid.", strong: "Failed to edit " + $scope.logTitleSingular + "!"};
 			return;
 		}
-		if(!checkRequired(content.promoTag)) {
-			$scope.alert = {msg: "The promotion tag must be entered and cannot exceed 4 characters.", strong: "Failed to edit " + $scope.logTitleSingular + "!"};
-			return;
+		if(content.promoTag) {
+			//if(!checkRequired(content.promoTag)) {
+			//	$scope.alert = {msg: "The promotion tag must be entered and cannot exceed 4 characters.", strong: "Failed to edit " + $scope.logTitleSingular + "!"};
+			//	return;
+			//}
+			if(!checkMaxLength(content.promoTag, 4)) {
+				$scope.alert = {msg: "The promotion tag cannot exceed 4 characters.", strong: "Failed to edit " + $scope.logTitleSingular + "!"};
+				return;
+			}
+			if(!checkPromoTag(content.promoTag)) {
+				$scope.alert = {msg: "The promotion tag can only contain letters and digits.", strong: "Failed to edit " + $scope.logTitleSingular + "!"};
+				return;
+			}
 		}
-		if(!checkMaxLength(content.promoTag, 4)) {
-			$scope.alert = {msg: "The promotion tag must be entered and cannot exceed 4 characters.", strong: "Failed to edit " + $scope.logTitleSingular + "!"};
-			return;
-		}
-		if(!checkPromoTag(content.promoTag)) {
-			$scope.alert = {msg: "The promotion tag must can only contain letters and digits.", strong: "Failed to edit " + $scope.logTitleSingular + "!"};
-			return;
-		}
-		if(!checkRequired(content.rank)) {
-			$scope.alert = {msg: "The rank is invalid.", strong: "Failed to edit " + $scope.logTitleSingular + "!"};
-			return;
-		}
+		//if(!checkRequired(content.rank)) {
+		//	$scope.alert = {msg: "The rank is invalid.", strong: "Failed to edit " + $scope.logTitleSingular + "!"};
+		//	return;
+		//}
 		if(!checkRequired(content.email)) {
 			$scope.alert = {msg: "The email is invalid.", strong: "Failed to edit " + $scope.logTitleSingular + "!"};
 			return;

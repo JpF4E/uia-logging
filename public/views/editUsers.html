@@ -161,7 +161,7 @@
 								<label>{{addForm.promoTag.tip1}}:</label>
 								<div class="input-group">
 									<span class="input-group-addon">[</span>
-									<input ng-disabled="addForm.promoTag.dis" required="" type="text" class="form-control" placeholder="{{addForm.promoTag.tip2}}" ng-model="addForm.promoTag.val"></input>
+									<input ng-disabled="addForm.promoTag.dis" type="text" class="form-control" placeholder="{{addForm.promoTag.tip2}}" ng-model="addForm.promoTag.val"></input>
 									<span class="input-group-addon">]</span>
 								</div>
 							</div>
@@ -169,7 +169,7 @@
 								<label>{{addForm.rank.tip1}}:</label>
 								<div class="input-group">
 									<span class="input-group-addon">[UIA]</span>
-									<input ng-disabled="addForm.rank.dis" required="" type="text" class="form-control" placeholder="{{addForm.rank.tip2}}" ng-model="addForm.rank.val"></input>
+									<input ng-disabled="addForm.rank.dis" type="text" class="form-control" placeholder="{{addForm.rank.tip2}}" ng-model="addForm.rank.val"></input>
 								</div>
 							</div>
 							<div ng-if="addForm.email.show" class="a-control">
@@ -213,13 +213,13 @@
 										<h5 text-align="left" class="panel-title">Shortcuts</h5>
 									</div>
 									<div class="panel-body no-pad">
-										<button ng-click="shortcut('Trainer')" ng-disabled="addForm.type.val != 'Regular'" class="btn btn-primary shortcut-button">Trainer</button>
-										<button ng-click="shortcut('High Rank')" ng-disabled="addForm.type.val != 'Regular'" class="btn btn-primary shortcut-button">High<br>Rank</button>
-										<button ng-click="shortcut('TU Member')" ng-disabled="addForm.type.val != 'Regular'" class="btn btn-info shortcut-button">TU<br>Member</button>
+										<button formnovalidate ng-click="shortcut('Trainer')" ng-disabled="addForm.type.val != 'Regular'" class="btn btn-primary shortcut-button">Trainer</button>
+										<button formnovalidate ng-click="shortcut('High Rank')" ng-disabled="addForm.type.val != 'Regular'" class="btn btn-primary shortcut-button">High<br>Rank</button>
+										<button formnovalidate ng-click="shortcut('TU Member')" ng-disabled="addForm.type.val != 'Regular'" class="btn btn-info shortcut-button">TU<br>Member</button>
 										<button ng-click="shortcut('Rank Seller')" ng-disabled="addForm.type.val != 'Regular'" class="btn btn-info shortcut-button">Rank<br>Seller</button>
 										<hr>
-										<button ng-click="shortcut('Reset')" class="btn btn-default shortcut-button">Reset</button>
-										<button ng-click="shortcut('Clear')" class="btn btn-default shortcut-button">Clear</button>
+										<button formnovalidate ng-click="shortcut('Reset')" class="btn btn-default shortcut-button">Reset</button>
+										<button formnovalidate ng-click="shortcut('Clear')" class="btn btn-default shortcut-button">Clear</button>
 									</div>
 								</div>
 								<div class="table-responsive main-table-content">
