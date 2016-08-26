@@ -12,15 +12,27 @@ angular.module('MainCtrl', []).controller('MainController', function($http, $roo
 	$scope.memberRoles = {};
 	$scope.memberName = "";
 
-	moment.locale('fr');
+	var locale = window.navigator.userLanguage || window.navigator.language || window.navigator.browserLanguage || window.navigator.systemLanguage || "en-us";
+	moment.locale(locale);
 
-	var dateFormatting = function(locale, options) {
-	}
-
-	//Date.prototype.toLocaleString = dateFormatting;
+	var tz = moment.tz.guess();
+	Date.prototype.toLocaleString = function(locale, options) {
+		if('month' in options) {
+			if(options.month != 'numeric') {
+				return moment(this).tz(tz).format("ddd, LL");
+			} else {
+				return moment(this).tz(tz).format("ddd, L");
+			}
+		} else {
+			if('timeZoneName' in options) {
+				return moment(this).tz(tz).format("LTS z");
+			} else {
+				return moment(this).tz(tz).format("LTS");
+			}
+		}
+	};
 	//ServerDate.toLocaleString = dateFormatting;
 
-	var locale = window.navigator.userLanguage || window.navigator.language || window.navigator.browserLanguage || window.navigator.systemLanguage || "en-us";
 	var options1 = {weekday: "short", year:"numeric", month:"long", day:"numeric"};
 	var options2 = {hour:"numeric", minute:"numeric", second: "numeric", timeZoneName: "short"};
 	
