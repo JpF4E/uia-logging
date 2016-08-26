@@ -196,9 +196,9 @@
 										<span ng-if="x.banned" class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span></td>
 									<td ng-if="addForm.createdAt.show">{{getDate(x.createdAt)}}<br>{{getTime(x.createdAt)}}</td>
 									<td>
-										<a data-toggle="tooltip" title="More Details..." class="icon-hide icon-padding" href="" ng-click="comments[$index] = !comments[$index]" type="button" role="button"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a>
-										<a data-toggle="tooltip" title="Edit Member" ng-show="(memberType != 'Admin' || (x.type != 'Owner' && x.type != 'Admin')) && memberName != x.name" class="icon-hide icon-padding" href="" ng-click="editUser(x)" type="button" role="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
-										<a data-toggle="tooltip" title="Ban Member" ng-show="(memberType != 'Admin' || (x.type != 'Owner' && x.type != 'Admin')) && memberName != x.name && !x.banned" class="icon-hide icon-padding" href="" type="button" role="button" data-toggle="modal" data-target="#myModal" ng-click="prepareBan(x, false)"><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span></a>
+										<a title="More Details..." class="icon-hide icon-padding" href="" ng-click="comments[$index] = !comments[$index]" type="button" role="button"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a>
+										<a title="Edit Member" ng-show="(memberType != 'Admin' || (x.type != 'Owner' && x.type != 'Admin')) && memberName != x.name" class="icon-hide icon-padding" href="" ng-click="editUser(x)" type="button" role="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+										<a title="Ban Member" ng-show="(memberType != 'Admin' || (x.type != 'Owner' && x.type != 'Admin')) && memberName != x.name && !x.banned" class="icon-hide icon-padding" href="" type="button" role="button" data-toggle="modal" data-target="#myModal" ng-click="prepareBan(x, false)"><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span></a>
 									</td>
 								</tr>
 								<tr ng-class="{'danger table-banned': x.banned}" ng-if="comments[$index]">

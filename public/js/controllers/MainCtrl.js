@@ -12,6 +12,14 @@ angular.module('MainCtrl', []).controller('MainController', function($http, $roo
 	$scope.memberRoles = {};
 	$scope.memberName = "";
 
+	moment.locale('fr');
+
+	var dateFormatting = function(locale, options) {
+	}
+
+	//Date.prototype.toLocaleString = dateFormatting;
+	//ServerDate.toLocaleString = dateFormatting;
+
 	var locale = window.navigator.userLanguage || window.navigator.language || window.navigator.browserLanguage || window.navigator.systemLanguage || "en-us";
 	var options1 = {weekday: "short", year:"numeric", month:"long", day:"numeric"};
 	var options2 = {hour:"numeric", minute:"numeric", second: "numeric", timeZoneName: "short"};
