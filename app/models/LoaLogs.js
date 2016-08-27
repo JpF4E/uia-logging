@@ -6,11 +6,11 @@ var bcrypt = require('bcrypt');
 
 // set up a mongoose model
 var LoaLogsSchema = new Schema({
-  username: {
-		type: String,
-		required: [true, 'Please fill the username.'],
-    trim: true
-	},
+  //username: {
+	//	type: String,
+	//	required: [true, 'Please fill the username.'],
+  //  trim: true
+	//},
   startDate: {
 		type: Date,
 		required: [true, 'Please fill the start date.']
