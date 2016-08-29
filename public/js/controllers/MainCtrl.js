@@ -71,7 +71,8 @@ angular.module('MainCtrl', []).controller('MainController', function($http, $roo
 
 	$scope.logout = function() {
 		AuthService.logout(false);
-		$state.go('home');
+		if($scope.currentState.current.name != 'sec-search')
+			$state.go('home');
 	};
 
 	$scope.closeAlert = function() {

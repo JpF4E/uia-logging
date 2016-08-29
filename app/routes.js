@@ -6,18 +6,175 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 	var logsDict = {
 		'training-logs' : TrainingLogs,
 		'promotion-logs' : PromotionLogs,
-		'warning-logs' : WarningLogs,
+		'warning-logs' : WarningLogs,//DONE
 		'demotion-logs' : DemotionLogs,
 		'strike-logs' : StrikeLogs,
-		'fired-logs' : FiredLogs,
+		'fired-logs' : FiredLogs,//DONE
 		'transfer-logs' : TransferLogs,
 		'rank-selling-logs' : RankSellingLogs,
-		'loa-logs' : LoaLogs
+		'loa-logs' : LoaLogs//DONE
 	}
+
+	var notHRRegex = /^(?=(.*(agent|security|training|instructor).*))(?!(field|director))/i;
 
 	// server routes ===========================================================
 	// handle things like api calls
 	// authentication routes
+
+	app.post('/api/secSearch', function(req, res) {
+		var query = {};
+
+		if(req.body.username && req.body.username.trim()) {
+			query.username = new RegExp("^" + escapeRegExp(req.body.username.trim()) + "$", "i");
+		} else {
+			res.json({success: true, panel: {color: 'white', text: 'Input the username...', motto: ''}});
+			return;
+		}
+
+		query.rehired = false;
+		FiredLogs.findOne(query, function(err, log) {
+			delete query.rehired;
+			if (err) throw err;
+			if (log) {
+				res.json({success: true, panel: {color: 'red', text: 'This member has been Fired!', motto: ''}});
+			} else {
+				var theLogs = [];
+				var theStrikesNum = null;
+				TrainingLogs.findOne(query, function(nerr, nlog) {
+					if (nerr) throw nerr;
+					if (nlog) {
+						nlog.logType = 'training-logs';
+						theLogs.push(nlog);
+					}
+					PromotionLogs.findOne(query, function(err2, nlog2) {
+						if (err2) throw err2;
+						if (nlog2) {
+							nlog2.logType = 'promotion-logs';
+							theLogs.push(nlog2);
+						}
+						DemotionLogs.findOne(query, function(err3, nlog3) {
+							if (err3) throw err3;
+							if (nlog3) {
+								nlog3.logType = 'demotion-logs';
+								theLogs.push(nlog3);
+							}
+							StrikeLogs.findOne(query, function(err4, nlog4) {
+								if (err4) throw err4;
+								if (nlog4) {
+									theStrikesNum = nlog4.strikeNumber;
+								}
+								TransferLogs.findOne(query, function(err5, nlog5) {
+									if (err5) throw err5;
+									if (nlog5) {
+										nlog5.logType = 'transfer-logs';
+										theLogs.push(nlog5);
+									}
+									RankSellingLogs.findOne(query, function(err6, nlog6) {
+										if (err6) throw err6;
+										if (nlog6) {
+											nlog6.logType = 'rank-selling-logs';
+											theLogs.push(nlog6);
+										}
+										
+										theLogs.sort(function(a, b) {
+											if(a.createdAt >= b.createdAt)
+												return -1;
+											else
+												return 1;
+										});
+
+										var i = -1;
+										while(true) {
+											i++;
+											if(theLogs.length < i + 1) {
+												res.json({success: true, panel: {color: 'orange', text: 'Member not found. Potential Recruit...', motto: '[UIA] Recruit'}});
+											} else {
+												var mainLog = theLogs[i];
+												if(mainLog.logType == 'training-logs') {
+													if(mainLog.passOrFail == 'pass') {
+														if(mainLog.recSecTrainOrHR == 'rec') {
+															getPromoTag(mainLog.logger, function(tag) {
+																res.json({success: true, panel: {color: 'green', text: 'This member passed training and is UIA\'s staff.', motto: '[UIA] Agent I ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : '')}});
+															});
+														} else {
+															continue;
+														}
+													} else {
+														if(mainLog.recSecTrainOrHR == 'rec') {
+															res.json({success: true, panel: {color: 'orange', text: 'This member failed training. Potential Recruit...', motto: '[UIA] Recruit'}});
+														} else {
+															continue;
+														}
+													}
+												} else if(mainLog.logType == 'promotion-logs' ||
+													mainLog.logType == 'demotion-logs') {
+													if(notHRRegex.test(mainLog.newRank)) {
+														getPromoTag(mainLog.logger, function(tag) {
+															res.json({success: true, panel: {color: 'green', text: 'This member is UIA\'s staff.', motto: '[UIA] ' + mainLog.newRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : '')}});
+														});
+													}
+													else {
+														getPromoTag(mainLog.logger, function(tag) {
+															res.json({success: true, panel: {color: 'grey', text: 'This member is Operative+. Use the group gate.', motto: '[UIA] ' + mainLog.newRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : '')}});
+														});
+													}
+												} else if(mainLog.logType == 'transfer-logs') {
+													if(mainLog.fullTransferOrNearMiss == 'fullTransfer') {
+														if(notHRRegex.test(mainLog.offeredRank)) {
+															getPromoTag(mainLog.logger, function(tag) {
+																res.json({success: true, panel: {color: 'green', text: 'This member transfered and is UIA\'s staff.', motto: '[UIA] ' + mainLog.offeredRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : '')}});
+															});
+														}
+														else {
+															getPromoTag(mainLog.logger, function(tag) {
+																res.json({success: true, panel: {color: 'grey', text: 'This member transfered and is Operative+. Use the group gate.', motto: '[UIA] ' + mainLog.offeredRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : '')}});
+															});
+														}
+													} else {
+														res.json({success: true, panel: {color: 'orange', text: 'This member tried to transfer. Potential Recruit...', motto: '[UIA] Recruit'}});
+													}
+												} else if(mainLog.logType == 'rank-selling-logs') {
+													if(notHRRegex.test(mainLog.newRank)) {
+														getPromoTag(mainLog.logger, function(tag) {
+															res.json({success: true, panel: {color: 'green', text: 'This member bought a rank and is UIA\'s staff.', motto: '[UIA] ' + mainLog.newRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : '')}});
+														});
+													}
+													else {
+														getPromoTag(mainLog.logger, function(tag) {
+															res.json({success: true, panel: {color: 'grey', text: 'This member bought a rank and is Operative+. Use the group gate.', motto: '[UIA] ' + mainLog.newRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : '')}});
+														});
+													}
+												}
+											}
+											break;
+										}
+									}).sort('-createdAt');
+								}).sort('-createdAt');
+							}).sort('-createdAt');
+						}).sort('-createdAt');
+					}).sort('-createdAt');
+				}).sort('-createdAt');
+			}
+		}).sort('-createdAt');
+	});
+
+	function getPromoTag(username, cont) {
+		User.findOne({
+			name: username
+		}, function(err, user) {
+			if (err) throw err;
+		 
+		 	var tag;
+			if (!user) {
+				tag = '-Unknown Promotion Tag-';
+			} else {
+				tag = '[' + user.promoTag + ']';
+			}
+
+			cont(tag);
+		});
+	}
+
 	app.post('/api/signup', function(req, res) {
 		if (!req.body.registerName || !req.body.registerPassword || !req.body.registerEmail) {
 			res.json({success: false, msg: 'Please input your Habbo username, your email, and a password.'});

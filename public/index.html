@@ -32,6 +32,7 @@
 	<script src="js/controllers/PendingCtrl.js"></script>
 	<script src="js/controllers/UsersCtrl.js"></script>
 	<script src="js/controllers/EditUsersCtrl.js"></script>
+	<script src="js/controllers/SecSearchCtrl.js"></script>
 	<script src="js/services/AuthService.js"></script>
 	<!--<script src="js/services/LogService.js"></script>-->
 	<script src="js/appRoutes.js"></script>
@@ -50,17 +51,21 @@
 				</span>UIA Portal
 			</a>
 		</div>
+		<ul class="nav navbar-nav">
+			<li><a href="" ui-sref="sec-search">Security Search</a></li>
+		</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<li ng-if="currentState.current.name != 'home' && (memberInfo.type == 'Owner' || memberInfo.type == 'Admin')"><a href="" ui-sref="pending">Administration</a></li>
-			<li ng-if="currentState.current.name != 'home'"><a href="" ui-sref="edit-profile">{{memberName}}'s Profile</a></li>
-			<li ng-if="currentState.current.name != 'home'"><a href="" ng-click="logout()">Logout</a></li>
+			<li ng-if="currentState.current.name != 'home' && memberInfo.type"><a href="" ui-sref="edit-profile">{{memberName}}'s Profile</a></li>
+			<li ng-if="currentState.current.name != 'home' && memberInfo.type"><a href="" ng-click="logout()">Logout</a></li>
+			<li ng-if="currentState.current.name == 'sec-search' && !memberInfo.type"><a href="" ui-sref="home">Login</a></li>
 		</ul>
 	</nav>
 
 	<div ui-view></div>
 
 	<footer>
-		<p>UIA &copy; 2016 - BETA v0.2.4<p>
+		<p>UIA &copy; 2016 - BETA v0.4.0<p>
 	</footer>
 
 </div>

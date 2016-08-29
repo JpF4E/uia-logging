@@ -231,6 +231,12 @@ angular.module('appRoutes', [])
 			},
 			templateUrl: 'views/editUsers.html',
 			controller: 'EditUsersController'
+		})
+
+		.state('sec-search', {
+			url: '/security-search',
+			templateUrl: 'views/secSearch.html',
+			controller: 'SecSearchController'
 		});
 
 	$urlRouterProvider.otherwise('/');
@@ -241,7 +247,7 @@ angular.module('appRoutes', [])
 .run(['$rootScope', '$state', 'AuthService', 'AUTH_EVENTS', function($rootScope, $state, AuthService, AUTH_EVENTS) {
 	$rootScope.$on('$stateChangeStart', function (event, next, nextParams, fromState) {
 		if (!AuthService.isAuthenticated()) {
-			if (next.name !== 'home') {
+			if (next.name !== 'home' && next.name !== 'sec-search') {
 				event.preventDefault();
 				$state.go('home');
 			}

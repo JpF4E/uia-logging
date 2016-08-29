@@ -266,6 +266,14 @@ textarea {
   max-width: 500px;
 }
 
+.main-add-form2 {
+  padding-right: 15px;
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-bottom: 10px;
+  max-width: 500px;
+}
+
 .main-table-content {
   padding: 15px;
 }
@@ -274,7 +282,7 @@ textarea {
   padding-bottom: 20px;
 }
 
-.custom-panel2 {
+.custom-panel {
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
   border-top: none;
@@ -333,4 +341,38 @@ textarea {
 
 .shortcut-button-small {
   width: 75px;
+}
+
+.panel-red {
+  background-color: red;
+  color: white;
+}
+
+.panel-green {
+  background-color: green;
+  color: white;
+}
+
+.panel-grey {
+  background-color: gray;
+  color: white;
+}
+
+.panel-orange {
+  background-color: orange;
+}
+
+.panel-config {
+  margin: 15px;
+  height: 300px;
+}
+
+.text-config {
+  margin: 0px;
+  line-height: 300px;
+  text-align: center;
+}
+
+.twrap {
+  white-space: pre-wrap;
 }
