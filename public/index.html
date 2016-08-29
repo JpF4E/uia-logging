@@ -15,6 +15,9 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment-with-locales.min.js" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.5/moment-timezone-with-data.min.js" crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-spinner/0.8.1/angular-spinner.min.js" crossorigin="anonymous"></script>
 	<!--<script src="libs/angular-route/angular-route.min.js"></script>-->
 	<script src="https://angular-ui.github.io/ui-router/release/angular-ui-router.min.js" crossorigin="anonymous"></script>
 	<script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.1.2.min.js" crossorigin="anonymous"></script>
@@ -52,7 +55,7 @@
 			</a>
 		</div>
 		<ul class="nav navbar-nav">
-			<li><a href="" ui-sref="sec-search">Security Search</a></li>
+			<li><a class="blink_me" href="" ui-sref="sec-search">Security Search</a></li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<li ng-if="currentState.current.name != 'home' && (memberInfo.type == 'Owner' || memberInfo.type == 'Admin')"><a href="" ui-sref="pending">Administration</a></li>
@@ -65,7 +68,7 @@
 	<div ui-view></div>
 
 	<footer>
-		<p>UIA &copy; 2016 - BETA v0.4.1<p>
+		<p>UIA &copy; 2016 - BETA v0.4.2<p>
 	</footer>
 
 </div>

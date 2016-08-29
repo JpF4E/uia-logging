@@ -14,6 +14,7 @@ angular.module('SecSearchCtrl', []).controller('SecSearchController', function($
 
 	$scope.panel = {color: 'white', text: 'Input the username...', motto: ''};
 	$scope.search = {};
+	$scope.showSpinner = false;
 
 	$scope.logout = function() {
 		AuthService.logout(false);
@@ -47,7 +48,9 @@ angular.module('SecSearchCtrl', []).controller('SecSearchController', function($
 	}
 
 	$scope.secSearch = function() {
+		$scope.showSpinner = true;
 		$http.post(API_ENDPOINT.url + '/secSearch', {username: $scope.search.username}).then(function(result) {
+			$scope.showSpinner = false;
 			if (result.data.success) {
 				$scope.panel = result.data.panel;
 				console.log($scope.panel);

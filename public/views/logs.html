@@ -222,7 +222,7 @@
 											<tbody>
 												<tr class="table-grey">
 													<td class="twrap" ng-if="addForm.reason.show">{{x.reason}}</td>
-													<td class="twrap" ng-if="addForm.screenshots.show">{{x.screenshots}}</td>
+													<td class="twrap" ng-if="addForm.screenshots.show"><div ng-bind-html="x.screenshots | linky:'_blank'"></div></td>
 													<td class="twrap" ng-if="addForm.notes.show">{{x.notes}}</td>
 												</tr>
 											</tbody>
@@ -232,6 +232,7 @@
 							</tbody>
 						</table>
 					</div>
+					<span us-spinner="{radius:10, width:3, length: 6}" spinner-on="showSpinner"></span>
 				</div>
 			</div>
 		</div>

@@ -177,7 +177,7 @@
 									<td ng-if="addForm.type.show">{{x.type}}</td>
 									<td ng-if="addForm.promoTag.show">[{{x.promoTag}}]</td>
 									<td ng-if="addForm.rank.show">[UIA] {{x.rank}}</td>
-									<td ng-if="addForm.email.show">{{x.email}}</td>
+									<td ng-if="addForm.email.show"><div ng-bind-html="x.email | linky"></div></td>
 									<td ng-if="addForm.tokenTimestamp.show">{{getDate(x.tokenTimestamp)}}<br>{{getTime(x.tokenTimestamp)}}</td>
 									<td ng-if="addForm.firstLogin.show">
 										<span ng-if="!x.firstLogin" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
@@ -215,6 +215,7 @@
 							</tbody>
 						</table>
 					</div>
+					<span us-spinner="{radius:10, width:3, length: 6}" spinner-on="showSpinner"></span>
 				</div>
 			</div>
 		</div>

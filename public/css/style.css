@@ -382,3 +382,42 @@ textarea {
     -ms-transform:rotateX(180deg); /* IE 9 */
     -webkit-transform:rotateX(180deg); /* Safari and Chrome */
 }
+
+.blink_me {
+    color: #fff !important;
+    -webkit-animation-name: blinker;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: 5;
+
+    -moz-animation-name: blinker;
+    -moz-animation-duration: 1s;
+    -moz-animation-timing-function: linear;
+    -moz-animation-iteration-count: 5;
+
+    animation-name: blinker;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: 5;
+}
+
+@-moz-keyframes blinker {
+    0% { opacity: 1.0; color: #fff; }
+    40% { opacity: 0.2; color: #fff; }
+    75% { opacity: 0.8; color: #fff; }
+    100% { opacity: 1.0; color: #9d9d9d; }
+}
+
+@-webkit-keyframes blinker {
+    0% { opacity: 1.0; color: #fff; }
+    40% { opacity: 0.2; color: #fff; }
+    75% { opacity: 0.8; color: #fff; }
+    100% { opacity: 1.0; color: #9d9d9d; }
+}
+
+@keyframes blinker {
+    0% { opacity: 1.0; color: #fff; }
+    40% { opacity: 0.2; color: #fff; }
+    75% { opacity: 0.8; color: #fff; }
+    100% { opacity: 1.0; color: #9d9d9d; }
+}

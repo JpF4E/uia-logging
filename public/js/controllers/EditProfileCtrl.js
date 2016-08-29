@@ -15,6 +15,7 @@ angular.module('EditProfileCtrl', []).controller('EditProfileController', functi
 	$scope.logTitle = "Your Profile";
 	$scope.logTitleSingular = "Profile";
 	$scope.logIcon = "user";
+	$scope.showSpinner = false;
 
 	//$scope.login = function() {
 	//	AuthService.login($scope.user).then(function(msg) {
@@ -137,8 +138,9 @@ angular.module('EditProfileCtrl', []).controller('EditProfileController', functi
 			$scope.alert = {msg: "The email is invalid.", strong: "Failed to edit " + $scope.logTitleSingular + "!"};
 			return;
 		}
-			
+		$scope.showSpinner = true;
 		$http.post(API_ENDPOINT.url + '/editProfile', content).then(function(result) {
+			$scope.showSpinner = false;
 			if (result.data.success) {
 				AuthService.reloadUser();
 				$scope.alert = {type: "success", msg: result.data.msg, strong: $scope.logTitleSingular + " edited successfully!"};
@@ -169,8 +171,9 @@ angular.module('EditProfileCtrl', []).controller('EditProfileController', functi
 			$scope.alert2 = {msg: "The new passwords are not equal.", strong: "Failed to change password!"};
 			return;
 		}
-			
+		$scope.showSpinner = true;
 		$http.post(API_ENDPOINT.url + '/changePw', content).then(function(result) {
+			$scope.showSpinner = false;
 			if (result.data.success) {
 				$scope.alert2 = {type: "success", msg: result.data.msg, strong: "Changed password successfully!"};
 			} else {

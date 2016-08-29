@@ -22,6 +22,7 @@ angular.module('PendingCtrl', []).controller('PendingController', function($http
 	$scope.comments = [];
 
 	$scope.search = {};
+	$scope.showSpinner = false;
 
 	//$scope.login = function() {
 	//	AuthService.login($scope.user).then(function(msg) {
@@ -109,10 +110,12 @@ angular.module('PendingCtrl', []).controller('PendingController', function($http
 	var lastCreatedAt = null;
 
 	$scope.searchThePending = function(reload) {
+		$scope.showSpinner = true;
 		if(reload) {
 			lastCreatedAt = null;
 		}
 		$http.post(API_ENDPOINT.url + '/searchPending', {name: $scope.search.name, lastCreatedAt: lastCreatedAt || ServerDate()}).then(function(result) {
+			$scope.showSpinner = false;
 			if (result.data.success) {
 				if(result.data.pending.length > 0)
 					lastCreatedAt = result.data.pending[result.data.pending.length-1].createdAt;

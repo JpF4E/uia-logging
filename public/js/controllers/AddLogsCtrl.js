@@ -15,6 +15,7 @@ angular.module('AddLogsCtrl', []).controller('AddLogsController', function($http
 	$scope.logTitle = null;
 	$scope.logTitleSingular = null;
 	$scope.logIcon = null;
+	$scope.showSpinner = false;
 
 	var LOA_TIME_DISTORTION = 1439;
 
@@ -437,7 +438,9 @@ angular.module('AddLogsCtrl', []).controller('AddLogsController', function($http
 				content.endDate.addMinutes(LOA_TIME_DISTORTION);
 				break;
 		}
+		$scope.showSpinner = true;
 		$http.post(API_ENDPOINT.url + '/addLog', content).then(function(result) {
+			$scope.showSpinner = false;
 			if (result.data.success) {
 				$scope.alert = {type: "success", msg: result.data.msg, strong: $scope.logTitleSingular + " added successfully!"};
 				$scope.resetForm();

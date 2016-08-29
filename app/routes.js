@@ -184,14 +184,14 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 				password: req.body.registerPassword,
 				email: req.body.registerEmail,
 				allowedRoles: [{"role" : "training-logs", "perm" : [true, true, true, false]},
-				{"role" : "promotion-logs", "perm" : [false, false, false, false]},
+				{"role" : "promotion-logs", "perm" : [true, true, true, false]},
 				{"role" : "warning-logs", "perm" : [false, false, false, false]},
 				{"role" : "demotion-logs", "perm" : [false, false, false, false]},
 				{"role" : "strike-logs", "perm" : [false, false, false, false]},
 				{"role" : "fired-logs", "perm" : [false, false, false, false]},
 				{"role" : "transfer-logs", "perm" : [false, false, false, false]},
 				{"role" : "rank-selling-logs", "perm" : [false, false, false, false]},
-				{"role" : "loa-logs", "perm" : [false, false, false, false]}]
+				{"role" : "loa-logs", "perm" : [true, true, true, false]}]
 			});
 			// save the user
 			newUser.save(function(err) {

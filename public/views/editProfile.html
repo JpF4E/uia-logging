@@ -214,6 +214,7 @@
 						</div>
 						<button class="btn btn-lg btn-primary" type="submit" ng-click="changePw()">Change Password</button>
 						<!-- <button class="btn btn-lg" type="reset" ng-click="resetForm()">Clear</button> -->
+						<span us-spinner="{radius:10, width:3, length: 6}" spinner-on="showSpinner"></span>
 						<br ng-show="alert2 != null">
 						<br ng-show="alert2 != null">
 						<div ng-show="alert2 != null" uib-alert ng-class="'alert-' + (alert2.type || 'danger')" close="closeAlert2()"><strong>{{alert2.strong}}</strong> {{alert2.msg}}</div>

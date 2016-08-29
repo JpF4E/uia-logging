@@ -21,6 +21,7 @@ angular.module('LogsCtrl', []).controller('LogsController', function($http, $sco
 	$scope.comments = [];
 
 	$scope.search = {};
+	$scope.showSpinner = false;
 
 	//$scope.login = function() {
 	//	AuthService.login($scope.user).then(function(msg) {
@@ -159,10 +160,12 @@ angular.module('LogsCtrl', []).controller('LogsController', function($http, $sco
 	var lastCreatedAt = null;
 
 	$scope.searchTheLogs = function(reload) {
+		$scope.showSpinner = true;
 		if(reload) {
 			lastCreatedAt = null;
 		}
 		$http.post(API_ENDPOINT.url + '/searchLog', {logger: $scope.search.logger, username: $scope.search.username, type: $scope.currentState.current.name, lastCreatedAt: lastCreatedAt || ServerDate()}).then(function(result) {
+			$scope.showSpinner = false;
 			if (result.data.success) {
 				if(result.data.logs.length > 0)
 					lastCreatedAt = result.data.logs[result.data.logs.length-1].createdAt;

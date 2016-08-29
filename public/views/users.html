@@ -218,7 +218,7 @@
 															<div ng-repeat="y in x.usersAllowedRoles track by $index">{{y}}</div>
 														</div>
 													</td>
-													<td ng-if="addForm.email.show">{{x.email}}</td>
+													<td ng-if="addForm.email.show"><div ng-bind-html="x.email | linky"></div></td>
 												</tr>
 											</tbody>
 										</table>
@@ -227,6 +227,7 @@
 							</tbody>
 						</table>
 					</div>
+					<span us-spinner="{radius:10, width:3, length: 6}" spinner-on="showSpinner"></span>
 				</div>
 			</div>
 		</div>

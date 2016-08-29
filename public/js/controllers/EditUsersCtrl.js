@@ -178,7 +178,8 @@ angular.module('EditUsersCtrl', []).controller('EditUsersController', function($
 		if(stype == "Trainer") {
 			for (var i = $scope.addForm.allowedRoles.val.length - 1; i >= 0; i--) {
 				if($scope.addForm.allowedRoles.val[i].role == "training-logs" ||
-					$scope.addForm.allowedRoles.val[i].role == "loa-logs") {
+					$scope.addForm.allowedRoles.val[i].role == "loa-logs" ||
+					$scope.addForm.allowedRoles.val[i].role == "promotion-logs") {
 					$scope.addForm.allowedRoles.val[i].perm[0] = !toChangeTr;
 					$scope.addForm.allowedRoles.val[i].perm[1] = !toChangeTr;
 					$scope.addForm.allowedRoles.val[i].perm[2] = !toChangeTr;

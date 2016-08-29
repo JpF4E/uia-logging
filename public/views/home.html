@@ -8,6 +8,7 @@
 					<!--<label for="inputPassword" class="sr-only">Password</label>-->
 					<input type="password" id="inputPassword" class="form-control" placeholder="Password" required="" ng-model="user.password">
 					<button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="login()">Sign in</button>
+					<span us-spinner="{radius:10, width:3, length: 6}" spinner-on="showSpinner"></span>
 				</form>
 				<br ng-show="alert != null">
 				<div ng-show="alert != null" uib-alert ng-class="'alert-' + (alert.type || 'danger')" close="closeAlert()"><strong>{{alert.strong}}</strong> {{alert.msg}}</div>

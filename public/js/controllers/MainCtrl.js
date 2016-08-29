@@ -11,6 +11,7 @@ angular.module('MainCtrl', []).controller('MainController', function($http, $roo
 	$scope.memberCatsEmpty = [true, true, true];
 	$scope.memberRoles = {};
 	$scope.memberName = "";
+	$scope.showSpinner = true;
 
 	var locale = window.navigator.userLanguage || window.navigator.language || window.navigator.browserLanguage || window.navigator.systemLanguage || "en-us";
 	moment.locale(locale);
@@ -44,9 +45,12 @@ angular.module('MainCtrl', []).controller('MainController', function($http, $roo
 	$interval(tick, 500);
 
 	$scope.login = function() {
+		$scope.showSpinner = true;
 		AuthService.login($scope.user).then(function(msg) {
+			$scope.showSpinner = false;
 			$state.go('main');
 		}, function(errMsg) {
+			$scope.showSpinner = false;
 			$scope.alert = {msg: errMsg, strong: "Login failed!"};
 		});
 	};
@@ -59,11 +63,14 @@ angular.module('MainCtrl', []).controller('MainController', function($http, $roo
 		if(!$scope.requesting) {
 			$scope.requesting = true;
 		} else {
+			$scope.showSpinner = true;
 			AuthService.register($scope.user).then(function(msg) {
+				$scope.showSpinner = false;
 				$scope.alert2 = {type: "success", msg: msg, strong: "Registration succeeded!"};
 				$scope.requesting = false;
 				$scope.user = {};
 			}, function(errMsg) {
+				$scope.showSpinner = false;
 				$scope.alert2 = {msg: errMsg, strong: "Registration failed!"};
 			});
 		}
@@ -99,6 +106,7 @@ angular.module('MainCtrl', []).controller('MainController', function($http, $roo
 			if(AuthService.isFirstLogin()) {
 				$state.go('edit-profile');
 			}
+			$scope.showSpinner = false;
 		}
 	}, true);
 

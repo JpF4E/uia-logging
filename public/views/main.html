@@ -117,6 +117,7 @@
 						<h3 align="left" class="panel-title">Logs</h3>
 					</div>
 					<div class="panel-body">
+						<span us-spinner="{radius:10, width:3, length: 6}" spinner-on="showSpinner"></span>
 						<div ng-if="memberRoles['training-logs'][1]" class="thumb-margins">
 							<div class="btn-group-lg btn-group-vertical btn-fill" role="group">
 								<button ui-sref="training-logs" type="button" ng-class="(memberRoles['training-logs'][0]) ? 'btn btn-info btn-block btn-bigger' : 'btn btn-info btn-block btn-bigger-alt'"><span class="glyphicon glyphicon-wrench main-icons" aria-hidden="true"></span><br>Training Logs</button>

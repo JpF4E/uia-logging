@@ -22,6 +22,7 @@ angular.module('UsersCtrl', []).controller('UsersController', function($http, $s
 	$scope.comments = [];
 
 	$scope.search = {};
+	$scope.showSpinner = false;
 
 	//$scope.login = function() {
 	//	AuthService.login($scope.user).then(function(msg) {
@@ -112,10 +113,12 @@ angular.module('UsersCtrl', []).controller('UsersController', function($http, $s
 	var lastCreatedAt = null;
 
 	$scope.searchTheUsers = function(reload) {
+		$scope.showSpinner = true;
 		if(reload) {
 			lastCreatedAt = null;
 		}
 		$http.post(API_ENDPOINT.url + '/searchUsers', {name: $scope.search.name, banned: $scope.search.banned, promoTag: $scope.search.promoTag, lastCreatedAt: lastCreatedAt || ServerDate()}).then(function(result) {
+			$scope.showSpinner = false;
 			if (result.data.success) {
 				if(result.data.users.length > 0)
 					lastCreatedAt = result.data.users[result.data.users.length-1].createdAt;
