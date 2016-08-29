@@ -1,0 +1,167 @@
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Delete Log</h4>
+			</div>
+			<div class="modal-body">
+				Are you sure you want to delete this {{logTitleSingular}}?
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger" ng-click="deleteLog()" data-dismiss="modal">Yes</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div ng-hide="!memberName" class="col-md-2 vert-div">
+		<div class="jumbotron no-pad the-menu">
+		<h3 align="left">Menu</h3>
+			<ul class="nav nav-pills nav-stacked">
+				<li role="presentation" align="left"><a ui-sref="main">Home</a></li>
+				<br ng-if="!memberCatsEmpty[0]">
+				<div ng-if="!memberCatsEmpty[0]" class="strike"><span>Logs</span></div>
+				<li ng-class="{'active': currentState.current.name == 'training-logs' || currentState.current.name == 'add-training-logs'}" ng-if="memberRoles['training-logs'][1]" role="presentation" align="left">
+					<div class="outer-item">
+						<div class="inner-flex">
+							<a href="" ui-sref="training-logs">Training Logs</a>
+						</div>
+						<div class="inner-fixed">
+							<a ui-sref="add-training-logs" ng-if="memberRoles['training-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+						</div>
+					</div>
+				</li>
+				<li ng-class="{'active': currentState.current.name == 'promotion-logs' || currentState.current.name == 'add-promotion-logs'}" ng-if="memberRoles['promotion-logs'][1]" role="presentation" align="left">
+					<div class="outer-item">
+						<div class="inner-flex">
+							<a href="" ui-sref="promotion-logs">Promotion Logs</a>
+						</div>
+						<div class="inner-fixed">
+							<a ui-sref="add-promotion-logs" ng-if="memberRoles['promotion-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+						</div>
+					</div>
+				</li>
+				<br ng-if="!memberCatsEmpty[1]">
+				<div ng-if="!memberCatsEmpty[1]" class="strike"><span>Discipline Logs</span></div>
+				<li ng-class="{'active': currentState.current.name == 'warning-logs' || currentState.current.name == 'add-warning-logs'}" ng-if="memberRoles['warning-logs'][1]" role="presentation" align="left">
+					<div class="outer-item">
+						<div class="inner-flex">
+							<a href="" ui-sref="warning-logs">Warning Logs</a>
+						</div>
+						<div class="inner-fixed">
+							<a ui-sref="add-warning-logs" ng-if="memberRoles['warning-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+						</div>
+					</div>
+				</li>
+				<li ng-class="{'active': currentState.current.name == 'demotion-logs' || currentState.current.name == 'add-demotion-logs'}" ng-if="memberRoles['demotion-logs'][1]" role="presentation" align="left">
+					<div class="outer-item">
+						<div class="inner-flex">
+							<a href="" ui-sref="demotion-logs">Demotion Logs</a>
+						</div>
+						<div class="inner-fixed">
+							<a ui-sref="add-demotion-logs" ng-if="memberRoles['demotion-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+						</div>
+					</div>
+				</li>
+				<li ng-class="{'active': currentState.current.name == 'strike-logs' || currentState.current.name == 'add-strike-logs'}" ng-if="memberRoles['strike-logs'][1]" role="presentation" align="left">
+					<div class="outer-item">
+						<div class="inner-flex">
+							<a href="" ui-sref="strike-logs">Strike Logs</a>
+						</div>
+						<div class="inner-fixed">
+							<a ui-sref="add-strike-logs" ng-if="memberRoles['strike-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+						</div>
+					</div>
+				</li>
+				<li ng-class="{'active': currentState.current.name == 'fired-logs' || currentState.current.name == 'add-fired-logs'}" ng-if="memberRoles['fired-logs'][1]" role="presentation" align="left">
+					<div class="outer-item">
+						<div class="inner-flex">
+							<a href="" ui-sref="fired-logs">Fired Logs</a>
+						</div>
+						<div class="inner-fixed">
+							<a ui-sref="add-fired-logs" ng-if="memberRoles['fired-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+						</div>
+					</div>
+				</li>
+				<br ng-if="!memberCatsEmpty[2]">
+				<div ng-if="!memberCatsEmpty[2]" class="strike"><span>Other Logs</span></div>
+				<li ng-class="{'active': currentState.current.name == 'transfer-logs' || currentState.current.name == 'add-transfer-logs'}" ng-if="memberRoles['transfer-logs'][1]" role="presentation" align="left">
+					<div class="outer-item">
+						<div class="inner-flex">
+							<a href="" ui-sref="transfer-logs">Transfer Logs</a>
+						</div>
+						<div class="inner-fixed">
+							<a ui-sref="add-transfer-logs" ng-if="memberRoles['transfer-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+						</div>
+					</div>
+				</li>
+				<li ng-class="{'active': currentState.current.name == 'rank-selling-logs' || currentState.current.name == 'add-rank-selling-logs'}" ng-if="memberRoles['rank-selling-logs'][1]" role="presentation" align="left">
+					<div class="outer-item">
+						<div class="inner-flex">
+							<a href="" ui-sref="rank-selling-logs">Rank Selling Logs</a>
+						</div>
+						<div class="inner-fixed">
+							<a ui-sref="add-rank-selling-logs" ng-if="memberRoles['rank-selling-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+						</div>
+					</div>
+				</li>
+				<li ng-class="{'active': currentState.current.name == 'loa-logs' || currentState.current.name == 'add-loa-logs'}" ng-if="memberRoles['loa-logs'][1]" role="presentation" align="left">
+					<div class="outer-item">
+						<div class="inner-flex">
+							<a href="" ui-sref="loa-logs">LoA Logs</a>
+						</div>
+						<div class="inner-fixed">
+							<a ui-sref="add-loa-logs" ng-if="memberRoles['loa-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div ng-class="{'col-md-10 main-content': memberName, 'col-md-12 main-content': !memberName}">
+		<div class="jumbotron no-pad">
+			<div class="outer-item">
+				<h3 class="inner-flex" align="left"><span ng-class="'glyphicon glyphicon-' + logIcon" aria-hidden="true"></span> {{logTitle}}</h3>
+				<div class="inner-fixed">
+					<h4 align="right">{{clockDate}}</h4>
+					<h4 align="right"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> {{clockTime}}</h4>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<!--<div class="panel-heading">
+					<h3 text-align="left" class="panel-title">Add a {{logTitleSingular}}</h3>
+				</div>-->
+				<div class="panel-body">
+					<form class="main-add-form">
+						<label>Search for:</label>
+						<div class="outer-item">
+							<input autofocus="" type="search" class="form-control inner-fixed" placeholder="Username" ng-model="search.username"></input>
+							<button class="btn btn-primary search-button inner-fixed" type="submit" ng-click="secSearch()">Search</button>
+							<button class="btn inner-fixed search-button" type="reset" ng-click="resetForm(); secSearch()">Clear</button>
+						</div>
+					</form>
+					<br ng-show="alert != null">
+					<br ng-show="alert != null">
+					<div ng-show="alert != null" uib-alert ng-class="'alert-' + (alert.type || 'danger')" close="closeAlert()"><strong>{{alert.strong}}</strong> {{alert.msg}}</div>
+					<div class="main-add-form2">
+						<label>This motto should match:</label>
+						<input class="form-control" disabled ng-model="panel.motto"></input>
+					</div>
+					<div ng-class="{'panel panel-default panel-config panel-red': panel.color == 'red',
+									'panel panel-default panel-config panel-orange': panel.color == 'orange',
+									'panel panel-default panel-config panel-green': panel.color == 'green',
+									'panel panel-default panel-config panel-grey': panel.color == 'grey',
+									'panel panel-default panel-config': panel.color == 'white'}">
+						<div class="panel-body">
+							<h3 class="text-config">{{panel.text}}</h3>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
