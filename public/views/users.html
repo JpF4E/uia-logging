@@ -169,7 +169,6 @@
 									<th ng-if="addForm.type.show">{{addForm.type.tip1}}</th>
 									<th ng-if="addForm.promoTag.show">{{addForm.promoTag.tip1}}</th>
 									<th ng-if="addForm.rank.show">{{addForm.rank.tip1}}</th>
-									<th ng-if="addForm.email.show">{{addForm.email.tip1}}</th>
 									<th ng-if="addForm.tokenTimestamp.show">{{addForm.tokenTimestamp.tip1}}</th>
 									<th ng-if="addForm.firstLogin.show">{{addForm.firstLogin.tip1}}</th>
 									<th ng-if="addForm.banned.show">{{addForm.banned.tip1}}</th>
@@ -187,7 +186,6 @@
 									<td ng-if="addForm.type.show">{{x.type}}</td>
 									<td ng-if="addForm.promoTag.show">[{{x.promoTag}}]</td>
 									<td ng-if="addForm.rank.show">[UIA] {{x.rank}}</td>
-									<td ng-if="addForm.email.show">{{x.email}}</td>
 									<td ng-if="addForm.tokenTimestamp.show">{{getDate(x.tokenTimestamp)}}<br>{{getTime(x.tokenTimestamp)}}</td>
 									<td ng-if="addForm.firstLogin.show">
 										<span ng-if="x.firstLogin" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
@@ -207,6 +205,7 @@
 											<thead>
 												<tr ng-class="{'table-banned': x.banned, 'table-grey': !x.banned}">
 													<th ng-if="addForm.allowedRoles.show">{{addForm.allowedRoles.tip1}}</th>
+													<th ng-if="addForm.email.show">{{addForm.email.tip1}}</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -219,6 +218,7 @@
 															<div ng-repeat="y in x.usersAllowedRoles track by $index">{{y}}</div>
 														</div>
 													</td>
+													<td ng-if="addForm.email.show">{{x.email}}</td>
 												</tr>
 											</tbody>
 										</table>
