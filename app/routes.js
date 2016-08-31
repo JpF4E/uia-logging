@@ -626,6 +626,9 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 										banned: true
 									}
 								}
+								if(req.body.admin) {
+									query.type = { $ne: 'Regular' }
+								}
 							} else {
 								if(!req.body.banned) {
 									query = {

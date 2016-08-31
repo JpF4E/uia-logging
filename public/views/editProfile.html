@@ -189,7 +189,7 @@
 							<label>{{addForm.email.tip1}}:</label>
 							<input ng-disabled="addForm.email.dis" required="" type="email" class="form-control" placeholder="{{addForm.email.tip2}}" ng-model="addForm.email.val"></input>
 						</div>
-						<button class="btn btn-lg btn-primary" type="submit" ng-click="editProfile()">Edit Profile</button>
+						<button ng-disabled="showSpinner" class="btn btn-lg btn-primary" type="submit" ng-click="editProfile()">Edit Profile</button>
 						<!-- <button class="btn btn-lg" type="reset" ng-click="resetForm()">Clear</button> -->
 						<br ng-show="alert != null">
 						<br ng-show="alert != null">
@@ -212,7 +212,7 @@
 							<label>{{addForm.passC.tip1}}:</label>
 							<input ng-disabled="addForm.passC.dis" required="" autofocus="" type="password" class="form-control" placeholder="{{addForm.passC.tip2}}" ng-model="addForm.passC.val"></input>
 						</div>
-						<button class="btn btn-lg btn-primary" type="submit" ng-click="changePw()">Change Password</button>
+						<button ng-disabled="showSpinner" class="btn btn-lg btn-primary" type="submit" ng-click="changePw()">Change Password</button>
 						<!-- <button class="btn btn-lg" type="reset" ng-click="resetForm()">Clear</button> -->
 						<span us-spinner="{radius:10, width:3, length: 6}" spinner-on="showSpinner"></span>
 						<br ng-show="alert2 != null">

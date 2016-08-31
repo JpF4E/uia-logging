@@ -7,7 +7,7 @@
 					<input type="username" id="inputUsername" class="form-control" placeholder="Habbo username" required="" autofocus="" ng-model="user.name">
 					<!--<label for="inputPassword" class="sr-only">Password</label>-->
 					<input type="password" id="inputPassword" class="form-control" placeholder="Password" required="" ng-model="user.password">
-					<button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="login()">Sign in</button>
+					<button ng-disabled="showSpinner" class="btn btn-lg btn-primary btn-block" type="submit" ng-click="login()">Sign in</button>
 					<span us-spinner="{radius:10, width:3, length: 6}" spinner-on="showSpinner"></span>
 				</form>
 				<br ng-show="alert != null">
@@ -22,7 +22,7 @@
 					<!--<label for="inputPassword" class="sr-only">Password</label>-->
 					<input type="password" id="inputRegPassword" class="form-control" placeholder="Password" ng-model="user.registerPassword" ng-show="requesting">
 					<input type="password" id="inputRegRepPassword" class="form-control" placeholder="Repeat password" ng-model="user.registerRepeatPassword" ng-show="requesting">
-					<button ng-class="{'btn btn-lg btn-default btn-block': !requesting, 'btn btn-lg btn-primary btn-block': requesting}" ng-attr-type="(requesting)?'submit':'button'" ng-click="signup()">
+					<button ng-disabled="showSpinner" ng-class="{'btn btn-lg btn-default btn-block': !requesting, 'btn btn-lg btn-primary btn-block': requesting}" ng-attr-type="(requesting)?'submit':'button'" ng-click="signup()">
 						<div ng-if="!requesting">Request Membership <span class="caret"></span></div>
 						<div ng-if="requesting">Request Membership</div>
 					</button>

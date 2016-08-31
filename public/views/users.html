@@ -146,15 +146,23 @@
 							<input autofocus="" type="search" class="form-control inner-fixed" placeholder="{{addForm.name.tip1}}" ng-model="search.name"></input>
 							<label class="or-label">,&nbsp;</label>
 							<input type="search" class="form-control inner-fixed" placeholder="{{addForm.promoTag.tip1}}" ng-model="search.promoTag"></input>
-							<label class="or-label">,&nbsp;</label>
+							<button class="btn btn-primary search-button inner-fixed" type="submit" ng-click="searchTheUsers(true)">Search</button>
+							<button class="btn inner-fixed search-button" type="reset" ng-click="resetForm(); searchTheUsers(true)">Clear</button>
+						</div>
+						<div class="outer-item">
 							<div class="checkbox">
 								<label>
 									<input type="checkbox" ng-model="search.banned">
 									Only&nbsp;Banned
 								</label>
 							</div>
-							<button class="btn btn-primary search-button inner-fixed" type="submit" ng-click="searchTheUsers(true)">Search</button>
-							<button class="btn inner-fixed search-button" type="reset" ng-click="resetForm(); searchTheUsers(true)">Clear</button>
+							<label ng-if="memberType == 'Owner'" class="or-label">,&nbsp;</label>
+							<div ng-if="memberType == 'Owner'" class="checkbox">
+								<label>
+									<input type="checkbox" ng-model="search.admin">
+									Only&nbsp;Admins
+								</label>
+							</div>
 						</div>
 					</form>
 					<br ng-show="alert != null">

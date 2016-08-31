@@ -108,6 +108,7 @@ angular.module('UsersCtrl', []).controller('UsersController', function($http, $s
 		$scope.search.name = null;
 		$scope.search.promoTag = null;
 		$scope.search.banned = false;
+		$scope.search.admin = false;
 	}
 
 	var lastCreatedAt = null;
@@ -117,7 +118,7 @@ angular.module('UsersCtrl', []).controller('UsersController', function($http, $s
 		if(reload) {
 			lastCreatedAt = null;
 		}
-		$http.post(API_ENDPOINT.url + '/searchUsers', {name: $scope.search.name, banned: $scope.search.banned, promoTag: $scope.search.promoTag, lastCreatedAt: lastCreatedAt || ServerDate()}).then(function(result) {
+		$http.post(API_ENDPOINT.url + '/searchUsers', {name: $scope.search.name, banned: $scope.search.banned, admin: $scope.search.admin, promoTag: $scope.search.promoTag, lastCreatedAt: lastCreatedAt || ServerDate()}).then(function(result) {
 			$scope.showSpinner = false;
 			if (result.data.success) {
 				if(result.data.users.length > 0)
