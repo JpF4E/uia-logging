@@ -208,7 +208,7 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 			name: req.body.name
 		}, function(err, user) {
 			if (err) throw err;
-		 
+		 	console.log(req.body.name + " wants to login!");
 			if (!user) {
 				res.send({success: false, msg: 'Authentication failed. User not found.'});
 			} else {
