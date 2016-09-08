@@ -157,6 +157,8 @@
 						<table class="table table-hover Content Flipped">
 							<thead>
 								<tr>
+									<th ng-if="addForm.loa.show">{{addForm.loa.tip1}}</th>
+									<th ng-if="addForm.loaRank.show">{{addForm.loaRank.tip1}}</th>
 									<th ng-if="addForm.username.show">{{addForm.username.tip1}}</th>
 									<th ng-if="addForm.rehired.show">{{addForm.rehired.tip1}}</th>
 									<th ng-if="addForm.recSecTrainOrHR.show">{{addForm.recSecTrainOrHR.tip1}}</th>
@@ -181,9 +183,14 @@
 								</tr>
 							</thead>
 							<tbody ng-repeat="x in logs">
-								<tr>
+								<tr ng-class="{'danger': x.removed || x.rehired}">
+									<td ng-if="addForm.loa.show">{{x.logger}}</td>
+									<td ng-if="addForm.loaRank.show">[UIA] {{x.loggerRank}}</td>
 									<td ng-if="addForm.username.show">{{x.username}}</td>
-									<td ng-if="addForm.rehired.show">
+									<td ng-if="addForm.rehired.show && (currentState.current.name == 'strike-logs' || currentState.current.name == 'warning-logs')">
+										<span ng-if="!x.removed" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+										<span ng-if="x.removed" class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
+									<td ng-if="addForm.rehired.show && currentState.current.name == 'fired-logs'">
 										<span ng-if="!x.rehired" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 										<span ng-if="x.rehired" class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
 									<td ng-if="addForm.recSecTrainOrHR.show">{{recSecTrainOrHRDict[x.recSecTrainOrHR]}}</td>
@@ -209,18 +216,18 @@
 										<a title="Delete Log" ng-show="(memberType == 'Owner') || (memberRoles[currentState.current.name][3] && memberName == x.logger)" class="icon-hide icon-padding" href="" type="button" role="button" data-toggle="modal" data-target="#myModal" ng-click="prepareDelete(x)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
 									</td>
 								</tr>
-								<tr class="table-grey" ng-if="comments[$index]">
+								<tr ng-class="{'danger': x.removed || x.rehired}" ng-if="comments[$index]">
 									<td colspan="100">
 										<table class="table table-condensed">
 											<thead>
-												<tr class="table-grey">
+												<tr ng-class="{'table-banned': x.removed || x.rehired, 'table-grey': !x.removed && !x.rehired}">
 													<th ng-if="addForm.reason.show">{{addForm.reason.tip1}}</th>
 													<th ng-if="addForm.screenshots.show">{{addForm.screenshots.tip1}}</th>
 													<th ng-if="addForm.notes.show">{{addForm.notes.tip1}}</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr class="table-grey">
+												<tr ng-class="{'table-banned': x.removed || x.rehired, 'table-grey': !x.removed && !x.rehired}">
 													<td class="twrap" ng-if="addForm.reason.show">{{x.reason}}</td>
 													<td class="twrap" ng-if="addForm.screenshots.show"><div ng-bind-html="x.screenshots | linky:'_blank'"></div></td>
 													<td class="twrap" ng-if="addForm.notes.show">{{x.notes}}</td>

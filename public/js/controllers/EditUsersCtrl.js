@@ -186,7 +186,7 @@ angular.module('EditUsersCtrl', []).controller('EditUsersController', function($
 				}
 			}
 			toChangeTr = !toChangeTr;
-		} else if(stype == "High Rank") {
+		} else if(stype == "Operative") {
 			for (var i = $scope.addForm.allowedRoles.val.length - 1; i >= 0; i--) {
 				if($scope.addForm.allowedRoles.val[i].role != "transfer-logs" &&
 					$scope.addForm.allowedRoles.val[i].role != "rank-selling-logs") {

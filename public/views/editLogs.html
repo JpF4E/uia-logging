@@ -130,7 +130,11 @@
 							<div ng-if="addForm.rehired.show" class="a-control">
 								<label>{{addForm.rehired.tip1}}:</label>
 								<div class="checkbox">
-									<label>
+									<label ng-if="currentState.current.name == 'edit-strike-logs' || currentState.current.name == 'edit-warning-logs'">
+										<input ng-disabled="addForm.rehired.dis" type="checkbox" ng-model="addForm.rehired.val">
+										Removed
+									</label>
+									<label ng-if="currentState.current.name == 'edit-fired-logs'">
 										<input ng-disabled="addForm.rehired.dis" type="checkbox" ng-model="addForm.rehired.val">
 										Rehired
 									</label>
@@ -159,7 +163,7 @@
 								<div class="radio">
 									<label>
 										<input ng-disabled="addForm.recSecTrainOrHR.dis" required="" value="hr" type="radio" name="optionsRadios2" id="optionsRadios24" ng-model="addForm.recSecTrainOrHR.val">
-										High Rank Training
+										Operative Training
 									</label>
 								</div>
 							</div>

@@ -58,7 +58,9 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 								nlog3.logType = 'demotion-logs';
 								theLogs.push(nlog3);
 							}
+							query.removed = false;
 							StrikeLogs.findOne(query, function(err4, nlog4) {
+								delete query.removed;
 								if (err4) throw err4;
 								if (nlog4) {
 									theStrikesNum = nlog4.strikeNumber;
@@ -387,6 +389,7 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 									newLog.notes = req.body.notes;
 									newLog.username = req.body.username;
 									newLog.rehired = req.body.rehired;
+									newLog.removed = req.body.removed;
 
 									newLog.save(function(err) {
 										if (err) {

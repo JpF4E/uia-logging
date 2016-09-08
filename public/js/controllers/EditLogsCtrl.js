@@ -222,8 +222,13 @@ angular.module('EditLogsCtrl', []).controller('EditLogsController', function($ht
 				content.reason = $scope.addForm.reason.val;
 				content.screenshots = $scope.addForm.screenshots.val;
 				content.notes = $scope.addForm.notes.val;
+				content.removed = $scope.addForm.rehired.val;
 				if(!checkRequired(content.username)) {
 					$scope.alert = {msg: "The username is invalid.", strong: "Failed to edit " + $scope.logTitleSingular + "!"};
+					return;
+				}
+				if(!checkRequired(content.removed)) {
+					$scope.alert = {msg: "The removed option is invalid.", strong: "Failed to edit " + $scope.logTitleSingular + "!"};
 					return;
 				}
 				if(!checkRequired(content.warnNumber)) {
@@ -285,8 +290,13 @@ angular.module('EditLogsCtrl', []).controller('EditLogsController', function($ht
 				content.reason = $scope.addForm.reason.val;
 				content.screenshots = $scope.addForm.screenshots.val;
 				content.notes = $scope.addForm.notes.val;
+				content.removed = $scope.addForm.rehired.val;
 				if(!checkRequired(content.username)) {
 					$scope.alert = {msg: "The username is invalid.", strong: "Failed to edit " + $scope.logTitleSingular + "!"};
+					return;
+				}
+				if(!checkRequired(content.removed)) {
+					$scope.alert = {msg: "The removed option is invalid.", strong: "Failed to edit " + $scope.logTitleSingular + "!"};
 					return;
 				}
 				if(!checkRequired(content.strikeNumber)) {
@@ -486,6 +496,7 @@ angular.module('EditLogsCtrl', []).controller('EditLogsController', function($ht
 				$scope.addForm.updatedAt = {show: true, tip1: "Updated At", tip2: "yyyy-mm-dd", dis: true, val: new Date($state.params.obj.updatedAt)};
 				$scope.addForm.logger = {show: true, tip1: "Logger", tip2: "The logger name", dis: true, val: $state.params.obj.logger};
 				$scope.addForm.loggerRank = {show: true, tip1: "Logger Rank", tip2: "The logger rank", dis: true, val: $state.params.obj.loggerRank};
+				$scope.addForm.rehired = {show: true, tip1: "Check if you want to remove this warning", tip2: "Warning has been removed?", dis: false, val: $state.params.obj.removed};
 				break;
 			case 'edit-demotion-logs':
 				$scope.logTitle = "Demotion Logs";
@@ -515,6 +526,7 @@ angular.module('EditLogsCtrl', []).controller('EditLogsController', function($ht
 				$scope.addForm.updatedAt = {show: true, tip1: "Updated At", tip2: "yyyy-mm-dd", dis: true, val: new Date($state.params.obj.updatedAt)};
 				$scope.addForm.logger = {show: true, tip1: "Logger", tip2: "The logger name", dis: true, val: $state.params.obj.logger};
 				$scope.addForm.loggerRank = {show: true, tip1: "Logger Rank", tip2: "The logger rank", dis: true, val: $state.params.obj.loggerRank};
+				$scope.addForm.rehired = {show: true, tip1: "Check if you want to remove this strike", tip2: "Strike has been removed?", dis: false, val: $state.params.obj.removed};
 				break;
 			case 'edit-fired-logs':
 				$scope.logTitle = "Fired Logs";

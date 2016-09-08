@@ -41,6 +41,11 @@ var WarningLogsSchema = new Schema({
   loggerRank: {
       type: String,
     required: [true, 'Please fill the logger\'s rank.']
+    },
+  removed: {
+      type: Boolean,
+      required: true,
+      default: false 
     }
 }, {timestamps: true});
 

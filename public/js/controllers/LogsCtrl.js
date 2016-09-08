@@ -49,7 +49,7 @@ angular.module('LogsCtrl', []).controller('LogsController', function($http, $sco
 		rec: "Recruit",
 		sec: "Security",
 		train: "Train",
-		hr: "High Rank"
+		hr: "Operative"
 	}
 
 	$scope.passOrFailDict = {
@@ -149,7 +149,9 @@ angular.module('LogsCtrl', []).controller('LogsController', function($http, $sco
 		updatedAt : {show: false, tip1: ""},
 		logger : {show: false, tip1: ""},
 		loggerRank : {show: false, tip1: ""},
-		rehired : {show: false, tip1: ""}
+		rehired : {show: false, tip1: ""},
+		loa : {show: false, tip1: ""},
+		loaRank : {show: false, tip1: ""}
 	}
 
 	$scope.resetForm = function() {
@@ -251,6 +253,7 @@ angular.module('LogsCtrl', []).controller('LogsController', function($http, $sco
 				$scope.addForm.updatedAt = {show: false, tip1: "Updated At"};
 				$scope.addForm.logger = {show: true, tip1: "Warner"};
 				$scope.addForm.loggerRank = {show: true, tip1: "Warner Rank"};
+				$scope.addForm.rehired = {show: true, tip1: "Removed"};
 				break;
 			case 'demotion-logs':
 				$scope.logTitle = "Demotion Logs";
@@ -280,6 +283,7 @@ angular.module('LogsCtrl', []).controller('LogsController', function($http, $sco
 				$scope.addForm.updatedAt = {show: false, tip1: "Updated At"};
 				$scope.addForm.logger = {show: true, tip1: "Striker"};
 				$scope.addForm.loggerRank = {show: true, tip1: "Striker Rank"};
+				$scope.addForm.rehired = {show: true, tip1: "Removed"};
 				break;
 			case 'fired-logs':
 				$scope.logTitle = "Fired Logs";
@@ -336,8 +340,10 @@ angular.module('LogsCtrl', []).controller('LogsController', function($http, $sco
 				$scope.addForm.notes = {show: true, tip1: "Notes"};
 				$scope.addForm.createdAt = {show: true, tip1: "Created At"};
 				$scope.addForm.updatedAt = {show: false, tip1: "Updated At"};
-				$scope.addForm.logger = {show: true, tip1: "Member on LoA"};
-				$scope.addForm.loggerRank = {show: true, tip1: "Member's Rank"};
+				$scope.addForm.logger = {show: false, tip1: "Member on LoA"};
+				$scope.addForm.loggerRank = {show: false, tip1: "Member's Rank"};
+				$scope.addForm.loa = {show: true, tip1: "Member on LoA"};
+				$scope.addForm.loaRank = {show: true, tip1: "Member's Rank"};
 				break;
 			default:
 				return;
