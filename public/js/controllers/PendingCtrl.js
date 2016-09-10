@@ -120,11 +120,11 @@ angular.module('PendingCtrl', []).controller('PendingController', function($http
 			if (result.data.success) {
 				if(result.data.pending.length > 0)
 					lastCreatedAt = result.data.pending[result.data.pending.length-1].createdAt;
+				if(result.data.pending.length == 0)
+					$scope.loadMoreShow = false;
 				if(reload) {
 					$scope.pending = result.data.pending;
 				} else {
-					if(result.data.pending.length == 0)
-						$scope.loadMoreShow = false;
 					$scope.pending = $scope.pending.concat(result.data.pending);
 				}
 				for (var i = 0; i < $scope.pending.length; i++) {

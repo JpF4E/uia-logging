@@ -172,11 +172,11 @@ angular.module('LogsCtrl', []).controller('LogsController', function($http, $sco
 			if (result.data.success) {
 				if(result.data.logs.length > 0)
 					lastCreatedAt = result.data.logs[result.data.logs.length-1].createdAt;
+				if(result.data.logs.length == 0)
+					$scope.loadMoreShow = false;
 				if(reload) {
 					$scope.logs = result.data.logs;
 				} else {
-					if(result.data.logs.length == 0)
-						$scope.loadMoreShow = false;
 					$scope.logs = $scope.logs.concat(result.data.logs);
 				}
 				for (var i = $scope.logs.length - 1; i >= 0; i--) {

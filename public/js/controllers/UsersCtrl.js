@@ -124,11 +124,11 @@ angular.module('UsersCtrl', []).controller('UsersController', function($http, $s
 			if (result.data.success) {
 				if(result.data.users.length > 0)
 					lastCreatedAt = result.data.users[result.data.users.length-1].createdAt;
+				if(result.data.users.length == 0)
+					$scope.loadMoreShow = false;
 				if(reload) {
 					$scope.users = result.data.users;
 				} else {
-					if(result.data.users.length == 0)
-						$scope.loadMoreShow = false;
 					$scope.users = $scope.users.concat(result.data.users);
 				}
 				for (var i = 0; i < $scope.users.length; i++) {
