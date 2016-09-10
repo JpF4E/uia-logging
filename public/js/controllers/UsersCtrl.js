@@ -23,6 +23,7 @@ angular.module('UsersCtrl', []).controller('UsersController', function($http, $s
 
 	$scope.search = {};
 	$scope.showSpinner = false;
+	$scope.loadMoreShow = true;
 
 	//$scope.login = function() {
 	//	AuthService.login($scope.user).then(function(msg) {
@@ -123,7 +124,13 @@ angular.module('UsersCtrl', []).controller('UsersController', function($http, $s
 			if (result.data.success) {
 				if(result.data.users.length > 0)
 					lastCreatedAt = result.data.users[result.data.users.length-1].createdAt;
-				$scope.users = result.data.users;
+				if(reload) {
+					$scope.users = result.data.users;
+				} else {
+					if(result.data.users.length == 0)
+						$scope.loadMoreShow = false;
+					$scope.users = $scope.users.concat(result.data.users);
+				}
 				for (var i = 0; i < $scope.users.length; i++) {
 					$scope.users[i].usersAllowedRolesNames = printableNames($scope.users[i].allowedRoles);
 					$scope.users[i].usersAllowedRoles = printableRoles($scope.users[i].allowedRoles);

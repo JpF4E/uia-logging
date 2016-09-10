@@ -16,6 +16,7 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 	}
 
 	var notHRRegex = /^(?=(.*(agent|security|training|instructor).*))(?!(field|director))/i;
+	var noTagsRegex = /\[[^\]]*\]/g;
 
 	// server routes ===========================================================
 	// handle things like api calls
@@ -210,7 +211,7 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 			name: req.body.name
 		}, function(err, user) {
 			if (err) throw err;
-		 	console.log(req.body.name + " wants to login!");
+
 			if (!user) {
 				res.send({success: false, msg: 'Authentication failed. User not found.'});
 			} else {
@@ -301,6 +302,20 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 
 							req.body.logger = user.name;
 							req.body.loggerRank = user.rank;
+
+							if(req.body.prevRank) {
+								req.body.prevRank = req.body.prevRank.replace(noTagsRegex, '');
+							}
+							if(req.body.oldRank) {
+								req.body.oldRank = req.body.oldRank.replace(noTagsRegex, '');
+							}
+							if(req.body.offeredRank) {
+								req.body.offeredRank = req.body.offeredRank.replace(noTagsRegex, '');
+							}
+							if(req.body.newRank) {
+								req.body.newRank = req.body.newRank.replace(noTagsRegex, '');
+							}
+
 							var newLog = new logsDict[req.body.type](req.body);
 							if(!newLog) {
 								return res.status(403).send({success: false, msg: 'Internal error.'});
@@ -500,7 +515,7 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 						if(valid) {
 							var query = {
 								createdAt: {
-									$lte: req.body.lastCreatedAt
+									$lt: req.body.lastCreatedAt
 								}
 							}
 
@@ -551,7 +566,7 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 							if(user.type == 'Owner') {
 								query = {
 									createdAt: {
-										$lte: req.body.lastCreatedAt
+										$lt: req.body.lastCreatedAt
 									},
 									valid: false,
 									name: {
@@ -561,7 +576,7 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 							} else {
 								query = {
 									createdAt: {
-										$lte: req.body.lastCreatedAt
+										$lt: req.body.lastCreatedAt
 									},
 									type: "Regular",
 									valid: false,
@@ -612,7 +627,7 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 								if(!req.body.banned) {
 									query = {
 										createdAt: {
-											$lte: req.body.lastCreatedAt
+											$lt: req.body.lastCreatedAt
 										},
 										name: {
 											$ne: user.name
@@ -621,7 +636,7 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 								} else {
 									query = {
 										createdAt: {
-											$lte: req.body.lastCreatedAt
+											$lt: req.body.lastCreatedAt
 										},
 										name: {
 											$ne: user.name
@@ -636,7 +651,7 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 								if(!req.body.banned) {
 									query = {
 										createdAt: {
-											$lte: req.body.lastCreatedAt
+											$lt: req.body.lastCreatedAt
 										},
 										type: "Regular",
 										name: {
@@ -646,7 +661,7 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 								} else {
 									query = {
 										createdAt: {
-											$lte: req.body.lastCreatedAt
+											$lt: req.body.lastCreatedAt
 										},
 										type: "Regular",
 										name: {
@@ -823,7 +838,7 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 							return res.status(403).send({success: false, msg: 'Please update your rank and promotion tag.'});
 						}
 
-						user.rank = req.body.rank;
+						user.rank = req.body.rank.replace(noTagsRegex, '');
 						user.promoTag = req.body.promoTag;
 						user.email = req.body.email;
 

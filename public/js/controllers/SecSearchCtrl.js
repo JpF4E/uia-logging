@@ -53,7 +53,6 @@ angular.module('SecSearchCtrl', []).controller('SecSearchController', function($
 			$scope.showSpinner = false;
 			if (result.data.success) {
 				$scope.panel = result.data.panel;
-				console.log($scope.panel);
 			} else {
 				$scope.alert = {msg: result.data.msg, strong: "Failed to " + $scope.logTitle + "!"};
 			}

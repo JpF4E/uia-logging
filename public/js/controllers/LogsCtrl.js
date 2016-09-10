@@ -22,6 +22,7 @@ angular.module('LogsCtrl', []).controller('LogsController', function($http, $sco
 
 	$scope.search = {};
 	$scope.showSpinner = false;
+	$scope.loadMoreShow = true;
 
 	//$scope.login = function() {
 	//	AuthService.login($scope.user).then(function(msg) {
@@ -171,7 +172,13 @@ angular.module('LogsCtrl', []).controller('LogsController', function($http, $sco
 			if (result.data.success) {
 				if(result.data.logs.length > 0)
 					lastCreatedAt = result.data.logs[result.data.logs.length-1].createdAt;
-				$scope.logs = result.data.logs;
+				if(reload) {
+					$scope.logs = result.data.logs;
+				} else {
+					if(result.data.logs.length == 0)
+						$scope.loadMoreShow = false;
+					$scope.logs = $scope.logs.concat(result.data.logs);
+				}
 				for (var i = $scope.logs.length - 1; i >= 0; i--) {
 					$scope.comments.push(false);
 				};

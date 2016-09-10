@@ -215,6 +215,9 @@
 							</tbody>
 						</table>
 					</div>
+					<div class="center">
+						<button ng-if="loadMoreShow && pending.length % 100 == 0" class="btn" ng-click="searchThePending(false)">Load more...</button>
+					</div>
 					<span us-spinner="{radius:10, width:3, length: 6}" spinner-on="showSpinner"></span>
 				</div>
 			</div>

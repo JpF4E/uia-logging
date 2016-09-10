@@ -23,6 +23,7 @@ angular.module('PendingCtrl', []).controller('PendingController', function($http
 
 	$scope.search = {};
 	$scope.showSpinner = false;
+	$scope.loadMoreShow = true;
 
 	//$scope.login = function() {
 	//	AuthService.login($scope.user).then(function(msg) {
@@ -119,7 +120,13 @@ angular.module('PendingCtrl', []).controller('PendingController', function($http
 			if (result.data.success) {
 				if(result.data.pending.length > 0)
 					lastCreatedAt = result.data.pending[result.data.pending.length-1].createdAt;
-				$scope.pending = result.data.pending;
+				if(reload) {
+					$scope.pending = result.data.pending;
+				} else {
+					if(result.data.pending.length == 0)
+						$scope.loadMoreShow = false;
+					$scope.pending = $scope.pending.concat(result.data.pending);
+				}
 				for (var i = 0; i < $scope.pending.length; i++) {
 					$scope.pending[i].pendingAllowedRolesNames = printableNames($scope.pending[i].allowedRoles);
 					$scope.pending[i].pendingAllowedRoles = printableRoles($scope.pending[i].allowedRoles);
