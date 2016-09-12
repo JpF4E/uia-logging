@@ -149,7 +149,9 @@
 					<div ng-show="alert != null" uib-alert ng-class="'alert-' + (alert.type || 'danger')" close="closeAlert()"><strong>{{alert.strong}}</strong> {{alert.msg}}</div>
 					<div class="main-add-form2">
 						<label>This motto should match:</label>
-						<input class="form-control" disabled ng-model="panel.motto"></input>
+						<label class="form-control">{{panel.motto}}</label>
+						<label>Promoter:</label>
+						<label class="form-control">{{panel.promoter}}</label>
 					</div>
 					<div ng-class="{'panel panel-default panel-config panel-red': panel.color == 'red',
 									'panel panel-default panel-config panel-orange': panel.color == 'orange',
