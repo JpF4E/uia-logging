@@ -392,15 +392,15 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 						var valid, valid2 = false;
 						for (var i = user.allowedRoles.length - 1; i >= 0; i--) {
 							if(user.allowedRoles[i].role == req.body.type
-								&& user.allowedRoles[i].perm[2] && user.name == req.body.logger) {
+								&& user.allowedRoles[i].perm[2]) {
 								valid = true;
+								break;
 							}
 						}
 
 						valid2 = user.type == 'Admin' || user.type == 'Owner';
 
 						if(valid || valid2) {
-
 							if(!user.promoTag || !user.promoTag.trim()
 								|| !user.rank || !user.rank.trim()) {
 								return res.status(403).send({success: false, msg: 'Please go to your profile and update your rank and promotion tag.'});
@@ -504,8 +504,9 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 						var valid, valid2 = false;
 						for (var i = user.allowedRoles.length - 1; i >= 0; i--) {
 							if(user.allowedRoles[i].role == req.body.type
-								&& user.allowedRoles[i].perm[3] && user.name == req.body.logger) {
+								&& user.allowedRoles[i].perm[3]) {
 								valid = true;
+								break;
 							}
 						}
 

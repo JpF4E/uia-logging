@@ -194,7 +194,7 @@ angular.module('LogsCtrl', []).controller('LogsController', function($http, $sco
 	}
 
 	$scope.prepareDelete = function(x) {
-		$scope.logToDelete = {_id: x._id, logger: x.logger};
+		$scope.logToDelete = {_id: x._id};
 	}
 
 	$scope.deleteLog = function() {
