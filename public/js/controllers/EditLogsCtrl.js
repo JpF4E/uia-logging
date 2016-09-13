@@ -418,11 +418,11 @@ angular.module('EditLogsCtrl', []).controller('EditLogsController', function($ht
 				// 	return;
 				// }
 				if(!checkRequired(content.startDate)) {
-					$scope.alert = {msg: "The start date's format is invalid.", strong: "Failed to edit " + $scope.logTitleSingular + "!"};
+					$scope.alert = {msg: "The start date's format is invalid (yyyy-mm-dd).", strong: "Failed to edit " + $scope.logTitleSingular + "!"};
 					return;
 				}
 				if(!checkRequired(content.endDate)) {
-					$scope.alert = {msg: "The end date's format is invalid.", strong: "Failed to edit " + $scope.logTitleSingular + "!"};
+					$scope.alert = {msg: "The end date's format is invalid (yyyy-mm-dd).", strong: "Failed to edit " + $scope.logTitleSingular + "!"};
 					return;
 				}
 				if(!checkRequired(content.reason)) {

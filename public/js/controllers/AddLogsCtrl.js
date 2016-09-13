@@ -416,11 +416,11 @@ angular.module('AddLogsCtrl', []).controller('AddLogsController', function($http
 				// 	return;
 				// }
 				if(!checkRequired(content.startDate)) {
-					$scope.alert = {msg: "The start date's format is invalid.", strong: "Failed to add " + $scope.logTitleSingular + "!"};
+					$scope.alert = {msg: "The start date's format is invalid (yyyy-mm-dd).", strong: "Failed to add " + $scope.logTitleSingular + "!"};
 					return;
 				}
 				if(!checkRequired(content.endDate)) {
-					$scope.alert = {msg: "The end date's format is invalid.", strong: "Failed to add " + $scope.logTitleSingular + "!"};
+					$scope.alert = {msg: "The end date's format is invalid (yyyy-mm-dd).", strong: "Failed to add " + $scope.logTitleSingular + "!"};
 					return;
 				}
 				if(!checkRequired(content.reason)) {
