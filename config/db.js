@@ -1,4 +1,4 @@
 module.exports = {
 	'secret': 'jpf4eIsAwesome',
-	'database': process.env.MONGO_URL || 'mongodb://localhost/uia-logging'
+	'database': process.env.MONGODB_URI || 'mongodb://localhost/uia-logging'
 }
