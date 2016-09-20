@@ -5,13 +5,13 @@ angular.module('starter', [])
 })
 
 .constant('API_ENDPOINT', {
-  url: 'https://uia-portal.scalingo.io/api'
+  url: 'http://uia-portal.herokuapp.com/api'
   //url: 'http://127.0.0.1:8080/api'
   //  For a simulator use: url: 'http://127.0.0.1:8080/api'
 })
 
 .constant('HOME_ENDPOINT', {
-  url: 'https://uia-portal.scalingo.io/'
+  url: 'http://uia-portal.herokuapp.com/'
   //url: 'http://127.0.0.1:8080/'
   //  For a simulator use: url: 'http://127.0.0.1:8080/api'
 });
