@@ -35,14 +35,14 @@ app.use(morgan('dev'));
 app.use(passport.initialize());
 
 //CORS middleware
-//var allowCrossDomain = function(req, res, next) {
-//    res.header('Access-Control-Allow-Origin', 'http://uia-portal.scalingo.io');
-//    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-//    res.header('Access-Control-Allow-Headers', 'Content-Type','Authorization');
-//    next();
-//}
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', 'http://uia-portal.herokuapp.com/');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type','Authorization');
+    next();
+}
 
-//app.use(allowCrossDomain);
+app.use(allowCrossDomain);
 
 app.use(methodOverride('X-HTTP-Method-Override')); // override with the X-HTTP-Method-Override header in the request. simulate DELETE/PUT
 app.use(express.static(__dirname + '/public')); // set the static files location /public/img will be /img for users
