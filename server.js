@@ -36,7 +36,7 @@ app.use(passport.initialize());
 
 //CORS middleware
 var allowCrossDomain = function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', 'http://uia-portal.scalingo.io');
+    res.header('Access-Control-Allow-Origin', 'https://uia-portal.scalingo.io');
 
     next();
 }
