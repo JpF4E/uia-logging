@@ -236,7 +236,7 @@
 						</table>
 					</div>
 					<div class="center">
-						<button ng-if="loadMoreShow && users.length % 100 == 0" class="btn" ng-click="searchTheUsers(false)">Load more...</button>
+						<button ng-if="loadMoreShow && users.length % 100 == 0 && users.length != 0" class="btn" ng-click="searchTheUsers(false)">Load more...</button>
 					</div>
 					<span us-spinner="{radius:10, width:3, length: 6}" spinner-on="showSpinner"></span>
 				</div>

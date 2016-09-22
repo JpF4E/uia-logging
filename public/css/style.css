@@ -3,6 +3,8 @@ body {
   padding-bottom: 10px;
   background-image: url("https://kaba35.com/wp-content/uploads/2015/11/Savin-NY-Website-Background-Web.jpg");
   background-attachment: fixed;
+  background-repeat: repeat-x;
+  background-position: left bottom;
 }
 
 .form-signin {
@@ -256,10 +258,12 @@ img {
 
 .outer-item {
   display: flex;
+  display: -webkit-flex;
 }
 
 .inner-flex {
   flex-grow: 1;
+  -webkit-flex-grow: 1;
 }
 
 .inner-fixed {
