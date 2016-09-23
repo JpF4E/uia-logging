@@ -569,8 +569,7 @@ textarea {
     position: relative;
     top: 150px;
     text-align: center;
-    color: white;
-    font-size: 3.5em;
+    font-size: 3.5em !important;
 }
 /*BALLOON 1 4*/
 @-webkit-keyframes balloon1 {
