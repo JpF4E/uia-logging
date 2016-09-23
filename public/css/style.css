@@ -571,6 +571,11 @@ textarea {
     text-align: center;
     font-size: 3.5em !important;
 }
+
+.birthdayDiv {
+  height: 250px;
+}
+
 /*BALLOON 1 4*/
 @-webkit-keyframes balloon1 {
     0%, 100% {
