@@ -1,0 +1,256 @@
+<div class="row">
+	<div class="col-md-2 vert-div">
+		<div class="jumbotron no-pad the-menu">
+		<h3 align="left">Menu</h3>
+			<ul class="nav nav-pills nav-stacked">
+				<li role="presentation" align="left"><a ui-sref="main">Home</a></li>
+				<br ng-if="!memberCatsEmpty[0]">
+				<div ng-if="!memberCatsEmpty[0]" class="strike"><span>Logs</span></div>
+				<li ng-class="{'active': currentState.current.name == 'training-logs' || currentState.current.name == 'add-training-logs'}" ng-if="memberRoles['training-logs'][1]" role="presentation" align="left">
+					<div class="outer-item">
+						<div class="inner-flex">
+							<a href="" ui-sref="training-logs">Training Logs</a>
+						</div>
+						<div class="inner-fixed">
+							<a ui-sref="add-training-logs" ng-if="memberRoles['training-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+						</div>
+					</div>
+				</li>
+				<li ng-class="{'active': currentState.current.name == 'promotion-logs' || currentState.current.name == 'add-promotion-logs'}" ng-if="memberRoles['promotion-logs'][1]" role="presentation" align="left">
+					<div class="outer-item">
+						<div class="inner-flex">
+							<a href="" ui-sref="promotion-logs">Promotion Logs</a>
+						</div>
+						<div class="inner-fixed">
+							<a ui-sref="add-promotion-logs" ng-if="memberRoles['promotion-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+						</div>
+					</div>
+				</li>
+				<br ng-if="!memberCatsEmpty[1]">
+				<div ng-if="!memberCatsEmpty[1]" class="strike"><span>Discipline Logs</span></div>
+				<li ng-class="{'active': currentState.current.name == 'warning-logs' || currentState.current.name == 'add-warning-logs'}" ng-if="memberRoles['warning-logs'][1]" role="presentation" align="left">
+					<div class="outer-item">
+						<div class="inner-flex">
+							<a href="" ui-sref="warning-logs">Warning Logs</a>
+						</div>
+						<div class="inner-fixed">
+							<a ui-sref="add-warning-logs" ng-if="memberRoles['warning-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+						</div>
+					</div>
+				</li>
+				<li ng-class="{'active': currentState.current.name == 'demotion-logs' || currentState.current.name == 'add-demotion-logs'}" ng-if="memberRoles['demotion-logs'][1]" role="presentation" align="left">
+					<div class="outer-item">
+						<div class="inner-flex">
+							<a href="" ui-sref="demotion-logs">Demotion Logs</a>
+						</div>
+						<div class="inner-fixed">
+							<a ui-sref="add-demotion-logs" ng-if="memberRoles['demotion-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+						</div>
+					</div>
+				</li>
+				<li ng-class="{'active': currentState.current.name == 'strike-logs' || currentState.current.name == 'add-strike-logs'}" ng-if="memberRoles['strike-logs'][1]" role="presentation" align="left">
+					<div class="outer-item">
+						<div class="inner-flex">
+							<a href="" ui-sref="strike-logs">Strike Logs</a>
+						</div>
+						<div class="inner-fixed">
+							<a ui-sref="add-strike-logs" ng-if="memberRoles['strike-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+						</div>
+					</div>
+				</li>
+				<li ng-class="{'active': currentState.current.name == 'fired-logs' || currentState.current.name == 'add-fired-logs'}" ng-if="memberRoles['fired-logs'][1]" role="presentation" align="left">
+					<div class="outer-item">
+						<div class="inner-flex">
+							<a href="" ui-sref="fired-logs">Fired Logs</a>
+						</div>
+						<div class="inner-fixed">
+							<a ui-sref="add-fired-logs" ng-if="memberRoles['fired-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+						</div>
+					</div>
+				</li>
+				<br ng-if="!memberCatsEmpty[2]">
+				<div ng-if="!memberCatsEmpty[2]" class="strike"><span>Other Logs</span></div>
+				<li ng-class="{'active': currentState.current.name == 'transfer-logs' || currentState.current.name == 'add-transfer-logs'}" ng-if="memberRoles['transfer-logs'][1]" role="presentation" align="left">
+					<div class="outer-item">
+						<div class="inner-flex">
+							<a href="" ui-sref="transfer-logs">Transfer Logs</a>
+						</div>
+						<div class="inner-fixed">
+							<a ui-sref="add-transfer-logs" ng-if="memberRoles['transfer-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+						</div>
+					</div>
+				</li>
+				<li ng-class="{'active': currentState.current.name == 'rank-selling-logs' || currentState.current.name == 'add-rank-selling-logs'}" ng-if="memberRoles['rank-selling-logs'][1]" role="presentation" align="left">
+					<div class="outer-item">
+						<div class="inner-flex">
+							<a href="" ui-sref="rank-selling-logs">Rank Selling Logs</a>
+						</div>
+						<div class="inner-fixed">
+							<a ui-sref="add-rank-selling-logs" ng-if="memberRoles['rank-selling-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+						</div>
+					</div>
+				</li>
+				<li ng-class="{'active': currentState.current.name == 'loa-logs' || currentState.current.name == 'add-loa-logs'}" ng-if="memberRoles['loa-logs'][1]" role="presentation" align="left">
+					<div class="outer-item">
+						<div class="inner-flex">
+							<a href="" ui-sref="loa-logs">LoA Logs</a>
+						</div>
+						<div class="inner-fixed">
+							<a ui-sref="add-loa-logs" ng-if="memberRoles['loa-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="col-md-10 main-content">
+		<div class="jumbotron no-pad">
+			<div class="outer-item">
+				<h3 class="inner-flex" align="left"><span ng-class="'glyphicon glyphicon-' + logIcon" aria-hidden="true"></span> {{logTitle}}</h3>
+				<div class="inner-fixed">
+					<h4 align="right">{{clockDate}}</h4>
+					<h4 align="right"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> {{clockTime}}</h4>
+				</div>
+			</div>
+			<ul class="nav nav-tabs">
+				<li role="presentation"><a href="" ui-sref="pending">Pending Members</a></li>
+				<li role="presentation"><a href="" ui-sref="users">All Members</a></li>
+				<li role="presentation" class="active"><a>Train Checker</a></li>
+			</ul>
+			<div class="panel panel-default custom-panel">
+				<!--<div class="panel-heading">
+					<h3 text-align="left" class="panel-title">Add a {{logTitleSingular}}</h3>
+				</div>-->
+				<div class="panel-body">
+					<form class="main-add-form">
+						<label>Search for:</label>
+						<div class="outer-item">
+							<input autofocus="" type="search" class="form-control inner-fixed" placeholder="{{addForm.name.tip1}}" ng-model="search.name"></input>
+							<button class="btn btn-primary search-button inner-fixed" type="submit" ng-click="searchTheTrainers(true)">Search</button>
+							<button class="btn inner-fixed search-button" type="reset" ng-click="resetForm(); searchTheTrainers(true)">Clear</button>
+						</div>
+					</form>
+					<br ng-show="alert != null">
+					<br ng-show="alert != null">
+					<div ng-show="alert != null" uib-alert ng-class="'alert-' + (alert.type || 'danger')" close="closeAlert()"><strong>{{alert.strong}}</strong> {{alert.msg}}</div>
+					<div class="row">
+						<div class="col-md-6">
+							<h3 class="subtitle" align="left">At Risk</h3>
+							<div class="table-responsive main-table-content Flipped">
+								<table class="table table-hover Content Flipped">
+									<thead>
+										<tr>
+											<th ng-if="addForm.name.show">{{addForm.name.tip1}}</th>
+											<th ng-if="addForm.promoTag.show">{{addForm.promoTag.tip1}}</th>
+											<th ng-if="addForm.rank.show">{{addForm.rank.tip1}}</th>
+											<th ng-if="addForm.createdAt.show">{{addForm.createdAt.tip1}}</th>
+											<th ng-if="addForm.lastTrained.show">{{addForm.lastTrained.tip1}}</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody ng-repeat="x in trainers">
+										<tr ng-class="{'danger': true}">
+											<td ng-if="addForm.name.show">{{x.name}}</td>
+											<td ng-if="addForm.promoTag.show">[{{x.promoTag}}]</td>
+											<td ng-if="addForm.rank.show">[UIA] {{x.rank}}</td>
+											<td ng-if="addForm.createdAt.show">{{x.joined}}</td>
+											<td ng-if="addForm.lastTrained.show">{{(x.trainAtRisk == null) ? 'Unknown/Never' : x.lastTrainedDiff}}
+											<!--<br ng-if="x.trainAtRisk != null"><br ng-if="x.trainAtRisk != null">{{(x.trainAtRisk == null) ? '' : getTime(x.trainAtRisk)}}<br ng-if="x.trainAtRisk != null">{{(x.trainAtRisk == null) ? '' : getDate(x.trainAtRisk)}}--></td>
+											<td>
+												<a title="More Details..." class="icon-hide icon-padding" href="" ng-click="comments[$index] = !comments[$index]" type="button" role="button"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a>
+											</td>
+										</tr>
+										<tr ng-class="{'danger table-banned': true}" ng-if="comments[$index]">
+											<td colspan="100">
+												<table class="table table-condensed">
+													<thead>
+														<tr ng-class="{'table-banned': true, 'table-grey': false}">
+															<th ng-if="addForm.allowedRoles.show">{{addForm.allowedRoles.tip1}}</th>
+															<th ng-if="addForm.email.show">{{addForm.email.tip1}}</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr ng-class="{'table-banned': true, 'table-grey': false}">
+															<td class="outer-item" ng-if="addForm.allowedRoles.show">
+																<div class="fixed-width">
+																	<div ng-repeat="y in x.trainersAllowedRolesNames">{{y}}</div>
+																</div>
+																<div>
+																	<div ng-repeat="y in x.trainersAllowedRoles track by $index">{{y}}</div>
+																</div>
+															</td>
+															<td ng-if="addForm.email.show"><div ng-bind-html="x.email | linky"></div></td>
+														</tr>
+													</tbody>
+												</table>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<h3 class="subtitle" align="left">Cleared</h3>
+							<div class="table-responsive main-table-content Flipped">
+								<table class="table table-hover Content Flipped">
+									<thead>
+										<tr>
+											<th ng-if="addForm.name.show">{{addForm.name.tip1}}</th>
+											<th ng-if="addForm.promoTag.show">{{addForm.promoTag.tip1}}</th>
+											<th ng-if="addForm.rank.show">{{addForm.rank.tip1}}</th>
+											<th ng-if="addForm.createdAt.show">{{addForm.createdAt.tip1}}</th>
+											<th ng-if="addForm.lastTrained.show">{{addForm.lastTrained.tip1}}</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody ng-repeat="x in trainersCorrect">
+										<tr ng-class="{'danger': x.banned}">
+											<td ng-if="addForm.name.show">{{x.name}}</td>
+											<td ng-if="addForm.promoTag.show">[{{x.promoTag}}]</td>
+											<td ng-if="addForm.rank.show">[UIA] {{x.rank}}</td>
+											<td ng-if="addForm.createdAt.show">{{x.joined}}</td>
+											<td ng-if="addForm.lastTrained.show">{{(x.trainAtRisk == null) ? 'Unknown/Never' : x.lastTrainedDiff}}
+											<!--<br ng-if="x.trainAtRisk != null"><br ng-if="x.trainAtRisk != null">{{(x.trainAtRisk == null) ? '' : getTime(x.trainAtRisk)}}<br ng-if="x.trainAtRisk != null">{{(x.trainAtRisk == null) ? '' : getDate(x.trainAtRisk)}}--></td>
+											<td>
+												<a title="More Details..." class="icon-hide icon-padding" href="" ng-click="commentsCorrect[$index] = !commentsCorrect[$index]" type="button" role="button"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a>
+											</td>
+										</tr>
+										<tr ng-class="{'danger table-banned': x.banned}" ng-if="commentsCorrect[$index]">
+											<td colspan="100">
+												<table class="table table-condensed">
+													<thead>
+														<tr ng-class="{'table-banned': x.banned, 'table-grey': !x.banned}">
+															<th ng-if="addForm.allowedRoles.show">{{addForm.allowedRoles.tip1}}</th>
+															<th ng-if="addForm.email.show">{{addForm.email.tip1}}</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr ng-class="{'table-banned': x.banned, 'table-grey': !x.banned}">
+															<td class="outer-item" ng-if="addForm.allowedRoles.show">
+																<div class="fixed-width">
+																	<div ng-repeat="y in x.trainersCorrectAllowedRolesNames">{{y}}</div>
+																</div>
+																<div>
+																	<div ng-repeat="y in x.trainersCorrectAllowedRoles track by $index">{{y}}</div>
+																</div>
+															</td>
+															<td ng-if="addForm.email.show"><div ng-bind-html="x.email | linky"></div></td>
+														</tr>
+													</tbody>
+												</table>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="center">
+						<button ng-if="loadMoreShow && trainers.length + trainersCorrect.length % 100 == 0 && trainers.length != 0 && trainersCorrect.length != 0" class="btn" ng-click="searchTheTrainers(false)">Load more...</button>
+					</div>
+					<span us-spinner="{radius:10, width:3, length: 6}" spinner-on="showSpinner"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

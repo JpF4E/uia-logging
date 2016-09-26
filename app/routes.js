@@ -863,54 +863,54 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 		}
 	});
 
-	tempFunc = function(usersArr, index) {
-		User.findOne({name: usersArr[index].name}, function(arrErr, arrUser) {
-			if (arrErr) throw arrErr;
-			if(arrUser) {
-				if(!arrUser.banned) {
-					arrUser.banned = false;
-				}
-				arrUser.trainAtRisk = usersArr[index].date;
+	// tempFunc = function(usersArr, index) {
+	// 	User.findOne({name: usersArr[index].name}, function(arrErr, arrUser) {
+	// 		if (arrErr) throw arrErr;
+	// 		if(arrUser) {
+	// 			if(!arrUser.banned) {
+	// 				arrUser.banned = false;
+	// 			}
+	// 			arrUser.trainAtRisk = usersArr[index].date;
 
-				arrUser.save(function(arrBestErr) {
-					if (arrBestErr) throw arrBestErr;
+	// 			arrUser.save(function(arrBestErr) {
+	// 				if (arrBestErr) throw arrBestErr;
 
-					if(index+1 < usersArr.length)
-						tempFunc(usersArr, index+1);
-				});
-			} else {
-				console.log("ERROR: THIS USER DOES NOT EXIST: " + usersArr[index].name);
+	// 				if(index+1 < usersArr.length)
+	// 					tempFunc(usersArr, index+1);
+	// 			});
+	// 		} else {
+	// 			console.log("ERROR: THIS USER DOES NOT EXIST: " + usersArr[index].name);
 
-				if(index+1 < usersArr.length)
-					tempFunc(usersArr, index+1);
-			}
-		});
-	}
+	// 			if(index+1 < usersArr.length)
+	// 				tempFunc(usersArr, index+1);
+	// 		}
+	// 	});
+	// }
 
-	TrainingLogs.find({}, function(tempErr, tempLogs) {
-		if (tempErr) throw tempErr;
+	// TrainingLogs.find({}, function(tempErr, tempLogs) {
+	// 	if (tempErr) throw tempErr;
 
-		var theTempUsers = {};
-		User.find({}, function(tempErr1, tempLogs2) {
-			if (tempErr1) throw tempErr1;
+	// 	var theTempUsers = {};
+	// 	User.find({}, function(tempErr1, tempLogs2) {
+	// 		if (tempErr1) throw tempErr1;
 
-			for (var i = tempLogs2.length - 1; i >= 0; i--) {
-				theTempUsers[tempLogs2[i].name] = null;
-			}
+	// 		for (var i = tempLogs2.length - 1; i >= 0; i--) {
+	// 			theTempUsers[tempLogs2[i].name] = null;
+	// 		}
 
-			for (var i = tempLogs.length - 1; i >= 0; i--) {
-				theTempUsers[tempLogs[i].logger] = tempLogs[i].createdAt;
-			}
+	// 		for (var i = tempLogs.length - 1; i >= 0; i--) {
+	// 			theTempUsers[tempLogs[i].logger] = tempLogs[i].createdAt;
+	// 		}
 
-			var theTempUsersArr = [];
-			for (var key in theTempUsers) {
-				if (theTempUsers.hasOwnProperty(key)) {
-					theTempUsersArr.push({name: key, date: theTempUsers[key]});
-				}
-			}
-			tempFunc(theTempUsersArr, 0);
-		}).sort('-createdAt');
-	}).sort('-createdAt');
+	// 		var theTempUsersArr = [];
+	// 		for (var key in theTempUsers) {
+	// 			if (theTempUsers.hasOwnProperty(key)) {
+	// 				theTempUsersArr.push({name: key, date: theTempUsers[key]});
+	// 			}
+	// 		}
+	// 		tempFunc(theTempUsersArr, 0);
+	// 	}).sort('-createdAt');
+	// }).sort('-createdAt');
 
 	app.post('/api/decidedPending', passport.authenticate('jwt', { session: false}), function(req, res) {
 		var token = getToken(req.headers);
