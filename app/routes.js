@@ -851,7 +851,7 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 								if (err) throw err;
 								
 								res.json({success: true, trainers: newUsers});
-							}).limit(100).sort('+trainAtRisk');
+							}).limit(100).sort('trainAtRisk');
 						} else {
 							return res.status(403).send({success: false, msg: 'User with no permissions to do this operation.'});
 						}
