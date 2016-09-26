@@ -844,7 +844,7 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 							}
 
 							if(req.body.name && req.body.name.trim()) {
-								query.name.$regex = new RegExp("^" + escapeRegExp(req.body.name.trim()), "i");
+								query.name = new RegExp("^" + escapeRegExp(req.body.name.trim()), "i");
 							}
 
 							User.find(query, {password: 0, valid: 0, type: 0, tokenTimestamp: 0, firstLogin: 0, banned: 0}, function(err, newUsers) {

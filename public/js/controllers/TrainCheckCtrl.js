@@ -104,8 +104,6 @@ angular.module('TrainCheckCtrl', []).controller('TrainCheckController', function
 					$scope.trainersCorrect = [];
 				}
 
-				console.log(result.data.trainers);
-
 				for (var i = 0; i < result.data.trainers.length; i++) {
 					if(result.data.trainers[i].name == "Admin")
 						continue;
