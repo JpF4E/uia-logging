@@ -154,7 +154,7 @@
 											<td ng-if="addForm.promoTag.show">[{{x.promoTag}}]</td>
 											<td ng-if="addForm.rank.show">[UIA] {{x.rank}}</td>
 											<td ng-if="addForm.createdAt.show">{{x.joined}}</td>
-											<td ng-if="addForm.lastTrained.show">{{(x.trainAtRisk == null) ? 'Unknown/Never' : x.lastTrainedDiff}}
+											<td ng-if="addForm.lastTrained.show">{{(x.trainAtRisk == null) ? 'N/A' : x.lastTrainedDiff}}
 											<!--<br ng-if="x.trainAtRisk != null"><br ng-if="x.trainAtRisk != null">{{(x.trainAtRisk == null) ? '' : getTime(x.trainAtRisk)}}<br ng-if="x.trainAtRisk != null">{{(x.trainAtRisk == null) ? '' : getDate(x.trainAtRisk)}}--></td>
 											<td>
 												<a title="More Details..." class="icon-hide icon-padding" href="" ng-click="comments[$index] = !comments[$index]" type="button" role="button"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a>
@@ -209,7 +209,7 @@
 											<td ng-if="addForm.promoTag.show">[{{x.promoTag}}]</td>
 											<td ng-if="addForm.rank.show">[UIA] {{x.rank}}</td>
 											<td ng-if="addForm.createdAt.show">{{x.joined}}</td>
-											<td ng-if="addForm.lastTrained.show">{{(x.trainAtRisk == null) ? 'Unknown/Never' : x.lastTrainedDiff}}
+											<td ng-if="addForm.lastTrained.show">{{(x.trainAtRisk == null) ? 'N/A' : x.lastTrainedDiff}}
 											<!--<br ng-if="x.trainAtRisk != null"><br ng-if="x.trainAtRisk != null">{{(x.trainAtRisk == null) ? '' : getTime(x.trainAtRisk)}}<br ng-if="x.trainAtRisk != null">{{(x.trainAtRisk == null) ? '' : getDate(x.trainAtRisk)}}--></td>
 											<td>
 												<a title="More Details..." class="icon-hide icon-padding" href="" ng-click="commentsCorrect[$index] = !commentsCorrect[$index]" type="button" role="button"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a>
