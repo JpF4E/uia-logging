@@ -105,6 +105,8 @@ angular.module('TrainCheckCtrl', []).controller('TrainCheckController', function
 				}
 
 				for (var i = 0; i < result.data.trainers.length; i++) {
+					if(result.data.trainers[i].name == "Admin")
+						continue;
 					var mom = moment(result.data.trainers[i].trainAtRisk);
 					if(result.data.trainers[i].trainAtRisk != null) {
 						result.data.trainers[i].lastTrainedDiff = mom.from(moment(ServerDate.now()));
@@ -125,17 +127,17 @@ angular.module('TrainCheckCtrl', []).controller('TrainCheckController', function
 					}
 				}
 
-				var nullArray = [];
-				for (var i = $scope.trainers.length - 1; i >= 0; i--) {
-					if($scope.trainers[i].trainAtRisk == null) {
-						nullArray.push($scope.trainers[i]);
-						$scope.trainers = $scope.trainers.slice(0, i);
-					} else {
-						break;
-					}
-				}
+				// var nullArray = [];
+				// for (var i = $scope.trainers.length - 1; i >= 0; i--) {
+				// 	if($scope.trainers[i].trainAtRisk == null) {
+				// 		nullArray.push($scope.trainers[i]);
+				// 		$scope.trainers = $scope.trainers.slice(0, i);
+				// 	} else {
+				// 		break;
+				// 	}
+				// }
 
-				$scope.trainers = nullArray.concat($scope.trainers);
+				// $scope.trainers = nullArray.concat($scope.trainers);
 
 				//$scope.alert = {type: "success", msg: result.data.msg, strong: $scope.logTitleSingular + " added successfully!"};
 			} else {
@@ -188,7 +190,7 @@ angular.module('TrainCheckCtrl', []).controller('TrainCheckController', function
 		$scope.logTitleSingular = "Trainer Check";
 		$scope.logIcon = "flag";
 		$scope.addForm.name = {show: true, tip1: "Username"};
-		$scope.addForm.promoTag = {show: true, tip1: "Promotion Tag"};
+		$scope.addForm.promoTag = {show: false, tip1: "Promotion Tag"};
 		$scope.addForm.rank = {show: true, tip1: "Current Rank"};
 		$scope.addForm.email = {show: true, tip1: "Email"};
 		$scope.addForm.createdAt = {show: true, tip1: "Joined"};
