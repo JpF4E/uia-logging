@@ -127,40 +127,40 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 													}
 												} else if(mainLog.logType == 'promotion-logs' ||
 													mainLog.logType == 'demotion-logs') {
-													if(SecPlusRegex.test(mainLog.newRank)) {
+													if(notHRRegex.test(mainLog.newRank)) {
 														getPromoTag(mainLog.logger, function(tag) {
 															res.json({success: true, panel: {color: 'green', text: 'This member is UIA\'s staff.', motto: '[UIA] ' + mainLog.newRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
 														});
 													}
 													else {
 														getPromoTag(mainLog.logger, function(tag) {
-															res.json({success: true, panel: {color: 'grey', text: 'This member is Security+. Use the group gate.', motto: '[UIA] ' + mainLog.newRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
+															res.json({success: true, panel: {color: 'grey', text: 'This member is Operative+. Use the group gate.', motto: '[UIA] ' + mainLog.newRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
 														});
 													}
 												} else if(mainLog.logType == 'transfer-logs') {
 													if(mainLog.fullTransferOrNearMiss == 'fullTransfer') {
-														if(SecPlusRegex.test(mainLog.offeredRank)) {
+														if(notHRRegex.test(mainLog.offeredRank)) {
 															getPromoTag(mainLog.logger, function(tag) {
 																res.json({success: true, panel: {color: 'green', text: 'This member transfered and is UIA\'s staff.', motto: '[UIA] ' + mainLog.offeredRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
 															});
 														}
 														else {
 															getPromoTag(mainLog.logger, function(tag) {
-																res.json({success: true, panel: {color: 'grey', text: 'This member transfered and is Security+. Use the group gate.', motto: '[UIA] ' + mainLog.offeredRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
+																res.json({success: true, panel: {color: 'grey', text: 'This member transfered and is Operative+. Use the group gate.', motto: '[UIA] ' + mainLog.offeredRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
 															});
 														}
 													} else {
 														res.json({success: true, panel: {color: 'orange', text: 'This member tried to transfer. Potential Recruit...', motto: '[UIA] Recruit', promoter: ''}});
 													}
 												} else if(mainLog.logType == 'rank-selling-logs') {
-													if(SecPlusRegex.test(mainLog.newRank)) {
+													if(notHRRegex.test(mainLog.newRank)) {
 														getPromoTag(mainLog.logger, function(tag) {
 															res.json({success: true, panel: {color: 'green', text: 'This member bought a rank and is UIA\'s staff.', motto: '[UIA] ' + mainLog.newRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
 														});
 													}
 													else {
 														getPromoTag(mainLog.logger, function(tag) {
-															res.json({success: true, panel: {color: 'grey', text: 'This member bought a rank and is Security+. Use the group gate.', motto: '[UIA] ' + mainLog.newRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
+															res.json({success: true, panel: {color: 'grey', text: 'This member bought a rank and is Operative+. Use the group gate.', motto: '[UIA] ' + mainLog.newRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
 														});
 													}
 												}
