@@ -16,6 +16,7 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 	}
 
 	var notHRRegex = /^(?=(.*(agent|security|training|instructor).*))(?!(field|director))/i;
+	var SecPlusRegex = /^(?=(.*(agent).*))(?!(field|security))/i;
 	var noTagsRegex = /\[[^\]]*\]/g;
 
 	// server routes ===========================================================
@@ -126,40 +127,40 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 													}
 												} else if(mainLog.logType == 'promotion-logs' ||
 													mainLog.logType == 'demotion-logs') {
-													if(notHRRegex.test(mainLog.newRank)) {
+													if(SecPlusRegex.test(mainLog.newRank)) {
 														getPromoTag(mainLog.logger, function(tag) {
 															res.json({success: true, panel: {color: 'green', text: 'This member is UIA\'s staff.', motto: '[UIA] ' + mainLog.newRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
 														});
 													}
 													else {
 														getPromoTag(mainLog.logger, function(tag) {
-															res.json({success: true, panel: {color: 'grey', text: 'This member is Operative+. Use the group gate.', motto: '[UIA] ' + mainLog.newRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
+															res.json({success: true, panel: {color: 'grey', text: 'This member is Security+. Use the group gate.', motto: '[UIA] ' + mainLog.newRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
 														});
 													}
 												} else if(mainLog.logType == 'transfer-logs') {
 													if(mainLog.fullTransferOrNearMiss == 'fullTransfer') {
-														if(notHRRegex.test(mainLog.offeredRank)) {
+														if(SecPlusRegex.test(mainLog.offeredRank)) {
 															getPromoTag(mainLog.logger, function(tag) {
 																res.json({success: true, panel: {color: 'green', text: 'This member transfered and is UIA\'s staff.', motto: '[UIA] ' + mainLog.offeredRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
 															});
 														}
 														else {
 															getPromoTag(mainLog.logger, function(tag) {
-																res.json({success: true, panel: {color: 'grey', text: 'This member transfered and is Operative+. Use the group gate.', motto: '[UIA] ' + mainLog.offeredRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
+																res.json({success: true, panel: {color: 'grey', text: 'This member transfered and is Security+. Use the group gate.', motto: '[UIA] ' + mainLog.offeredRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
 															});
 														}
 													} else {
 														res.json({success: true, panel: {color: 'orange', text: 'This member tried to transfer. Potential Recruit...', motto: '[UIA] Recruit', promoter: ''}});
 													}
 												} else if(mainLog.logType == 'rank-selling-logs') {
-													if(notHRRegex.test(mainLog.newRank)) {
+													if(SecPlusRegex.test(mainLog.newRank)) {
 														getPromoTag(mainLog.logger, function(tag) {
 															res.json({success: true, panel: {color: 'green', text: 'This member bought a rank and is UIA\'s staff.', motto: '[UIA] ' + mainLog.newRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
 														});
 													}
 													else {
 														getPromoTag(mainLog.logger, function(tag) {
-															res.json({success: true, panel: {color: 'grey', text: 'This member bought a rank and is Operative+. Use the group gate.', motto: '[UIA] ' + mainLog.newRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
+															res.json({success: true, panel: {color: 'grey', text: 'This member bought a rank and is Security+. Use the group gate.', motto: '[UIA] ' + mainLog.newRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
 														});
 													}
 												}
@@ -352,17 +353,61 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 													user10.rank = req.body.offeredRank;
 												}
 												user10.save(function(err) {
-													res.json({success: true, msg: 'Your log has been stored.'});
+													if (err) {
+														return res.json({success: false, msg: 'Unkown error.'});
+													}
+
+													if(req.body.type == 'training-logs') {
+														user.trainAtRisk = new Date();
+														user.save(function(err) {
+															if (err) {
+																return res.json({success: false, msg: 'Unkown error.'});
+															}
+															res.json({success: true, msg: 'Your log has been stored.'});
+														});
+													} else {
+														res.json({success: true, msg: 'Your log has been stored.'});
+													}
 												});
 											} else {
-												res.json({success: true, msg: 'Your log has been stored.'});
+												if(req.body.type == 'training-logs') {
+													user.trainAtRisk = new Date();
+													user.save(function(err) {
+														if (err) {
+															return res.json({success: false, msg: 'Unkown error.'});
+														}
+														res.json({success: true, msg: 'Your log has been stored.'});
+													});
+												} else {
+													res.json({success: true, msg: 'Your log has been stored.'});
+												}
 											}
 										}).sort('-createdAt');
 									} else {
-										res.json({success: true, msg: 'Your log has been stored.'});
+										if(req.body.type == 'training-logs') {
+											user.trainAtRisk = new Date();
+											user.save(function(err) {
+												if (err) {
+													return res.json({success: false, msg: 'Unkown error.'});
+												}
+												res.json({success: true, msg: 'Your log has been stored.'});
+											});
+										} else {
+											res.json({success: true, msg: 'Your log has been stored.'});
+										}
 									}
 								} else {
-									res.json({success: true, msg: 'Your log has been stored.'});
+									if(req.body.type == 'training-logs') {
+										user.trainAtRisk = new Date();
+										user.save(function(err) {
+											if (err) {
+												return res.json({success: false, msg: 'Unkown error.'});
+											}
+											res.json({success: true, msg: 'Your log has been stored.'});
+										});
+									} else {
+										res.json({success: true, msg: 'Your log has been stored.'});
+									}
 								}
 							});
 						} else {
@@ -540,7 +585,17 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 										if (err) {
 											return handleError(err, res);
 										}
-										res.json({success: true, msg: 'Your log has been deleted.'});
+										if(req.body.type == 'training-logs') {
+										user.trainAtRisk = null;
+											user.save(function(err) {
+												if (err) {
+													return res.json({success: false, msg: 'Unkown error.'});
+												}
+												res.json({success: true, msg: 'Your log has been deleted.'});
+											});
+										} else {
+											res.json({success: true, msg: 'Your log has been deleted.'});
+										}
 									});
 								}
 							});
@@ -759,6 +814,103 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 			return res.status(403).send({success: false, msg: 'No token provided.'});
 		}
 	});
+
+	app.post('/api/searchTrainers', passport.authenticate('jwt', { session: false}), function(req, res) {
+		var token = getToken(req.headers);
+		if (token) {
+			var decoded = jwt.decode(token, config.secret);
+			User.findOne({
+				name: decoded.name
+			}, function(err, user) {
+				if (err) throw err;
+
+				if (!user) {
+					return res.status(403).send({success: false, msg: 'Authentication failed. User not found.'});
+				} else {
+					handleTokenTimeout(user, res, function(){
+						var valid = (user.type == 'Admin' || user.type == 'Owner');
+
+						if(valid) {
+							var query;
+							query = {
+								$or: [
+									{trainAtRisk: {
+										$lt: req.body.lastTrained
+									}},
+									{trainAtRisk: null}
+								],
+								valid: true,
+								banned: false
+							}
+
+							if(req.body.name && req.body.name.trim()) {
+								query.name.$regex = new RegExp("^" + escapeRegExp(req.body.name.trim()), "i");
+							}
+
+							User.find(query, {password: 0, valid: 0, type: 0, tokenTimestamp: 0, firstLogin: 0, banned: 0}, function(err, newUsers) {
+								if (err) throw err;
+								
+								res.json({success: true, trainers: newUsers});
+							}).limit(100).sort('+trainAtRisk');
+						} else {
+							return res.status(403).send({success: false, msg: 'User with no permissions to do this operation.'});
+						}
+					});
+				}
+			});
+		} else {
+			return res.status(403).send({success: false, msg: 'No token provided.'});
+		}
+	});
+
+	tempFunc = function(usersArr, index) {
+		User.findOne({name: usersArr[index].name}, function(arrErr, arrUser) {
+			if (arrErr) throw arrErr;
+			if(arrUser) {
+				if(!arrUser.banned) {
+					arrUser.banned = false;
+				}
+				arrUser.trainAtRisk = usersArr[index].date;
+
+				arrUser.save(function(arrBestErr) {
+					if (arrBestErr) throw arrBestErr;
+
+					if(index+1 < usersArr.length)
+						tempFunc(usersArr, index+1);
+				});
+			} else {
+				console.log("ERROR: THIS USER DOES NOT EXIST: " + usersArr[index].name);
+
+				if(index+1 < usersArr.length)
+					tempFunc(usersArr, index+1);
+			}
+		});
+	}
+
+	TrainingLogs.find({}, function(tempErr, tempLogs) {
+		if (tempErr) throw tempErr;
+
+		var theTempUsers = {};
+		User.find({}, function(tempErr1, tempLogs2) {
+			if (tempErr1) throw tempErr1;
+
+			for (var i = tempLogs2.length - 1; i >= 0; i--) {
+				theTempUsers[tempLogs2[i].name] = null;
+			}
+
+			for (var i = tempLogs.length - 1; i >= 0; i--) {
+				theTempUsers[tempLogs[i].logger] = tempLogs[i].createdAt;
+			}
+
+			var theTempUsersArr = [];
+			for (var key in theTempUsers) {
+				if (theTempUsers.hasOwnProperty(key)) {
+					theTempUsersArr.push({name: key, date: theTempUsers[key]});
+				}
+			}
+			tempFunc(theTempUsersArr, 0);
+		}).sort('-createdAt');
+	}).sort('-createdAt');
 
 	app.post('/api/decidedPending', passport.authenticate('jwt', { session: false}), function(req, res) {
 		var token = getToken(req.headers);

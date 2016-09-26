@@ -74,6 +74,10 @@ var UserSchema = new Schema({
   banned: {
   		type: Boolean,
   		default: false
+    },
+  trainAtRisk: {
+  		type: Date,
+  		default: null
     }
 }, {timestamps: true});
 

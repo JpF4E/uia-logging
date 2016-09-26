@@ -576,6 +576,10 @@ textarea {
   height: 250px;
 }
 
+.subtitle {
+  margin-left: 20px;
+}
+
 /*BALLOON 1 4*/
 @-webkit-keyframes balloon1 {
     0%, 100% {

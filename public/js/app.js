@@ -1,1 +1,1 @@
-angular.module('uia-logging', ['angularSpinner', 'ngSanitize', 'ui.bootstrap', 'ui.router', 'appRoutes', 'MainCtrl', 'LogsCtrl', 'AddLogsCtrl', 'EditLogsCtrl', 'PendingCtrl', 'UsersCtrl', 'EditUsersCtrl', 'SecSearchCtrl', 'EditProfileCtrl', 'AuthService', 'starter']);
+angular.module('uia-logging', ['angularSpinner', 'ngSanitize', 'ui.bootstrap', 'ui.router', 'appRoutes', 'MainCtrl', 'LogsCtrl', 'AddLogsCtrl', 'EditLogsCtrl', 'PendingCtrl', 'UsersCtrl', 'EditUsersCtrl', 'SecSearchCtrl', 'TrainCheckCtrl', 'EditProfileCtrl', 'AuthService', 'starter']);

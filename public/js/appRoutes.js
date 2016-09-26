@@ -233,6 +233,12 @@ angular.module('appRoutes', [])
 			controller: 'EditUsersController'
 		})
 
+		.state('trainCheck', {
+			url: '/admin/train-checker',
+			templateUrl: 'views/trainCheck.html',
+			controller: 'TrainCheckController'
+		})
+
 		.state('sec-search', {
 			url: '/security-search',
 			templateUrl: 'views/secSearch.html',
