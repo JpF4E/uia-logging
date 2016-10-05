@@ -6,7 +6,7 @@ angular.module('EditLogsCtrl', []).controller('EditLogsController', function($ht
 	//$scope.alert2 = null;
 	//$scope.requesting = false;
 
-	$scope.memberCatsEmpty = [true, true, true];
+	$scope.memberCatsEmpty = [true, true, true, true];
 	$scope.memberRoles = {};
 	$scope.memberName = "";
 
@@ -15,6 +15,7 @@ angular.module('EditLogsCtrl', []).controller('EditLogsController', function($ht
 	$scope.logTitleSingular = null;
 	$scope.logIcon = null;
 	$scope.showSpinner = false;
+	$scope.paidPeople = [];
 
 	var LOA_TIME_DISTORTION = 1439;
 
@@ -93,6 +94,25 @@ angular.module('EditLogsCtrl', []).controller('EditLogsController', function($ht
 		}
 	}
 
+	$scope.removePaid = function(index) {
+		$scope.paidPeople.splice(index, 1);
+	}
+
+	$scope.addPaid = function() {
+		if(!$scope.addForm.paidPeople.username.val)
+			return;
+		
+		if(!$scope.addForm.paidPeople.pay.val)
+			$scope.addForm.paidPeople.pay.val = 0;
+			
+		if($scope.addForm.paidPeople.pay.val == 0 && !$scope.addForm.paidPeople.notes.val)
+			$scope.addForm.paidPeople.notes.val = "Promotion.";
+
+		$scope.paidPeople.push({username: $scope.addForm.paidPeople.username.val, pay: $scope.addForm.paidPeople.pay.val, notes: $scope.addForm.paidPeople.notes.val});
+		$scope.addForm.paidPeople.username.val = "";
+		$scope.addForm.paidPeople.notes.val = "";
+	}
+
 	if(!$state.params.obj || !$state.params.obj._id) {
 		$state.go('home');
 		return;
@@ -100,6 +120,10 @@ angular.module('EditLogsCtrl', []).controller('EditLogsController', function($ht
 
 	$scope.addForm = {
 		username : {show: false, tip1: "", tip2: "", val: "", dis: false},
+		svOrVip : {show: false, tip1: "", tip2: "", val: "", dis: false},
+		paidPeople : {show: false, tip1: "", username: {tip1: "", tip2: "", dis: false, val: ""}, pay: {tip1: "", tip2: "", dis: false, val: ""}, notes: {tip1: "", tip2: "", dis: false, val: ""}},
+		payDay : {show: false, tip1: "", tip2: "", val: "", dis: false},
+		payTime : {show: false, tip1: "", tip2: "", val: "", dis: false},
 		passOrFail : {show: false, tip1: "", tip2: "", val: "", dis: false},
 		recSecTrainOrHR : {show: false, tip1: "", tip2: "", val: "", dis: false},
 		prevRank : {show: false, tip1: "", tip2: "", val: "", dis: false},
@@ -439,6 +463,42 @@ angular.module('EditLogsCtrl', []).controller('EditLogsController', function($ht
 				}
 				content.endDate.addMinutes(LOA_TIME_DISTORTION);
 				break;
+			case 'edit-sv-vip-logs':
+				content.username = $scope.addForm.username.val;
+				content.svOrVip = $scope.addForm.svOrVip.val;
+				content.notes = $scope.addForm.notes.val;
+				content.removed = $scope.addForm.rehired.val;
+				if(!checkRequired(content.username)) {
+					$scope.alert = {msg: "The username is invalid.", strong: "Failed to edit " + $scope.logTitleSingular + "!"};
+					return;
+				}
+				if(!checkRequired(content.svOrVip)) {
+					$scope.alert = {msg: "The type of badge is invalid.", strong: "Failed to edit " + $scope.logTitleSingular + "!"};
+					return;
+				}
+				if(!checkEnum(content.svOrVip, ['sv', 'vip'])) {
+					$scope.alert = {msg: "The type of badge is invalid.", strong: "Failed to edit " + $scope.logTitleSingular + "!"};
+					return;
+				}
+				if(!checkRequired(content.removed)) {
+					$scope.alert = {msg: "The removed option is invalid.", strong: "Failed to edit " + $scope.logTitleSingular + "!"};
+					return;
+				}
+				break;
+			case 'edit-pay-logs':
+				content.paidPeople = $scope.paidPeople;
+				content.payDay = $scope.addForm.payDay.val;
+				content.payTime = $scope.addForm.payTime.val;
+				content.notes = $scope.addForm.notes.val;
+				if(!checkRequired(content.payDay)) {
+					$scope.alert = {msg: "The pay day is invalid.", strong: "Failed to add " + $scope.logTitleSingular + "!"};
+					return;
+				}
+				if(!checkRequired(content.payTime)) {
+					$scope.alert = {msg: "The pay time is invalid.", strong: "Failed to add " + $scope.logTitleSingular + "!"};
+					return;
+				}
+				break;
 		}
 		$scope.showSpinner = true;
 		$http.post(API_ENDPOINT.url + '/editLog', content).then(function(result) {
@@ -548,8 +608,8 @@ angular.module('EditLogsCtrl', []).controller('EditLogsController', function($ht
 				$scope.logIcon = "transfer";
 				$scope.addForm.username = {show: true, tip1: "Username", tip2: "Transfered user", dis: false, val: $state.params.obj.username};
 				$scope.addForm.agency = {show: true, tip1: "Agency", tip2: "Agency from which the user is transfering", dis: false, val: $state.params.obj.agency};
-				$scope.addForm.oldRank = {show: true, tip1: "Old Rank", tip2: "Rank from the previous agency or UIA", dis: false, val: $state.params.obj.oldRank};
-				$scope.addForm.offeredRank = {show: true, tip1: "Offered Rank", tip2: "Offered UIA rank", dis: false, val: $state.params.obj.offeredRank};
+				$scope.addForm.oldRank = {show: true, tip1: "Old Rank", tip2: "Rank from the previous agency or HIT", dis: false, val: $state.params.obj.oldRank};
+				$scope.addForm.offeredRank = {show: true, tip1: "Offered Rank", tip2: "Offered HIT rank", dis: false, val: $state.params.obj.offeredRank};
 				$scope.addForm.fullTransferOrNearMiss = {show: true, tip1: "Type of Transfer", tip2: "Whether the transfer succeeded or was close to succeed", dis: false, val: $state.params.obj.fullTransferOrNearMiss};
 				$scope.addForm.notes = {show: true, tip1: "Notes", tip2: "Optional additional notes", dis: false, val: $state.params.obj.notes};
 				$scope.addForm.createdAt = {show: true, tip1: "Created At", tip2: "yyyy-mm-dd", dis: true, val: new Date($state.params.obj.createdAt)};
@@ -580,6 +640,33 @@ angular.module('EditLogsCtrl', []).controller('EditLogsController', function($ht
 				$scope.addForm.endDate = {show: true, tip1: "End Date", tip2: "yyyy-mm-dd", dis: false, val: new Date($state.params.obj.endDate)};
 				$scope.addForm.reason = {show: true, tip1: "Reason", tip2: "Reason for the absence (20 characters minimum)", dis: false, val: $state.params.obj.reason};
 				$scope.addForm.approvedBy = {show: true, tip1: "Approved By", tip2: "User that accepted this LoA", dis: false, val: $state.params.obj.approvedBy};
+				$scope.addForm.notes = {show: true, tip1: "Notes", tip2: "Optional additional notes", dis: false, val: $state.params.obj.notes};
+				$scope.addForm.createdAt = {show: true, tip1: "Created At", tip2: "yyyy-mm-dd", dis: true, val: new Date($state.params.obj.createdAt)};
+				$scope.addForm.updatedAt = {show: true, tip1: "Updated At", tip2: "yyyy-mm-dd", dis: true, val: new Date($state.params.obj.updatedAt)};
+				$scope.addForm.logger = {show: true, tip1: "Logger", tip2: "The logger name", dis: true, val: $state.params.obj.logger};
+				$scope.addForm.loggerRank = {show: true, tip1: "Logger Rank", tip2: "The logger rank", dis: true, val: $state.params.obj.loggerRank};
+				break;
+			case 'edit-sv-vip-logs':
+				$scope.logTitle = "SV/VIP Logs";
+				$scope.logTitleSingular = "SV/VIP Log";
+				$scope.logIcon = "glass";
+				$scope.addForm.username = {show: true, tip1: "Username", tip2: "Badge holder", dis: false, val: $state.params.obj.username};
+				$scope.addForm.svOrVip = {show: true, tip1: "Badge Type", tip2: "Type of access granted", dis: false, val: $state.params.obj.svOrVip};
+				$scope.addForm.notes = {show: true, tip1: "Notes", tip2: "Optional additional notes", dis: false, val: $state.params.obj.notes};
+				$scope.addForm.createdAt = {show: true, tip1: "Created At", tip2: "yyyy-mm-dd", dis: true, val: new Date($state.params.obj.createdAt)};
+				$scope.addForm.updatedAt = {show: true, tip1: "Updated At", tip2: "yyyy-mm-dd", dis: true, val: new Date($state.params.obj.updatedAt)};
+				$scope.addForm.logger = {show: true, tip1: "Logger", tip2: "The logger name", dis: true, val: $state.params.obj.logger};
+				$scope.addForm.loggerRank = {show: true, tip1: "Logger Rank", tip2: "The logger rank", dis: true, val: $state.params.obj.loggerRank};
+				$scope.addForm.rehired = {show: true, tip1: "Check if you want to remove the possession of the badge", tip2: "Badge has been removed?", dis: false, val: $state.params.obj.removed};
+				break;
+			case 'edit-pay-logs':
+				$scope.logTitle = "Pay Logs";
+				$scope.logTitleSingular = "Pay Log";
+				$scope.logIcon = "gift";
+				$scope.paidPeople = $state.params.obj.paidPeople;
+				$scope.addForm.paidPeople = {show: true, tip1: "List of Paid Members", username: {tip1: "Username", tip2: "Paid user", dis: false}, pay: {tip1: "Pay", tip2: "", dis: false}, notes: {tip1: "Note", tip2: "Optional note", dis: false}},
+				$scope.addForm.payDay = {show: true, tip1: "Pay Day", tip2: "e.g: Monday", dis: false, val: $state.params.obj.payDay},
+				$scope.addForm.payTime = {show: true, tip1: "Pay Time", tip2: "e.g: 6pm", dis: false, val: $state.params.obj.payTime},
 				$scope.addForm.notes = {show: true, tip1: "Notes", tip2: "Optional additional notes", dis: false, val: $state.params.obj.notes};
 				$scope.addForm.createdAt = {show: true, tip1: "Created At", tip2: "yyyy-mm-dd", dis: true, val: new Date($state.params.obj.createdAt)};
 				$scope.addForm.updatedAt = {show: true, tip1: "Updated At", tip2: "yyyy-mm-dd", dis: true, val: new Date($state.params.obj.updatedAt)};

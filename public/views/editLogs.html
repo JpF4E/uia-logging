@@ -5,8 +5,8 @@
 				<ul class="nav nav-pills nav-stacked">
 					<li role="presentation" align="left"><a ui-sref="main">Home</a></li>
 					<br ng-if="!memberCatsEmpty[0]">
-					<div ng-if="!memberCatsEmpty[0]" class="strike"><span>Logs</span></div>
-					<li ng-class="{'active': currentState.current.name == 'training-logs' || currentState.current.name == 'edit-training-logs'}" ng-if="memberRoles['training-logs'][1]" role="presentation" align="left">
+					<div ng-if="!memberCatsEmpty[0]" class="strike"><span>Main Logs</span></div>
+					<li ng-class="{'active': currentState.current.name == 'training-logs' || currentState.current.name == 'add-training-logs' || currentState.current.name == 'edit-training-logs'}" ng-if="memberRoles['training-logs'][1]" role="presentation" align="left">
 						<div class="outer-item">
 							<div class="inner-flex">
 								<a href="" ui-sref="training-logs">Training Logs</a>
@@ -16,7 +16,7 @@
 							</div>
 						</div>
 					</li>
-					<li ng-class="{'active': currentState.current.name == 'promotion-logs' || currentState.current.name == 'edit-promotion-logs'}" ng-if="memberRoles['promotion-logs'][1]" role="presentation" align="left">
+					<li ng-class="{'active': currentState.current.name == 'promotion-logs' || currentState.current.name == 'add-promotion-logs' || currentState.current.name == 'edit-promotion-logs'}" ng-if="memberRoles['promotion-logs'][1]" role="presentation" align="left">
 						<div class="outer-item">
 							<div class="inner-flex">
 								<a href="" ui-sref="promotion-logs">Promotion Logs</a>
@@ -28,7 +28,7 @@
 					</li>
 					<br ng-if="!memberCatsEmpty[1]">
 					<div ng-if="!memberCatsEmpty[1]" class="strike"><span>Discipline Logs</span></div>
-					<li ng-class="{'active': currentState.current.name == 'warning-logs' || currentState.current.name == 'edit-warning-logs'}" ng-if="memberRoles['warning-logs'][1]" role="presentation" align="left">
+					<li ng-class="{'active': currentState.current.name == 'warning-logs' || currentState.current.name == 'add-warning-logs' || currentState.current.name == 'edit-warning-logs'}" ng-if="memberRoles['warning-logs'][1]" role="presentation" align="left">
 						<div class="outer-item">
 							<div class="inner-flex">
 								<a href="" ui-sref="warning-logs">Warning Logs</a>
@@ -38,7 +38,7 @@
 							</div>
 						</div>
 					</li>
-					<li ng-class="{'active': currentState.current.name == 'demotion-logs' || currentState.current.name == 'edit-demotion-logs'}" ng-if="memberRoles['demotion-logs'][1]" role="presentation" align="left">
+					<li ng-class="{'active': currentState.current.name == 'demotion-logs' || currentState.current.name == 'add-demotion-logs' || currentState.current.name == 'edit-demotion-logs'}" ng-if="memberRoles['demotion-logs'][1]" role="presentation" align="left">
 						<div class="outer-item">
 							<div class="inner-flex">
 								<a href="" ui-sref="demotion-logs">Demotion Logs</a>
@@ -48,7 +48,7 @@
 							</div>
 						</div>
 					</li>
-					<li ng-class="{'active': currentState.current.name == 'strike-logs' || currentState.current.name == 'edit-strike-logs'}" ng-if="memberRoles['strike-logs'][1]" role="presentation" align="left">
+					<li ng-class="{'active': currentState.current.name == 'strike-logs' || currentState.current.name == 'add-strike-logs' || currentState.current.name == 'edit-strike-logs'}" ng-if="memberRoles['strike-logs'][1]" role="presentation" align="left">
 						<div class="outer-item">
 							<div class="inner-flex">
 								<a href="" ui-sref="strike-logs">Strike Logs</a>
@@ -58,7 +58,7 @@
 							</div>
 						</div>
 					</li>
-					<li ng-class="{'active': currentState.current.name == 'fired-logs' || currentState.current.name == 'edit-fired-logs'}" ng-if="memberRoles['fired-logs'][1]" role="presentation" align="left">
+					<li ng-class="{'active': currentState.current.name == 'fired-logs' || currentState.current.name == 'add-fired-logs' || currentState.current.name == 'edit-fired-logs'}" ng-if="memberRoles['fired-logs'][1]" role="presentation" align="left">
 						<div class="outer-item">
 							<div class="inner-flex">
 								<a href="" ui-sref="fired-logs">Fired Logs</a>
@@ -69,18 +69,8 @@
 						</div>
 					</li>
 					<br ng-if="!memberCatsEmpty[2]">
-					<div ng-if="!memberCatsEmpty[2]" class="strike"><span>Other Logs</span></div>
-					<li ng-class="{'active': currentState.current.name == 'transfer-logs' || currentState.current.name == 'edit-transfer-logs'}" ng-if="memberRoles['transfer-logs'][1]" role="presentation" align="left">
-						<div class="outer-item">
-							<div class="inner-flex">
-								<a href="" ui-sref="transfer-logs">Transfer Logs</a>
-							</div>
-							<div class="inner-fixed">
-								<a ui-sref="add-transfer-logs" ng-if="memberRoles['transfer-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
-							</div>
-						</div>
-					</li>
-					<li ng-class="{'active': currentState.current.name == 'rank-selling-logs' || currentState.current.name == 'edit-rank-selling-logs'}" ng-if="memberRoles['rank-selling-logs'][1]" role="presentation" align="left">
+					<div ng-if="!memberCatsEmpty[2]" class="strike"><span>Financial Logs</span></div>
+					<li ng-class="{'active': currentState.current.name == 'rank-selling-logs' || currentState.current.name == 'add-rank-selling-logs' || currentState.current.name == 'edit-rank-selling-logs'}" ng-if="memberRoles['rank-selling-logs'][1]" role="presentation" align="left">
 						<div class="outer-item">
 							<div class="inner-flex">
 								<a href="" ui-sref="rank-selling-logs">Rank Selling Logs</a>
@@ -90,7 +80,39 @@
 							</div>
 						</div>
 					</li>
-					<li ng-class="{'active': currentState.current.name == 'loa-logs' || currentState.current.name == 'edit-loa-logs'}" ng-if="memberRoles['loa-logs'][1]" role="presentation" align="left">
+					<li ng-class="{'active': currentState.current.name == 'sv-vip-logs' || currentState.current.name == 'add-sv-vip-logs' || currentState.current.name == 'edit-sv-vip-logs'}" ng-if="memberRoles['sv-vip-logs'][1]" role="presentation" align="left">
+						<div class="outer-item">
+							<div class="inner-flex">
+								<a href="" ui-sref="sv-vip-logs">SV/VIP Logs</a>
+							</div>
+							<div class="inner-fixed">
+								<a ui-sref="add-sv-vip-logs" ng-if="memberRoles['sv-vip-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+							</div>
+						</div>
+					</li>
+					<li ng-class="{'active': currentState.current.name == 'pay-logs' || currentState.current.name == 'add-pay-logs' || currentState.current.name == 'edit-pay-logs'}" ng-if="memberRoles['pay-logs'][1]" role="presentation" align="left">
+						<div class="outer-item">
+							<div class="inner-flex">
+								<a href="" ui-sref="pay-logs">Pay Logs</a>
+							</div>
+							<div class="inner-fixed">
+								<a ui-sref="add-pay-logs" ng-if="memberRoles['pay-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+							</div>
+						</div>
+					</li>
+					<br ng-if="!memberCatsEmpty[3]">
+					<div ng-if="!memberCatsEmpty[3]" class="strike"><span>Other Logs</span></div>
+					<li ng-class="{'active': currentState.current.name == 'transfer-logs' || currentState.current.name == 'add-transfer-logs' || currentState.current.name == 'edit-transfer-logs'}" ng-if="memberRoles['transfer-logs'][1]" role="presentation" align="left">
+						<div class="outer-item">
+							<div class="inner-flex">
+								<a href="" ui-sref="transfer-logs">Transfer Logs</a>
+							</div>
+							<div class="inner-fixed">
+								<a ui-sref="add-transfer-logs" ng-if="memberRoles['transfer-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+							</div>
+						</div>
+					</li>
+					<li ng-class="{'active': currentState.current.name == 'loa-logs' || currentState.current.name == 'add-loa-logs' || currentState.current.name == 'edit-loa-logs'}" ng-if="memberRoles['loa-logs'][1]" role="presentation" align="left">
 						<div class="outer-item">
 							<div class="inner-flex">
 								<a href="" ui-sref="loa-logs">LoA Logs</a>
@@ -127,10 +149,25 @@
 								<label>{{addForm.username.tip1}}:</label>
 								<input ng-disabled="addForm.username.dis" required="" autofocus="" type="text" class="form-control" placeholder="{{addForm.username.tip2}}" ng-model="addForm.username.val"></input>
 							</div>
+							<div ng-if="addForm.svOrVip.show" class="a-control">
+								<label>{{addForm.svOrVip.tip1}}:</label>
+								<div class="radio">
+									<label>
+										<input ng-disabled="addForm.svOrVip.dis" required="" value="sv" type="radio" name="optionsRadios2" id="optionsRadios21" ng-model="addForm.svOrVip.val">
+										Special Visitor
+									</label>
+								</div>
+								<div class="radio">
+									<label>
+										<input ng-disabled="addForm.svOrVip.dis" required="" value="vip" type="radio" name="optionsRadios2" id="optionsRadios22" ng-model="addForm.svOrVip.val">
+										Very Important Pixel
+									</label>
+								</div>
+							</div>
 							<div ng-if="addForm.rehired.show" class="a-control">
 								<label>{{addForm.rehired.tip1}}:</label>
 								<div class="checkbox">
-									<label ng-if="currentState.current.name == 'edit-strike-logs' || currentState.current.name == 'edit-warning-logs'">
+									<label ng-if="currentState.current.name == 'edit-strike-logs' || currentState.current.name == 'edit-warning-logs' || currentState.current.name == 'edit-sv-vip-logs'">
 										<input ng-disabled="addForm.rehired.dis" type="checkbox" ng-model="addForm.rehired.val">
 										Removed
 									</label>
@@ -140,30 +177,83 @@
 									</label>
 								</div>
 							</div>
+							<div ng-if="addForm.paidPeople.show" class="a-control">
+								<label>{{addForm.paidPeople.tip1}}:</label>
+								<div class="row">
+									<div class="col-md-4">
+										<label>{{addForm.paidPeople.username.tip1}}:</label>
+									</div>
+									<div class="col-md-2">
+										<label>{{addForm.paidPeople.pay.tip1}}:</label>
+									</div>
+									<div class="col-md-5">
+										<label>{{addForm.paidPeople.notes.tip1}}:</label>
+									</div>
+									<div class="col-md-1">
+									</div>
+								</div>
+								<div ng-repeat="s in paidPeople track by $index" class="row">
+									<div class="col-md-4">
+										<p class="paidText">{{s.username}}</p>
+									</div>
+									<div class="col-md-2">
+										<p class="paidText">{{s.pay}}c</p>
+									</div>
+									<div class="col-md-5">
+										<p class="paidText">{{s.notes}}</p>
+									</div>
+									<div class="col-md-1">
+										<a title="Remove Member" class="close min-btn" type="button" ng-click="removePaid($index)"><span class="glyphicon glyphicon-minus-sign vertCenterMinBtn" aria-hidden="true"></span></a>
+									</div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="col-md-4">
+										<input ng-disabled="addForm.paidPeople.username.dis" type="text" class="form-control paid-control" placeholder="{{addForm.paidPeople.username.tip2}}" ng-model="addForm.paidPeople.username.val"></input>
+									</div>
+									<div class="col-md-2">
+										<input ng-disabled="addForm.paidPeople.pay.dis" type="number" min="0" class="form-control paid-control" placeholder="{{addForm.paidPeople.pay.tip2}}" ng-model="addForm.paidPeople.pay.val"></input>
+									</div>
+									<div class="col-md-5">
+										<input ng-disabled="addForm.paidPeople.notes.dis" type="text" class="form-control paid-control" placeholder="{{addForm.paidPeople.notes.tip2}}" ng-model="addForm.paidPeople.notes.val"></input>
+									</div>
+									<div class="col-md-1">
+										<a title="Add Member" class="close min-btn" type="button" ng-click="addPaid()"><span class="glyphicon glyphicon-plus-sign vertCenterMinBtn" aria-hidden="true"></span></a>
+									</div>
+								</div>
+							</div>
+							<div ng-if="addForm.payDay.show" class="a-control">
+								<label>{{addForm.payDay.tip1}}:</label>
+								<input ng-disabled="addForm.payDay.dis" required="" autofocus="" type="text" class="form-control" placeholder="{{addForm.payDay.tip2}}" ng-model="addForm.payDay.val"></input>
+							</div>
+							<div ng-if="addForm.payTime.show" class="a-control">
+								<label>{{addForm.payTime.tip1}}:</label>
+								<input ng-disabled="addForm.payTime.dis" required="" autofocus="" type="text" class="form-control" placeholder="{{addForm.payTime.tip2}}" ng-model="addForm.payTime.val"></input>
+							</div>
 							<div ng-if="addForm.recSecTrainOrHR.show" class="a-control">
 								<label>{{addForm.recSecTrainOrHR.tip1}}:</label>
 								<div class="radio">
 									<label>
-										<input ng-disabled="addForm.recSecTrainOrHR.dis" required="" value="rec" type="radio" name="optionsRadios2" id="optionsRadios21" ng-model="addForm.recSecTrainOrHR.val">
-										Recruit Training
+										<input ng-disabled="addForm.recSecTrainOrHR.dis" required="" value="rec" type="radio" name="optionsRadios4" id="optionsRadios41" ng-model="addForm.recSecTrainOrHR.val">
+										Recruit
 									</label>
 								</div>
 								<div class="radio">
 									<label>
-										<input ng-disabled="addForm.recSecTrainOrHR.dis" required="" value="sec" type="radio" name="optionsRadios2" id="optionsRadios22" ng-model="addForm.recSecTrainOrHR.val">
-										Security Training
+										<input ng-disabled="addForm.recSecTrainOrHR.dis" required="" value="sec" type="radio" name="optionsRadios4" id="optionsRadios42" ng-model="addForm.recSecTrainOrHR.val">
+										Security
 									</label>
 								</div>
 								<div class="radio">
 									<label>
-										<input ng-disabled="addForm.recSecTrainOrHR.dis" required="" value="train" type="radio" name="optionsRadios2" id="optionsRadios23" ng-model="addForm.recSecTrainOrHR.val">
-										Trainer Training
+										<input ng-disabled="addForm.recSecTrainOrHR.dis" required="" value="train" type="radio" name="optionsRadios4" id="optionsRadios43" ng-model="addForm.recSecTrainOrHR.val">
+										Trainer
 									</label>
 								</div>
 								<div class="radio">
 									<label>
-										<input ng-disabled="addForm.recSecTrainOrHR.dis" required="" value="hr" type="radio" name="optionsRadios2" id="optionsRadios24" ng-model="addForm.recSecTrainOrHR.val">
-										Operative Training
+										<input ng-disabled="addForm.recSecTrainOrHR.dis" required="" value="hr" type="radio" name="optionsRadios4" id="optionsRadios44" ng-model="addForm.recSecTrainOrHR.val">
+										High Rank
 									</label>
 								</div>
 							</div>
@@ -185,7 +275,7 @@
 							<div ng-if="addForm.prevRank.show" class="a-control">
 								<label>{{addForm.prevRank.tip1}}:</label>
 								<div class="input-group">
-									<span class="input-group-addon">[UIA]</span>
+									<span class="input-group-addon">[HIT]</span>
 									<input ng-disabled="addForm.prevRank.dis" required="" type="text" class="form-control" placeholder="{{addForm.prevRank.tip2}}" ng-model="addForm.prevRank.val"></input>
 								</div>
 							</div>
@@ -203,7 +293,7 @@
 							<div ng-if="addForm.offeredRank.show" class="a-control">
 								<label>{{addForm.offeredRank.tip1}}:</label>
 								<div class="input-group">
-									<span class="input-group-addon">[UIA]</span>
+									<span class="input-group-addon">[HIT]</span>
 									<input ng-disabled="addForm.offeredRank.dis" required="" type="text" class="form-control" placeholder="{{addForm.offeredRank.tip2}}" ng-model="addForm.offeredRank.val"></input>
 								</div>
 							</div>
@@ -211,13 +301,13 @@
 								<label>{{addForm.fullTransferOrNearMiss.tip1}}:</label>
 								<div class="radio">
 									<label>
-										<input ng-disabled="addForm.fullTransferOrNearMiss.dis" required="" value="fullTransfer" type="radio" name="optionsRadios3" id="optionsRadios31" ng-model="addForm.fullTransferOrNearMiss.val">
+										<input ng-disabled="addForm.fullTransferOrNearMiss.dis" required="" value="fullTransfer" type="radio" name="optionsRadios5" id="optionsRadios51" ng-model="addForm.fullTransferOrNearMiss.val">
 										Full Transfer
 									</label>
 								</div>
 								<div class="radio">
 									<label>
-										<input ng-disabled="addForm.fullTransferOrNearMiss.dis" required="" value="nearMiss" type="radio" name="optionsRadios3" id="optionsRadios32" ng-model="addForm.fullTransferOrNearMiss.val">
+										<input ng-disabled="addForm.fullTransferOrNearMiss.dis" required="" value="nearMiss" type="radio" name="optionsRadios5" id="optionsRadios52" ng-model="addForm.fullTransferOrNearMiss.val">
 										Near Miss
 									</label>
 								</div>
@@ -239,7 +329,7 @@
 							<div ng-if="addForm.newRank.show" class="a-control">
 								<label>{{addForm.newRank.tip1}}:</label>
 								<div class="input-group">
-									<span class="input-group-addon">[UIA]</span>
+									<span class="input-group-addon">[HIT]</span>
 									<input ng-disabled="addForm.newRank.dis" required="" type="text" class="form-control" placeholder="{{addForm.newRank.tip2}}" ng-model="addForm.newRank.val"></input>
 								</div>
 							</div>
@@ -281,7 +371,7 @@
 							<div ng-if="addForm.loggerRank.show" class="a-control">
 								<label>{{addForm.loggerRank.tip1}}:</label>
 								<div class="input-group">
-									<span class="input-group-addon">[UIA]</span>
+									<span class="input-group-addon">[HIT]</span>
 									<input ng-disabled="addForm.loggerRank.dis" required="" type="text" class="form-control" placeholder="{{addForm.loggerRank.tip2}}" ng-model="addForm.loggerRank.val"></input>
 								</div>
 							</div>

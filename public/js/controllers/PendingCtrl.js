@@ -6,7 +6,7 @@ angular.module('PendingCtrl', []).controller('PendingController', function($http
 	//$scope.alert2 = null;
 	//$scope.requesting = false;
 
-	$scope.memberCatsEmpty = [true, true, true];
+	$scope.memberCatsEmpty = [true, true, true, true];
 	$scope.memberRoles = {};
 	$scope.memberName = "";
 	$scope.memberType = "";
@@ -180,7 +180,7 @@ angular.module('PendingCtrl', []).controller('PendingController', function($http
 	$scope.prepare = function(x, accept) {
 		$scope.logToPending = {_id: x._id, accept: accept};
 		$scope.modal = (accept) ? 'accept ' : 'deny ';
-		$scope.modal += x.name + "'s access to the UIA Portal";
+		$scope.modal += x.name + "'s access to the HIT Portal";
 	}
 
 	$scope.decided = function() {

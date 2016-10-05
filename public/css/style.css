@@ -1,10 +1,15 @@
 body {
   padding-top: 10px;
   padding-bottom: 10px;
+  /*background-image: url("../imgs/city_back.png");*/
   background-image: url("https://kaba35.com/wp-content/uploads/2015/11/Savin-NY-Website-Background-Web.jpg");
   background-attachment: fixed;
   background-repeat: repeat-x;
   background-position: left bottom;
+}
+
+.homeHeader{
+  font-family: Impact, Charcoal, sans-serif;
 }
 
 .form-signin {
@@ -191,6 +196,28 @@ img {
   color: dodgerblue;
   padding-right: 0px !important;
   padding-left: 5px !important;
+}
+
+.min-btn, .min-btn:link, .min-btn:visited, .min-btn:hover, .min-btn:active, .min-btn:focus {
+  color: dodgerblue;
+  opacity: 1;
+  padding: 0px !important;
+}
+
+.paidText {
+  font-size: 14px !important;
+  margin-bottom: 5px !important;
+  margin-top: 5px !important;
+}
+
+.paid-control{
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+}
+
+.vertCenterMinBtn {
+  height: 30px;
+  line-height: 30px;
 }
 
 .thumb-margins {
@@ -440,7 +467,13 @@ textarea {
   margin-bottom: 10px;
 }
 
+.paidTableRight {
+  padding-right: 10px !important;
+}
 
+.paidTableLeft {
+  padding-left: 10px !important;
+}
 
 
 

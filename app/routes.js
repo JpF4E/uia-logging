@@ -1,4 +1,4 @@
-module.exports = function(app, User, passport, jwt, config, TrainingLogs, PromotionLogs, WarningLogs, DemotionLogs, StrikeLogs, FiredLogs, TransferLogs, RankSellingLogs, LoaLogs) {
+module.exports = function(app, User, passport, jwt, config, TrainingLogs, PromotionLogs, WarningLogs, DemotionLogs, StrikeLogs, FiredLogs, TransferLogs, RankSellingLogs, LoaLogs, SvVipLogs, PayLogs) {
 
 	require('../config/passport')(passport);
 	var TOKEN_TIMEOUT = 10080;
@@ -12,11 +12,14 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 		'fired-logs' : FiredLogs,
 		'transfer-logs' : TransferLogs,
 		'rank-selling-logs' : RankSellingLogs,
-		'loa-logs' : LoaLogs
+		'loa-logs' : LoaLogs,
+		'sv-vip-logs' : SvVipLogs,
+		'pay-logs' : PayLogs
 	}
 
 	var notHRRegex = /^(?=(.*(agent|security|training|instructor).*))(?!(field|director))/i;
-	var SecPlusRegex = /^(?=(.*(agent).*))(?!(field|security))/i;
+	//var SecPlusRegex = /^(?=(.*(agent).*))(?!(field|security))/i;
+	var SecPlusRegex = /^(?=(.*(officer).*))(?!(security|legal|finance|chief))/i;
 	var noTagsRegex = /\[[^\]]*\]/g;
 
 	// server routes ===========================================================
@@ -94,9 +97,9 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 												User.findOne({name: query.username}, function(nerr10, user10) {
 													if (nerr10) throw nerr10;
 													if (user10) {
-														res.json({success: true, panel: {color: 'white', text: 'Member in UIA Portal but not yet logged.', motto: '', promoter: ''}});
+														res.json({success: true, panel: {color: 'white', text: 'Member in HIT Portal but not yet logged.', motto: '', promoter: ''}});
 													} else {
-														res.json({success: true, panel: {color: 'orange', text: 'Member not found. Potential Recruit...', motto: '[UIA] Recruit', promoter: ''}});
+														res.json({success: true, panel: {color: 'orange', text: 'Member not found. Potential Recruit...', motto: '[HIT] Recruit', promoter: ''}});
 													}
 												}).sort('-createdAt');
 											} else {
@@ -105,62 +108,62 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 													if(mainLog.passOrFail == 'pass') {
 														if(mainLog.recSecTrainOrHR == 'rec') {
 															getPromoTag(mainLog.logger, function(tag) {
-																res.json({success: true, panel: {color: 'green', text: 'This member passed training and is UIA\'s staff.', motto: '[UIA] Agent I ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
+																res.json({success: true, panel: {color: 'green', text: 'This member passed training and is HIT\'s staff.', motto: '[HIT] Agent I ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
 															});
 														} else if(mainLog.recSecTrainOrHR == 'sec') {
 															getPromoTag(mainLog.logger, function(tag) {
-																res.json({success: true, panel: {color: 'green', text: 'This member passed training and is UIA\'s staff.', motto: '[UIA] Security Official I ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
+																res.json({success: true, panel: {color: 'green', text: 'This member passed training and is HIT\'s staff.', motto: '[HIT] Security Official I ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
 															});
 														} else if(mainLog.recSecTrainOrHR == 'train') {
 															getPromoTag(mainLog.logger, function(tag) {
-																res.json({success: true, panel: {color: 'green', text: 'This member passed training and is UIA\'s staff.', motto: '[UIA] Instructor I ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
+																res.json({success: true, panel: {color: 'green', text: 'This member passed training and is HIT\'s staff.', motto: '[HIT] Instructor I ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
 															});
 														} else {
 															continue;
 														}
 													} else {
 														if(mainLog.recSecTrainOrHR == 'rec') {
-															res.json({success: true, panel: {color: 'orange', text: 'This member failed training. Potential Recruit...', motto: '[UIA] Recruit', promoter: ''}});
+															res.json({success: true, panel: {color: 'orange', text: 'This member failed training. Potential Recruit...', motto: '[HIT] Recruit', promoter: ''}});
 														} else {
 															continue;
 														}
 													}
 												} else if(mainLog.logType == 'promotion-logs' ||
 													mainLog.logType == 'demotion-logs') {
-													if(notHRRegex.test(mainLog.newRank)) {
+													if(SecPlusRegex.test(mainLog.newRank)) {
 														getPromoTag(mainLog.logger, function(tag) {
-															res.json({success: true, panel: {color: 'green', text: 'This member is UIA\'s staff.', motto: '[UIA] ' + mainLog.newRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
+															res.json({success: true, panel: {color: 'green', text: 'This member is HIT\'s staff.', motto: '[HIT] ' + mainLog.newRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
 														});
 													}
 													else {
 														getPromoTag(mainLog.logger, function(tag) {
-															res.json({success: true, panel: {color: 'grey', text: 'This member is Operative+. Use the group gate.', motto: '[UIA] ' + mainLog.newRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
+															res.json({success: true, panel: {color: 'grey', text: 'This member is Security+. Use the group gate.', motto: '[HIT] ' + mainLog.newRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
 														});
 													}
 												} else if(mainLog.logType == 'transfer-logs') {
 													if(mainLog.fullTransferOrNearMiss == 'fullTransfer') {
-														if(notHRRegex.test(mainLog.offeredRank)) {
+														if(SecPlusRegex.test(mainLog.offeredRank)) {
 															getPromoTag(mainLog.logger, function(tag) {
-																res.json({success: true, panel: {color: 'green', text: 'This member transfered and is UIA\'s staff.', motto: '[UIA] ' + mainLog.offeredRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
+																res.json({success: true, panel: {color: 'green', text: 'This member transfered and is HIT\'s staff.', motto: '[HIT] ' + mainLog.offeredRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
 															});
 														}
 														else {
 															getPromoTag(mainLog.logger, function(tag) {
-																res.json({success: true, panel: {color: 'grey', text: 'This member transfered and is Operative+. Use the group gate.', motto: '[UIA] ' + mainLog.offeredRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
+																res.json({success: true, panel: {color: 'grey', text: 'This member transfered and is Security+. Use the group gate.', motto: '[HIT] ' + mainLog.offeredRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
 															});
 														}
 													} else {
-														res.json({success: true, panel: {color: 'orange', text: 'This member tried to transfer. Potential Recruit...', motto: '[UIA] Recruit', promoter: ''}});
+														res.json({success: true, panel: {color: 'orange', text: 'This member tried to transfer. Potential Recruit...', motto: '[HIT] Recruit', promoter: ''}});
 													}
 												} else if(mainLog.logType == 'rank-selling-logs') {
-													if(notHRRegex.test(mainLog.newRank)) {
+													if(SecPlusRegex.test(mainLog.newRank)) {
 														getPromoTag(mainLog.logger, function(tag) {
-															res.json({success: true, panel: {color: 'green', text: 'This member bought a rank and is UIA\'s staff.', motto: '[UIA] ' + mainLog.newRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
+															res.json({success: true, panel: {color: 'green', text: 'This member bought a rank and is HIT\'s staff.', motto: '[HIT] ' + mainLog.newRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
 														});
 													}
 													else {
 														getPromoTag(mainLog.logger, function(tag) {
-															res.json({success: true, panel: {color: 'grey', text: 'This member bought a rank and is Operative+. Use the group gate.', motto: '[UIA] ' + mainLog.newRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
+															res.json({success: true, panel: {color: 'grey', text: 'This member bought a rank and is Security+. Use the group gate.', motto: '[HIT] ' + mainLog.newRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
 														});
 													}
 												}
@@ -210,7 +213,9 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 				{"role" : "fired-logs", "perm" : [false, false, false, false]},
 				{"role" : "transfer-logs", "perm" : [false, false, false, false]},
 				{"role" : "rank-selling-logs", "perm" : [false, false, false, false]},
-				{"role" : "loa-logs", "perm" : [true, true, true, false]}]
+				{"role" : "loa-logs", "perm" : [true, true, true, false]},
+				{"role" : "sv-vip-logs", "perm" : [false, false, false, false]},
+				{"role" : "pay-logs", "perm" : [false, true, false, false]}]
 			});
 			// save the user
 			newUser.save(function(err) {
@@ -313,7 +318,7 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 
 							if(!user.promoTag || !user.promoTag.trim()
 								|| !user.rank || !user.rank.trim()) {
-								return res.status(403).send({success: false, msg: 'Please go to your profile and update your rank and promotion tag.'});
+								return res.status(403).send({success: false, msg: 'Please go to your profile and update your rank and/or promotion tag.'});
 							}
 
 							req.body.logger = user.name;
@@ -468,7 +473,15 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 										return res.status(403).send({success: false, msg: 'User with no permissions to do this operation.'});
 									}
 
+									if(!valid2 && new Date() - newLog.createdAt > 172800000) {
+										return res.status(403).send({success: false, msg: 'User with no permissions to do this operation. This log has been added more than 2 days ago.'});
+									}
+
 									newLog.username = req.body.username;
+									newLog.svOrVip = req.body.svOrVip;
+									newLog.paidPeople = req.body.paidPeople;
+									newLog.payDay = req.body.payDay;
+									newLog.payTime = req.body.payTime;
 									newLog.passOrFail = req.body.passOrFail;
 									newLog.recSecTrainOrHR = req.body.recSecTrainOrHR;
 									newLog.prevRank = req.body.prevRank;
@@ -866,6 +879,7 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 		}
 	});
 
+	// RUN ONCE: TRAIN CHECKER
 	// tempFunc = function(usersArr, index) {
 	// 	User.findOne({name: usersArr[index].name}, function(arrErr, arrUser) {
 	// 		if (arrErr) throw arrErr;
@@ -914,6 +928,55 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 	// 		tempFunc(theTempUsersArr, 0);
 	// 	}).sort('-createdAt');
 	// }).sort('-createdAt');
+
+	// RUN ONCE: SV/VIP + PAY LOGS
+	// tempFunc = function(usersArr, index) {
+	// 	User.findOne({name: usersArr[index].name}, function(arrErr, arrUser) {
+	// 		if (arrErr) throw arrErr;
+	// 		if(arrUser) {
+
+	// 			if(arrUser.allowedRoles.length != 9) {
+	// 				if(index+1 < usersArr.length)
+	// 					tempFunc(usersArr, index+1);
+	// 				return;
+	// 			}
+
+	// 			if(arrUser.type == 'Admin') {
+	// 				arrUser.allowedRoles.push({role: "sv-vip-logs", perm : [true, true, true, false]});
+	// 				arrUser.allowedRoles.push({role: "pay-logs", perm : [true, true, true, false]});
+	// 			} else if(arrUser.type == 'Owner') {
+	// 				arrUser.allowedRoles.push({role: "sv-vip-logs", perm : [true, true, true, true]});
+	// 				arrUser.allowedRoles.push({role: "pay-logs", perm : [true, true, true, true]});
+	// 			} else if(arrUser.allowedRoles[7].perm[0]) {
+	// 				arrUser.allowedRoles.push({role: "sv-vip-logs", perm : [true, true, true, false]});
+	// 				arrUser.allowedRoles.push({role: "pay-logs", perm : [false, true, false, false]});
+	// 			} else if(arrUser.allowedRoles[2].perm[0]) {
+	// 				arrUser.allowedRoles.push({role: "sv-vip-logs", perm : [false, false, false, false]});
+	// 				arrUser.allowedRoles.push({role: "pay-logs", perm : [false, true, false, false]});
+	// 			} else {
+	// 				arrUser.allowedRoles.push({role: "sv-vip-logs", perm : [true, true, true, false]});
+	// 				arrUser.allowedRoles.push({role: "pay-logs", perm : [false, true, false, false]});
+	// 			}
+
+	// 			arrUser.save(function(arrBestErr) {
+	// 				if (arrBestErr) throw arrBestErr;
+
+	// 				if(index+1 < usersArr.length)
+	// 					tempFunc(usersArr, index+1);
+	// 			});
+	// 		} else {
+	// 			console.log("ERROR: THIS USER DOES NOT EXIST: " + usersArr[index].name);
+
+	// 			if(index+1 < usersArr.length)
+	// 				tempFunc(usersArr, index+1);
+	// 		}
+	// 	});
+	// }
+
+	// User.find({}, {name: 1}, function(tempErr, tempLogs) {
+	// 	if (tempErr) throw tempErr;
+	// 	tempFunc(tempLogs, 0);
+	// });
 
 	app.post('/api/decidedPending', passport.authenticate('jwt', { session: false}), function(req, res) {
 		var token = getToken(req.headers);
@@ -1262,6 +1325,14 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 			return res.json({success: false, msg: 'Unkown error.'});
 		} else if('username' in err.errors) {
 			theItem = 'username';
+		} else if('svOrVip' in err.errors) {
+			theItem = 'svOrVip';
+		} else if('payDay' in err.errors) {
+			theItem = 'payDay';
+		} else if('payTime' in err.errors) {
+			theItem = 'payTime';
+		} else if('paidPeople' in err.errors) {
+			theItem = 'paidPeople';
 		} else if('passOrFail' in err.errors) {
 			theItem = 'passOrFail';
 		} else if('recSecTrainOrHR' in err.errors) {
@@ -1297,6 +1368,7 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 		} else if('notes' in err.errors) {
 			theItem = 'notes';
 		} else {
+			console.log(err);
 			return res.json({success: false, msg: 'Unkown error.'});
 		}
 		return res.json({success: false, msg: err.errors[theItem].message});

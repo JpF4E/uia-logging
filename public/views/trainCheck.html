@@ -5,8 +5,8 @@
 			<ul class="nav nav-pills nav-stacked">
 				<li role="presentation" align="left"><a ui-sref="main">Home</a></li>
 				<br ng-if="!memberCatsEmpty[0]">
-				<div ng-if="!memberCatsEmpty[0]" class="strike"><span>Logs</span></div>
-				<li ng-class="{'active': currentState.current.name == 'training-logs' || currentState.current.name == 'add-training-logs'}" ng-if="memberRoles['training-logs'][1]" role="presentation" align="left">
+				<div ng-if="!memberCatsEmpty[0]" class="strike"><span>Main Logs</span></div>
+				<li ng-class="{'active': currentState.current.name == 'training-logs' || currentState.current.name == 'add-training-logs' || currentState.current.name == 'edit-training-logs'}" ng-if="memberRoles['training-logs'][1]" role="presentation" align="left">
 					<div class="outer-item">
 						<div class="inner-flex">
 							<a href="" ui-sref="training-logs">Training Logs</a>
@@ -16,7 +16,7 @@
 						</div>
 					</div>
 				</li>
-				<li ng-class="{'active': currentState.current.name == 'promotion-logs' || currentState.current.name == 'add-promotion-logs'}" ng-if="memberRoles['promotion-logs'][1]" role="presentation" align="left">
+				<li ng-class="{'active': currentState.current.name == 'promotion-logs' || currentState.current.name == 'add-promotion-logs' || currentState.current.name == 'edit-promotion-logs'}" ng-if="memberRoles['promotion-logs'][1]" role="presentation" align="left">
 					<div class="outer-item">
 						<div class="inner-flex">
 							<a href="" ui-sref="promotion-logs">Promotion Logs</a>
@@ -28,7 +28,7 @@
 				</li>
 				<br ng-if="!memberCatsEmpty[1]">
 				<div ng-if="!memberCatsEmpty[1]" class="strike"><span>Discipline Logs</span></div>
-				<li ng-class="{'active': currentState.current.name == 'warning-logs' || currentState.current.name == 'add-warning-logs'}" ng-if="memberRoles['warning-logs'][1]" role="presentation" align="left">
+				<li ng-class="{'active': currentState.current.name == 'warning-logs' || currentState.current.name == 'add-warning-logs' || currentState.current.name == 'edit-warning-logs'}" ng-if="memberRoles['warning-logs'][1]" role="presentation" align="left">
 					<div class="outer-item">
 						<div class="inner-flex">
 							<a href="" ui-sref="warning-logs">Warning Logs</a>
@@ -38,7 +38,7 @@
 						</div>
 					</div>
 				</li>
-				<li ng-class="{'active': currentState.current.name == 'demotion-logs' || currentState.current.name == 'add-demotion-logs'}" ng-if="memberRoles['demotion-logs'][1]" role="presentation" align="left">
+				<li ng-class="{'active': currentState.current.name == 'demotion-logs' || currentState.current.name == 'add-demotion-logs' || currentState.current.name == 'edit-demotion-logs'}" ng-if="memberRoles['demotion-logs'][1]" role="presentation" align="left">
 					<div class="outer-item">
 						<div class="inner-flex">
 							<a href="" ui-sref="demotion-logs">Demotion Logs</a>
@@ -48,7 +48,7 @@
 						</div>
 					</div>
 				</li>
-				<li ng-class="{'active': currentState.current.name == 'strike-logs' || currentState.current.name == 'add-strike-logs'}" ng-if="memberRoles['strike-logs'][1]" role="presentation" align="left">
+				<li ng-class="{'active': currentState.current.name == 'strike-logs' || currentState.current.name == 'add-strike-logs' || currentState.current.name == 'edit-strike-logs'}" ng-if="memberRoles['strike-logs'][1]" role="presentation" align="left">
 					<div class="outer-item">
 						<div class="inner-flex">
 							<a href="" ui-sref="strike-logs">Strike Logs</a>
@@ -58,7 +58,7 @@
 						</div>
 					</div>
 				</li>
-				<li ng-class="{'active': currentState.current.name == 'fired-logs' || currentState.current.name == 'add-fired-logs'}" ng-if="memberRoles['fired-logs'][1]" role="presentation" align="left">
+				<li ng-class="{'active': currentState.current.name == 'fired-logs' || currentState.current.name == 'add-fired-logs' || currentState.current.name == 'edit-fired-logs'}" ng-if="memberRoles['fired-logs'][1]" role="presentation" align="left">
 					<div class="outer-item">
 						<div class="inner-flex">
 							<a href="" ui-sref="fired-logs">Fired Logs</a>
@@ -69,18 +69,8 @@
 					</div>
 				</li>
 				<br ng-if="!memberCatsEmpty[2]">
-				<div ng-if="!memberCatsEmpty[2]" class="strike"><span>Other Logs</span></div>
-				<li ng-class="{'active': currentState.current.name == 'transfer-logs' || currentState.current.name == 'add-transfer-logs'}" ng-if="memberRoles['transfer-logs'][1]" role="presentation" align="left">
-					<div class="outer-item">
-						<div class="inner-flex">
-							<a href="" ui-sref="transfer-logs">Transfer Logs</a>
-						</div>
-						<div class="inner-fixed">
-							<a ui-sref="add-transfer-logs" ng-if="memberRoles['transfer-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
-						</div>
-					</div>
-				</li>
-				<li ng-class="{'active': currentState.current.name == 'rank-selling-logs' || currentState.current.name == 'add-rank-selling-logs'}" ng-if="memberRoles['rank-selling-logs'][1]" role="presentation" align="left">
+				<div ng-if="!memberCatsEmpty[2]" class="strike"><span>Financial Logs</span></div>
+				<li ng-class="{'active': currentState.current.name == 'rank-selling-logs' || currentState.current.name == 'add-rank-selling-logs' || currentState.current.name == 'edit-rank-selling-logs'}" ng-if="memberRoles['rank-selling-logs'][1]" role="presentation" align="left">
 					<div class="outer-item">
 						<div class="inner-flex">
 							<a href="" ui-sref="rank-selling-logs">Rank Selling Logs</a>
@@ -90,7 +80,39 @@
 						</div>
 					</div>
 				</li>
-				<li ng-class="{'active': currentState.current.name == 'loa-logs' || currentState.current.name == 'add-loa-logs'}" ng-if="memberRoles['loa-logs'][1]" role="presentation" align="left">
+				<li ng-class="{'active': currentState.current.name == 'sv-vip-logs' || currentState.current.name == 'add-sv-vip-logs' || currentState.current.name == 'edit-sv-vip-logs'}" ng-if="memberRoles['sv-vip-logs'][1]" role="presentation" align="left">
+					<div class="outer-item">
+						<div class="inner-flex">
+							<a href="" ui-sref="sv-vip-logs">SV/VIP Logs</a>
+						</div>
+						<div class="inner-fixed">
+							<a ui-sref="add-sv-vip-logs" ng-if="memberRoles['sv-vip-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+						</div>
+					</div>
+				</li>
+				<li ng-class="{'active': currentState.current.name == 'pay-logs' || currentState.current.name == 'add-pay-logs' || currentState.current.name == 'edit-pay-logs'}" ng-if="memberRoles['pay-logs'][1]" role="presentation" align="left">
+					<div class="outer-item">
+						<div class="inner-flex">
+							<a href="" ui-sref="pay-logs">Pay Logs</a>
+						</div>
+						<div class="inner-fixed">
+							<a ui-sref="add-pay-logs" ng-if="memberRoles['pay-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+						</div>
+					</div>
+				</li>
+				<br ng-if="!memberCatsEmpty[3]">
+				<div ng-if="!memberCatsEmpty[3]" class="strike"><span>Other Logs</span></div>
+				<li ng-class="{'active': currentState.current.name == 'transfer-logs' || currentState.current.name == 'add-transfer-logs' || currentState.current.name == 'edit-transfer-logs'}" ng-if="memberRoles['transfer-logs'][1]" role="presentation" align="left">
+					<div class="outer-item">
+						<div class="inner-flex">
+							<a href="" ui-sref="transfer-logs">Transfer Logs</a>
+						</div>
+						<div class="inner-fixed">
+							<a ui-sref="add-transfer-logs" ng-if="memberRoles['transfer-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+						</div>
+					</div>
+				</li>
+				<li ng-class="{'active': currentState.current.name == 'loa-logs' || currentState.current.name == 'add-loa-logs' || currentState.current.name == 'edit-loa-logs'}" ng-if="memberRoles['loa-logs'][1]" role="presentation" align="left">
 					<div class="outer-item">
 						<div class="inner-flex">
 							<a href="" ui-sref="loa-logs">LoA Logs</a>
@@ -125,7 +147,7 @@
 					<form class="main-add-form">
 						<label>Search for:</label>
 						<div class="outer-item">
-							<input autofocus="" type="search" class="form-control inner-fixed" placeholder="{{addForm.name.tip1}}" ng-model="search.name"></input>
+							<input autofocus="" type="search" class="form-control inner-fixed" placeholder="{{addForm.name.tip1}}" ng-model="search.name" ng-change="searchTheTrainers(true)"></input>
 							<button class="btn btn-primary search-button inner-fixed" type="submit" ng-click="searchTheTrainers(true)">Search</button>
 							<button class="btn inner-fixed search-button" type="reset" ng-click="resetForm(); searchTheTrainers(true)">Clear</button>
 						</div>
@@ -152,7 +174,7 @@
 										<tr ng-class="{'danger': true}">
 											<td ng-if="addForm.name.show">{{x.name}}</td>
 											<td ng-if="addForm.promoTag.show">[{{x.promoTag}}]</td>
-											<td ng-if="addForm.rank.show">[UIA] {{x.rank}}</td>
+											<td ng-if="addForm.rank.show">[HIT] {{x.rank}}</td>
 											<td ng-if="addForm.createdAt.show">{{x.joined}}</td>
 											<td ng-if="addForm.lastTrained.show">{{(x.trainAtRisk == null) ? '-- N/A --' : x.lastTrainedDiff}}
 											<!--<br ng-if="x.trainAtRisk != null"><br ng-if="x.trainAtRisk != null">{{(x.trainAtRisk == null) ? '' : getTime(x.trainAtRisk)}}<br ng-if="x.trainAtRisk != null">{{(x.trainAtRisk == null) ? '' : getDate(x.trainAtRisk)}}--></td>
@@ -207,7 +229,7 @@
 										<tr ng-class="{'danger': x.banned}">
 											<td ng-if="addForm.name.show">{{x.name}}</td>
 											<td ng-if="addForm.promoTag.show">[{{x.promoTag}}]</td>
-											<td ng-if="addForm.rank.show">[UIA] {{x.rank}}</td>
+											<td ng-if="addForm.rank.show">[HIT] {{x.rank}}</td>
 											<td ng-if="addForm.createdAt.show">{{x.joined}}</td>
 											<td ng-if="addForm.lastTrained.show">{{(x.trainAtRisk == null) ? '-- N/A --' : x.lastTrainedDiff}}
 											<!--<br ng-if="x.trainAtRisk != null"><br ng-if="x.trainAtRisk != null">{{(x.trainAtRisk == null) ? '' : getTime(x.trainAtRisk)}}<br ng-if="x.trainAtRisk != null">{{(x.trainAtRisk == null) ? '' : getDate(x.trainAtRisk)}}--></td>

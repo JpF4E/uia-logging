@@ -17,7 +17,9 @@ var Role = {
 		'fired-logs',
 		'transfer-logs',
 		'rank-selling-logs',
-		'loa-logs']
+		'loa-logs',
+		'sv-vip-logs',
+		'pay-logs']
 }
 
 // set up a mongoose model

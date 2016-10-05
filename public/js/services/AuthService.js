@@ -6,7 +6,7 @@ angular.module('AuthService', [])
 	var authToken;
 	var memberInfo = null;
 
-	var memberCatsEmpty = [true, true, true];
+	var memberCatsEmpty = [true, true, true, true];
 	var memberRoles = {};
 	var memberName = "";
 	var memberType = "";
@@ -49,12 +49,19 @@ angular.module('AuthService', [])
 								memberCatsEmpty[1] = false;
 							}
 							break;
-						case 'transfer-logs':
 						case 'rank-selling-logs':
-						case 'loa-logs':
+						case 'sv-vip-logs':
+						case 'pay-logs':
 							if(memberInfo.allowedRoles[check].perm[0] ||
 								memberInfo.allowedRoles[check].perm[1]) {
 								memberCatsEmpty[2] = false;
+							}
+							break;
+						case 'transfer-logs':
+						case 'loa-logs':
+							if(memberInfo.allowedRoles[check].perm[0] ||
+								memberInfo.allowedRoles[check].perm[1]) {
+								memberCatsEmpty[3] = false;
 							}
 							break;
 					}
@@ -83,7 +90,7 @@ angular.module('AuthService', [])
 		userInfoReady = false;
 		isAuthenticated = false;
 		memberInfo = null;
-		memberCatsEmpty = [true, true, true];
+		memberCatsEmpty = [true, true, true, true];
 		memberRoles = {};
 		$http.defaults.headers.common.Authorization = undefined;
 		window.localStorage.removeItem(LOCAL_TOKEN_KEY);

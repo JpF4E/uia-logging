@@ -71,6 +71,18 @@ angular.module('appRoutes', [])
 			controller: 'LogsController'
 		})
 
+		.state('sv-vip-logs', {
+			url: '/logs/sv-vip',
+			templateUrl: 'views/logs.html',
+			controller: 'LogsController'
+		})
+
+		.state('pay-logs', {
+			url: '/logs/pay',
+			templateUrl: 'views/logs.html',
+			controller: 'LogsController'
+		})
+
 		.state('add-training-logs', {
 			url: '/logs/training/add',
 			templateUrl: 'views/addLogs.html',
@@ -121,6 +133,18 @@ angular.module('appRoutes', [])
 
 		.state('add-loa-logs', {
 			url: '/logs/loa/add',
+			templateUrl: 'views/addLogs.html',
+			controller: 'AddLogsController'
+		})
+
+		.state('add-sv-vip-logs', {
+			url: '/logs/sv-vip/add',
+			templateUrl: 'views/addLogs.html',
+			controller: 'AddLogsController'
+		})
+
+		.state('add-pay-logs', {
+			url: '/logs/pay/add',
 			templateUrl: 'views/addLogs.html',
 			controller: 'AddLogsController'
 		})
@@ -199,6 +223,24 @@ angular.module('appRoutes', [])
 
 		.state('edit-loa-logs', {
 			url: '/logs/loa/edit',
+			params: {
+				obj: null
+			},
+			templateUrl: 'views/editLogs.html',
+			controller: 'EditLogsController'
+		})
+
+		.state('edit-sv-vip-logs', {
+			url: '/logs/sv-vip/edit',
+			params: {
+				obj: null
+			},
+			templateUrl: 'views/editLogs.html',
+			controller: 'EditLogsController'
+		})
+
+		.state('edit-pay-logs', {
+			url: '/logs/pay/edit',
 			params: {
 				obj: null
 			},

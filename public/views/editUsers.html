@@ -5,8 +5,8 @@
 				<ul class="nav nav-pills nav-stacked">
 					<li role="presentation" align="left"><a ui-sref="main">Home</a></li>
 					<br ng-if="!memberCatsEmpty[0]">
-					<div ng-if="!memberCatsEmpty[0]" class="strike"><span>Logs</span></div>
-					<li ng-class="{'active': currentState.current.name == 'training-logs' || currentState.current.name == 'edit-training-logs'}" ng-if="memberRoles['training-logs'][1]" role="presentation" align="left">
+					<div ng-if="!memberCatsEmpty[0]" class="strike"><span>Main Logs</span></div>
+					<li ng-class="{'active': currentState.current.name == 'training-logs' || currentState.current.name == 'add-training-logs' || currentState.current.name == 'edit-training-logs'}" ng-if="memberRoles['training-logs'][1]" role="presentation" align="left">
 						<div class="outer-item">
 							<div class="inner-flex">
 								<a href="" ui-sref="training-logs">Training Logs</a>
@@ -16,7 +16,7 @@
 							</div>
 						</div>
 					</li>
-					<li ng-class="{'active': currentState.current.name == 'promotion-logs' || currentState.current.name == 'edit-promotion-logs'}" ng-if="memberRoles['promotion-logs'][1]" role="presentation" align="left">
+					<li ng-class="{'active': currentState.current.name == 'promotion-logs' || currentState.current.name == 'add-promotion-logs' || currentState.current.name == 'edit-promotion-logs'}" ng-if="memberRoles['promotion-logs'][1]" role="presentation" align="left">
 						<div class="outer-item">
 							<div class="inner-flex">
 								<a href="" ui-sref="promotion-logs">Promotion Logs</a>
@@ -28,7 +28,7 @@
 					</li>
 					<br ng-if="!memberCatsEmpty[1]">
 					<div ng-if="!memberCatsEmpty[1]" class="strike"><span>Discipline Logs</span></div>
-					<li ng-class="{'active': currentState.current.name == 'warning-logs' || currentState.current.name == 'edit-warning-logs'}" ng-if="memberRoles['warning-logs'][1]" role="presentation" align="left">
+					<li ng-class="{'active': currentState.current.name == 'warning-logs' || currentState.current.name == 'add-warning-logs' || currentState.current.name == 'edit-warning-logs'}" ng-if="memberRoles['warning-logs'][1]" role="presentation" align="left">
 						<div class="outer-item">
 							<div class="inner-flex">
 								<a href="" ui-sref="warning-logs">Warning Logs</a>
@@ -38,7 +38,7 @@
 							</div>
 						</div>
 					</li>
-					<li ng-class="{'active': currentState.current.name == 'demotion-logs' || currentState.current.name == 'edit-demotion-logs'}" ng-if="memberRoles['demotion-logs'][1]" role="presentation" align="left">
+					<li ng-class="{'active': currentState.current.name == 'demotion-logs' || currentState.current.name == 'add-demotion-logs' || currentState.current.name == 'edit-demotion-logs'}" ng-if="memberRoles['demotion-logs'][1]" role="presentation" align="left">
 						<div class="outer-item">
 							<div class="inner-flex">
 								<a href="" ui-sref="demotion-logs">Demotion Logs</a>
@@ -48,7 +48,7 @@
 							</div>
 						</div>
 					</li>
-					<li ng-class="{'active': currentState.current.name == 'strike-logs' || currentState.current.name == 'edit-strike-logs'}" ng-if="memberRoles['strike-logs'][1]" role="presentation" align="left">
+					<li ng-class="{'active': currentState.current.name == 'strike-logs' || currentState.current.name == 'add-strike-logs' || currentState.current.name == 'edit-strike-logs'}" ng-if="memberRoles['strike-logs'][1]" role="presentation" align="left">
 						<div class="outer-item">
 							<div class="inner-flex">
 								<a href="" ui-sref="strike-logs">Strike Logs</a>
@@ -58,7 +58,7 @@
 							</div>
 						</div>
 					</li>
-					<li ng-class="{'active': currentState.current.name == 'fired-logs' || currentState.current.name == 'edit-fired-logs'}" ng-if="memberRoles['fired-logs'][1]" role="presentation" align="left">
+					<li ng-class="{'active': currentState.current.name == 'fired-logs' || currentState.current.name == 'add-fired-logs' || currentState.current.name == 'edit-fired-logs'}" ng-if="memberRoles['fired-logs'][1]" role="presentation" align="left">
 						<div class="outer-item">
 							<div class="inner-flex">
 								<a href="" ui-sref="fired-logs">Fired Logs</a>
@@ -69,18 +69,8 @@
 						</div>
 					</li>
 					<br ng-if="!memberCatsEmpty[2]">
-					<div ng-if="!memberCatsEmpty[2]" class="strike"><span>Other Logs</span></div>
-					<li ng-class="{'active': currentState.current.name == 'transfer-logs' || currentState.current.name == 'edit-transfer-logs'}" ng-if="memberRoles['transfer-logs'][1]" role="presentation" align="left">
-						<div class="outer-item">
-							<div class="inner-flex">
-								<a href="" ui-sref="transfer-logs">Transfer Logs</a>
-							</div>
-							<div class="inner-fixed">
-								<a ui-sref="add-transfer-logs" ng-if="memberRoles['transfer-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
-							</div>
-						</div>
-					</li>
-					<li ng-class="{'active': currentState.current.name == 'rank-selling-logs' || currentState.current.name == 'edit-rank-selling-logs'}" ng-if="memberRoles['rank-selling-logs'][1]" role="presentation" align="left">
+					<div ng-if="!memberCatsEmpty[2]" class="strike"><span>Financial Logs</span></div>
+					<li ng-class="{'active': currentState.current.name == 'rank-selling-logs' || currentState.current.name == 'add-rank-selling-logs' || currentState.current.name == 'edit-rank-selling-logs'}" ng-if="memberRoles['rank-selling-logs'][1]" role="presentation" align="left">
 						<div class="outer-item">
 							<div class="inner-flex">
 								<a href="" ui-sref="rank-selling-logs">Rank Selling Logs</a>
@@ -90,7 +80,39 @@
 							</div>
 						</div>
 					</li>
-					<li ng-class="{'active': currentState.current.name == 'loa-logs' || currentState.current.name == 'edit-loa-logs'}" ng-if="memberRoles['loa-logs'][1]" role="presentation" align="left">
+					<li ng-class="{'active': currentState.current.name == 'sv-vip-logs' || currentState.current.name == 'add-sv-vip-logs' || currentState.current.name == 'edit-sv-vip-logs'}" ng-if="memberRoles['sv-vip-logs'][1]" role="presentation" align="left">
+						<div class="outer-item">
+							<div class="inner-flex">
+								<a href="" ui-sref="sv-vip-logs">SV/VIP Logs</a>
+							</div>
+							<div class="inner-fixed">
+								<a ui-sref="add-sv-vip-logs" ng-if="memberRoles['sv-vip-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+							</div>
+						</div>
+					</li>
+					<li ng-class="{'active': currentState.current.name == 'pay-logs' || currentState.current.name == 'add-pay-logs' || currentState.current.name == 'edit-pay-logs'}" ng-if="memberRoles['pay-logs'][1]" role="presentation" align="left">
+						<div class="outer-item">
+							<div class="inner-flex">
+								<a href="" ui-sref="pay-logs">Pay Logs</a>
+							</div>
+							<div class="inner-fixed">
+								<a ui-sref="add-pay-logs" ng-if="memberRoles['pay-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+							</div>
+						</div>
+					</li>
+					<br ng-if="!memberCatsEmpty[3]">
+					<div ng-if="!memberCatsEmpty[3]" class="strike"><span>Other Logs</span></div>
+					<li ng-class="{'active': currentState.current.name == 'transfer-logs' || currentState.current.name == 'add-transfer-logs' || currentState.current.name == 'edit-transfer-logs'}" ng-if="memberRoles['transfer-logs'][1]" role="presentation" align="left">
+						<div class="outer-item">
+							<div class="inner-flex">
+								<a href="" ui-sref="transfer-logs">Transfer Logs</a>
+							</div>
+							<div class="inner-fixed">
+								<a ui-sref="add-transfer-logs" ng-if="memberRoles['transfer-logs'][0]" class="close add-btn" type="button" ><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+							</div>
+						</div>
+					</li>
+					<li ng-class="{'active': currentState.current.name == 'loa-logs' || currentState.current.name == 'add-loa-logs' || currentState.current.name == 'edit-loa-logs'}" ng-if="memberRoles['loa-logs'][1]" role="presentation" align="left">
 						<div class="outer-item">
 							<div class="inner-flex">
 								<a href="" ui-sref="loa-logs">LoA Logs</a>
@@ -169,7 +191,7 @@
 							<div ng-if="addForm.rank.show" class="a-control">
 								<label>{{addForm.rank.tip1}}:</label>
 								<div class="input-group">
-									<span class="input-group-addon">[UIA]</span>
+									<span class="input-group-addon">[HIT]</span>
 									<input ng-disabled="addForm.rank.dis" type="text" class="form-control" placeholder="{{addForm.rank.tip2}}" ng-model="addForm.rank.val"></input>
 								</div>
 							</div>
@@ -195,7 +217,7 @@
 								<div class="checkbox">
 									<label>
 										<input ng-disabled="addForm.banned.dis" type="checkbox" ng-model="addForm.banned.val">
-										Prevents this member from using the UIA Portal
+										Prevents this member from using the HIT Portal
 									</label>
 								</div>
 							</div>
@@ -215,9 +237,10 @@
 									</div>
 									<div class="panel-body no-pad">
 										<button formnovalidate ng-click="shortcut('Trainer')" ng-disabled="addForm.type.val != 'Regular'" class="btn btn-primary shortcut-button">Trainer</button>
-										<button formnovalidate ng-click="shortcut('Operative')" ng-disabled="addForm.type.val != 'Regular'" class="btn btn-primary shortcut-button">Operative</button>
+										<button formnovalidate ng-click="shortcut('High Rank')" ng-disabled="addForm.type.val != 'Regular'" class="btn btn-primary shortcut-button">High Rank</button>
 										<button formnovalidate ng-click="shortcut('TU Member')" ng-disabled="addForm.type.val != 'Regular'" class="btn btn-info shortcut-button">TU<br>Member</button>
 										<button ng-click="shortcut('Rank Seller')" ng-disabled="addForm.type.val != 'Regular'" class="btn btn-info shortcut-button">Rank<br>Seller</button>
+										<button ng-click="shortcut('Payer')" ng-disabled="addForm.type.val != 'Regular'" class="btn btn-info shortcut-button">Payer</button>
 										<hr>
 										<button formnovalidate ng-click="shortcut('Reset')" class="btn btn-default shortcut-button">Reset</button>
 										<button formnovalidate ng-click="shortcut('Clear')" class="btn btn-default shortcut-button">Clear</button>

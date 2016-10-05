@@ -6,7 +6,7 @@ angular.module('TrainCheckCtrl', []).controller('TrainCheckController', function
 	//$scope.alert2 = null;
 	//$scope.requesting = false;
 
-	$scope.memberCatsEmpty = [true, true, true];
+	$scope.memberCatsEmpty = [true, true, true, true];
 	$scope.memberRoles = {};
 	$scope.memberName = "";
 	$scope.memberType = "";

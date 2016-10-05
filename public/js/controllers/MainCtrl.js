@@ -8,7 +8,7 @@ angular.module('MainCtrl', []).controller('MainController', function($http, $roo
 	$scope.currentState = $state;
 	$scope.memberInfo = {};
 
-	$scope.memberCatsEmpty = [true, true, true];
+	$scope.memberCatsEmpty = [true, true, true, true];
 	$scope.memberRoles = {};
 	$scope.memberName = "";
 	$scope.showSpinner = true;

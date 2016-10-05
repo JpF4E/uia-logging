@@ -6,7 +6,7 @@ angular.module('LogsCtrl', []).controller('LogsController', function($http, $sco
 	//$scope.alert2 = null;
 	//$scope.requesting = false;
 
-	$scope.memberCatsEmpty = [true, true, true];
+	$scope.memberCatsEmpty = [true, true, true, true];
 	$scope.memberRoles = {};
 	$scope.memberName = "";
 	$scope.memberType = "";
@@ -49,8 +49,13 @@ angular.module('LogsCtrl', []).controller('LogsController', function($http, $sco
 	$scope.recSecTrainOrHRDict = {
 		rec: "Recruit",
 		sec: "Security",
-		train: "Train",
-		hr: "Operative"
+		train: "Trainer",
+		hr: "High Rank"
+	}
+
+	$scope.svOrVipDict = {
+		sv: "SV",
+		vip: "VIP"
 	}
 
 	$scope.passOrFailDict = {
@@ -129,6 +134,10 @@ angular.module('LogsCtrl', []).controller('LogsController', function($http, $sco
 
 	$scope.addForm = {
 		username : {show: false, tip1: ""},
+		svOrVip : {show: false, tip1: ""},
+		payDay : {show: false, tip1: ""},
+		payTime : {show: false, tip1: ""},
+		paidPeople : {show: false, tip1: ""},
 		passOrFail : {show: false, tip1: ""},
 		recSecTrainOrHR : {show: false, tip1: ""},
 		prevRank : {show: false, tip1: ""},
@@ -180,6 +189,8 @@ angular.module('LogsCtrl', []).controller('LogsController', function($http, $sco
 					$scope.logs = $scope.logs.concat(result.data.logs);
 				}
 				for (var i = $scope.logs.length - 1; i >= 0; i--) {
+					if($scope.logs[i].paidPeople)
+						printablePaidPeople($scope.logs[i], $scope.logs[i].paidPeople);
 					$scope.comments.push(false);
 				};
 				//$scope.alert = {type: "success", msg: result.data.msg, strong: $scope.logTitleSingular + " added successfully!"};
@@ -187,6 +198,17 @@ angular.module('LogsCtrl', []).controller('LogsController', function($http, $sco
 				$scope.alert = {msg: result.data.msg, strong: "Failed to retrieve " + $scope.logTitle + "!"};
 			}
 		});
+	}
+
+	printablePaidPeople = function(obj, paidPeople) {
+		obj.paidPeopleUsername = [];
+		obj.paidPeoplePay = [];
+		obj.paidPeopleNotes = [];
+		for (var i = 0; i < paidPeople.length; i++) {
+			obj.paidPeopleUsername.push(paidPeople[i].username);
+			obj.paidPeoplePay.push(paidPeople[i].pay);
+			obj.paidPeopleNotes.push(paidPeople[i].notes);
+		}
 	}
 
 	$scope.editLog = function(x) {
@@ -213,6 +235,10 @@ angular.module('LogsCtrl', []).controller('LogsController', function($http, $sco
 				$scope.alert = {msg: result.data.msg, strong: "Failed to delete " + $scope.logTitleSingular + "!"};
 			}
 		});
+	}
+
+	$scope.getTimeDiff = function(d) {
+		return moment(ServerDate.now()).diff(moment(d), 'days');
 	}
 
 	$scope.$watch('currentState.current.name', function (newValue) {
@@ -351,6 +377,32 @@ angular.module('LogsCtrl', []).controller('LogsController', function($http, $sco
 				$scope.addForm.loggerRank = {show: false, tip1: "Member's Rank"};
 				$scope.addForm.loa = {show: true, tip1: "Member on LoA"};
 				$scope.addForm.loaRank = {show: true, tip1: "Member's Rank"};
+				break;
+			case 'sv-vip-logs':
+				$scope.logTitle = "SV/VIP Logs";
+				$scope.logTitleSingular = "SV/VIP Log";
+				$scope.logIcon = "glass";
+				$scope.addForm.username = {show: true, tip1: "Badge Holder"};
+				$scope.addForm.svOrVip = {show: true, tip1: "Badge Type"};
+				$scope.addForm.notes = {show: true, tip1: "Notes"};
+				$scope.addForm.createdAt = {show: true, tip1: "Created At"};
+				$scope.addForm.updatedAt = {show: false, tip1: "Updated At"};
+				$scope.addForm.logger = {show: true, tip1: "Seller"};
+				$scope.addForm.loggerRank = {show: true, tip1: "Seller Rank"};
+				$scope.addForm.rehired = {show: true, tip1: "Removed"};
+				break;
+			case 'pay-logs':
+				$scope.logTitle = "Pay Logs";
+				$scope.logTitleSingular = "Pay Log";
+				$scope.logIcon = "gift";
+				$scope.addForm.payDay = {show: true, tip1: "Pay Day"};
+				$scope.addForm.payTime = {show: true, tip1: "Pay Time"};
+				$scope.addForm.notes = {show: true, tip1: "Notes"};
+				$scope.addForm.paidPeople = {show: true, tip1: "Paid Members"};
+				$scope.addForm.createdAt = {show: true, tip1: "Created At"};
+				$scope.addForm.updatedAt = {show: false, tip1: "Updated At"};
+				$scope.addForm.logger = {show: true, tip1: "Payer"};
+				$scope.addForm.loggerRank = {show: true, tip1: "Payer Rank"};
 				break;
 			default:
 				return;

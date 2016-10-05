@@ -2,7 +2,7 @@ angular.module('SecSearchCtrl', []).controller('SecSearchController', function($
 
 	$scope.alert = null;
 
-	$scope.memberCatsEmpty = [true, true, true];
+	$scope.memberCatsEmpty = [true, true, true, true];
 	$scope.memberRoles = {};
 	$scope.memberName = "";
 	$scope.memberType = "";

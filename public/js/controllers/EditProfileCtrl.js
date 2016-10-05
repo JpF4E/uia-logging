@@ -6,7 +6,7 @@ angular.module('EditProfileCtrl', []).controller('EditProfileController', functi
 	$scope.alert2 = null;
 	//$scope.requesting = false;
 
-	$scope.memberCatsEmpty = [true, true, true];
+	$scope.memberCatsEmpty = [true, true, true, true];
 	$scope.memberRoles = {};
 	$scope.memberName = "";
 	$scope.memberAllInfo = null;
