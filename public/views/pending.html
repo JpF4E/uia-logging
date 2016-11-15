@@ -199,7 +199,7 @@
 										<span ng-if="x.valid" class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
 									<td ng-if="addForm.type.show">{{x.type}}</td>
 									<td ng-if="addForm.promoTag.show">[{{x.promoTag}}]</td>
-									<td ng-if="addForm.rank.show">[HIT] {{x.rank}}</td>
+									<td ng-if="addForm.rank.show">[IDC] {{x.rank}}</td>
 									<td ng-if="addForm.email.show"><div ng-bind-html="x.email | linky"></div></td>
 									<td ng-if="addForm.tokenTimestamp.show">{{getDate(x.tokenTimestamp)}}<br>{{getTime(x.tokenTimestamp)}}</td>
 									<td ng-if="addForm.firstLogin.show">

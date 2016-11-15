@@ -180,7 +180,7 @@ angular.module('PendingCtrl', []).controller('PendingController', function($http
 	$scope.prepare = function(x, accept) {
 		$scope.logToPending = {_id: x._id, accept: accept};
 		$scope.modal = (accept) ? 'accept ' : 'deny ';
-		$scope.modal += x.name + "'s access to the HIT Portal";
+		$scope.modal += x.name + "'s access to the IDC Portal";
 	}
 
 	$scope.decided = function() {

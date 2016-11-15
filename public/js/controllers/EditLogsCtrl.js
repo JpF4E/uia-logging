@@ -608,8 +608,8 @@ angular.module('EditLogsCtrl', []).controller('EditLogsController', function($ht
 				$scope.logIcon = "transfer";
 				$scope.addForm.username = {show: true, tip1: "Username", tip2: "Transfered user", dis: false, val: $state.params.obj.username};
 				$scope.addForm.agency = {show: true, tip1: "Agency", tip2: "Agency from which the user is transfering", dis: false, val: $state.params.obj.agency};
-				$scope.addForm.oldRank = {show: true, tip1: "Old Rank", tip2: "Rank from the previous agency or HIT", dis: false, val: $state.params.obj.oldRank};
-				$scope.addForm.offeredRank = {show: true, tip1: "Offered Rank", tip2: "Offered HIT rank", dis: false, val: $state.params.obj.offeredRank};
+				$scope.addForm.oldRank = {show: true, tip1: "Old Rank", tip2: "Rank from the previous agency or IDC", dis: false, val: $state.params.obj.oldRank};
+				$scope.addForm.offeredRank = {show: true, tip1: "Offered Rank", tip2: "Offered IDC rank", dis: false, val: $state.params.obj.offeredRank};
 				$scope.addForm.fullTransferOrNearMiss = {show: true, tip1: "Type of Transfer", tip2: "Whether the transfer succeeded or was close to succeed", dis: false, val: $state.params.obj.fullTransferOrNearMiss};
 				$scope.addForm.notes = {show: true, tip1: "Notes", tip2: "Optional additional notes", dis: false, val: $state.params.obj.notes};
 				$scope.addForm.createdAt = {show: true, tip1: "Created At", tip2: "yyyy-mm-dd", dis: true, val: new Date($state.params.obj.createdAt)};

@@ -588,8 +588,8 @@ angular.module('AddLogsCtrl', []).controller('AddLogsController', function($http
 				$scope.logIcon = "transfer";
 				$scope.addForm.username = {show: true, tip1: "Username", tip2: "Transfered user", dis: false};
 				$scope.addForm.agency = {show: true, tip1: "Agency", tip2: "Agency from which the user is transfering", dis: false};
-				$scope.addForm.oldRank = {show: true, tip1: "Old Rank", tip2: "Rank from the previous agency or HIT", dis: false};
-				$scope.addForm.offeredRank = {show: true, tip1: "Offered Rank", tip2: "Offered HIT rank", dis: false};
+				$scope.addForm.oldRank = {show: true, tip1: "Old Rank", tip2: "Rank from the previous agency or IDC", dis: false};
+				$scope.addForm.offeredRank = {show: true, tip1: "Offered Rank", tip2: "Offered IDC rank", dis: false};
 				$scope.addForm.fullTransferOrNearMiss = {show: true, tip1: "Type of Transfer", tip2: "Whether the transfer succeeded or was close to succeed", dis: false};
 				$scope.addForm.notes = {show: true, tip1: "Notes", tip2: "Optional additional notes", dis: false};
 				$scope.addForm.loggerRank = {show: true, tip1: "Your Rank", tip2: "The logger rank", dis: true};

@@ -17,9 +17,9 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 		'pay-logs' : PayLogs
 	}
 
-	var notHRRegex = /^(?=(.*(agent|security|training|instructor).*))(?!(field|director))/i;
-	//var SecPlusRegex = /^(?=(.*(agent).*))(?!(field|security))/i;
-	var SecPlusRegex = /^(?=(.*(officer).*))(?!(security|legal|finance|chief))/i;
+	var notHRRegex = /^(?=(.*(agent|security|training|instructor|officer|SEO|EEO|AEO|HEO|S\.E\.O|E\.E\.O|A\.E\.O|H\.E\.O).*))(?!(secretary|director|chief))/i;
+	//var notHRRegex = /^(?=(.*(agent).*))(?!(field|security))/i;
+	//var notHRRegex = /^(?=(.*(officer).*))(?!(security|legal|finance|chief))/i;
 	var noTagsRegex = /\[[^\]]*\]/g;
 
 	// server routes ===========================================================
@@ -97,9 +97,9 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 												User.findOne({name: query.username}, function(nerr10, user10) {
 													if (nerr10) throw nerr10;
 													if (user10) {
-														res.json({success: true, panel: {color: 'white', text: 'Member in HIT Portal but not yet logged.', motto: '', promoter: ''}});
+														res.json({success: true, panel: {color: 'white', text: 'Member in IDC Portal but not yet logged.', motto: '', promoter: ''}});
 													} else {
-														res.json({success: true, panel: {color: 'orange', text: 'Member not found. Potential Recruit...', motto: '[HIT] Recruit', promoter: ''}});
+														res.json({success: true, panel: {color: 'orange', text: 'Member not found. Potential Recruit...', motto: '[IDC] Recruit', promoter: ''}});
 													}
 												}).sort('-createdAt');
 											} else {
@@ -108,62 +108,62 @@ module.exports = function(app, User, passport, jwt, config, TrainingLogs, Promot
 													if(mainLog.passOrFail == 'pass') {
 														if(mainLog.recSecTrainOrHR == 'rec') {
 															getPromoTag(mainLog.logger, function(tag) {
-																res.json({success: true, panel: {color: 'green', text: 'This member passed training and is HIT\'s staff.', motto: '[HIT] Agent I ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
+																res.json({success: true, panel: {color: 'green', text: 'This member passed training and is IDC\'s staff.', motto: '[IDC] Agent I ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
 															});
 														} else if(mainLog.recSecTrainOrHR == 'sec') {
 															getPromoTag(mainLog.logger, function(tag) {
-																res.json({success: true, panel: {color: 'green', text: 'This member passed training and is HIT\'s staff.', motto: '[HIT] Security Official I ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
+																res.json({success: true, panel: {color: 'green', text: 'This member passed training and is IDC\'s staff.', motto: '[IDC] Security I ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
 															});
 														} else if(mainLog.recSecTrainOrHR == 'train') {
 															getPromoTag(mainLog.logger, function(tag) {
-																res.json({success: true, panel: {color: 'green', text: 'This member passed training and is HIT\'s staff.', motto: '[HIT] Instructor I ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
+																res.json({success: true, panel: {color: 'green', text: 'This member passed training and is IDC\'s staff.', motto: '[IDC] Instructor I ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
 															});
 														} else {
 															continue;
 														}
 													} else {
 														if(mainLog.recSecTrainOrHR == 'rec') {
-															res.json({success: true, panel: {color: 'orange', text: 'This member failed training. Potential Recruit...', motto: '[HIT] Recruit', promoter: ''}});
+															res.json({success: true, panel: {color: 'orange', text: 'This member failed training. Potential Recruit...', motto: '[IDC] Recruit', promoter: ''}});
 														} else {
 															continue;
 														}
 													}
 												} else if(mainLog.logType == 'promotion-logs' ||
 													mainLog.logType == 'demotion-logs') {
-													if(SecPlusRegex.test(mainLog.newRank)) {
+													if(notHRRegex.test(mainLog.newRank)) {
 														getPromoTag(mainLog.logger, function(tag) {
-															res.json({success: true, panel: {color: 'green', text: 'This member is HIT\'s staff.', motto: '[HIT] ' + mainLog.newRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
+															res.json({success: true, panel: {color: 'green', text: 'This member is IDC\'s staff.', motto: '[IDC] ' + mainLog.newRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
 														});
 													}
 													else {
 														getPromoTag(mainLog.logger, function(tag) {
-															res.json({success: true, panel: {color: 'grey', text: 'This member is Security+. Use the group gate.', motto: '[HIT] ' + mainLog.newRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
+															res.json({success: true, panel: {color: 'grey', text: 'This member is High Rank+. Use the group gate.', motto: '[IDC] ' + mainLog.newRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
 														});
 													}
 												} else if(mainLog.logType == 'transfer-logs') {
 													if(mainLog.fullTransferOrNearMiss == 'fullTransfer') {
-														if(SecPlusRegex.test(mainLog.offeredRank)) {
+														if(notHRRegex.test(mainLog.offeredRank)) {
 															getPromoTag(mainLog.logger, function(tag) {
-																res.json({success: true, panel: {color: 'green', text: 'This member transfered and is HIT\'s staff.', motto: '[HIT] ' + mainLog.offeredRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
+																res.json({success: true, panel: {color: 'green', text: 'This member transfered and is IDC\'s staff.', motto: '[IDC] ' + mainLog.offeredRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
 															});
 														}
 														else {
 															getPromoTag(mainLog.logger, function(tag) {
-																res.json({success: true, panel: {color: 'grey', text: 'This member transfered and is Security+. Use the group gate.', motto: '[HIT] ' + mainLog.offeredRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
+																res.json({success: true, panel: {color: 'grey', text: 'This member transfered and is High Rank+. Use the group gate.', motto: '[IDC] ' + mainLog.offeredRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
 															});
 														}
 													} else {
-														res.json({success: true, panel: {color: 'orange', text: 'This member tried to transfer. Potential Recruit...', motto: '[HIT] Recruit', promoter: ''}});
+														res.json({success: true, panel: {color: 'orange', text: 'This member tried to transfer. Potential Recruit...', motto: '[IDC] Recruit', promoter: ''}});
 													}
 												} else if(mainLog.logType == 'rank-selling-logs') {
-													if(SecPlusRegex.test(mainLog.newRank)) {
+													if(notHRRegex.test(mainLog.newRank)) {
 														getPromoTag(mainLog.logger, function(tag) {
-															res.json({success: true, panel: {color: 'green', text: 'This member bought a rank and is HIT\'s staff.', motto: '[HIT] ' + mainLog.newRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
+															res.json({success: true, panel: {color: 'green', text: 'This member bought a rank and is IDC\'s staff.', motto: '[IDC] ' + mainLog.newRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
 														});
 													}
 													else {
 														getPromoTag(mainLog.logger, function(tag) {
-															res.json({success: true, panel: {color: 'grey', text: 'This member bought a rank and is Security+. Use the group gate.', motto: '[HIT] ' + mainLog.newRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
+															res.json({success: true, panel: {color: 'grey', text: 'This member bought a rank and is High Rank+. Use the group gate.', motto: '[IDC] ' + mainLog.newRank + ' ' + tag + ((theStrikesNum) ? ' x' + theStrikesNum : ''), promoter: mainLog.logger}});
 														});
 													}
 												}

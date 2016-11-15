@@ -210,7 +210,7 @@
 							<tbody ng-repeat="x in logs">
 								<tr ng-class="{'danger': x.removed || x.rehired}">
 									<td ng-if="addForm.loa.show">{{x.logger}}</td>
-									<td ng-if="addForm.loaRank.show">[HIT] {{x.loggerRank}}</td>
+									<td ng-if="addForm.loaRank.show">[IDC] {{x.loggerRank}}</td>
 									<td ng-if="addForm.username.show">{{x.username}}</td>
 									<td ng-if="addForm.svOrVip.show">{{svOrVipDict[x.svOrVip]}}</td>
 									<td ng-if="addForm.payDay.show">{{x.payDay}}</td>
@@ -223,20 +223,20 @@
 										<span ng-if="x.rehired" class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
 									<td ng-if="addForm.recSecTrainOrHR.show">{{recSecTrainOrHRDict[x.recSecTrainOrHR]}}</td>
 									<td ng-if="addForm.passOrFail.show">{{passOrFailDict[x.passOrFail]}}</td>
-									<td ng-if="addForm.prevRank.show">[HIT] {{x.prevRank}}</td>
+									<td ng-if="addForm.prevRank.show">[IDC] {{x.prevRank}}</td>
 									<td ng-if="addForm.agency.show">{{x.agency}}</td>
 									<td ng-if="addForm.oldRank.show">[{{agencyPrefix(x.agency)}}] {{x.oldRank}}</td>
-									<td ng-if="addForm.offeredRank.show">[HIT] {{x.offeredRank}}</td>
+									<td ng-if="addForm.offeredRank.show">[IDC] {{x.offeredRank}}</td>
 									<td ng-if="addForm.fullTransferOrNearMiss.show">{{fullTransferOrNearMissDict[x.fullTransferOrNearMiss]}}</td>
 									<td ng-if="addForm.warnNumber.show">x{{x.warnNumber}}</td>
 									<td ng-if="addForm.strikeNumber.show">x{{x.strikeNumber}}</td>
-									<td ng-if="addForm.newRank.show">[HIT] {{x.newRank}}</td>
+									<td ng-if="addForm.newRank.show">[IDC] {{x.newRank}}</td>
 									<td ng-if="addForm.startDate.show">{{getDate(x.startDate)}}<br>{{getTime(x.startDate)}}</td>
 									<td ng-if="addForm.endDate.show">{{getDate(x.endDate)}}<br>{{getTime(x.endDate)}}</td>
 									<td ng-if="addForm.price.show">{{x.price}} coins</td>
 									<td ng-if="addForm.approvedBy.show">{{x.approvedBy}}</td>
 									<td ng-if="addForm.logger.show">{{x.logger}}</td>
-									<td ng-if="addForm.loggerRank.show">[HIT] {{x.loggerRank}}</td>
+									<td ng-if="addForm.loggerRank.show">[IDC] {{x.loggerRank}}</td>
 									<td ng-if="addForm.createdAt.show">{{getDate(x.createdAt)}}<br>{{getTime(x.createdAt)}}</td>
 									<td>
 										<a title="More Details..." ng-show="x.reason || x.screenshots || x.notes || x.paidPeople" class="icon-hide icon-padding" href="" ng-click="comments[$index] = !comments[$index]" type="button" role="button"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a>

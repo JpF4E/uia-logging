@@ -174,7 +174,7 @@
 										<tr ng-class="{'danger': true}">
 											<td ng-if="addForm.name.show">{{x.name}}</td>
 											<td ng-if="addForm.promoTag.show">[{{x.promoTag}}]</td>
-											<td ng-if="addForm.rank.show">[HIT] {{x.rank}}</td>
+											<td ng-if="addForm.rank.show">[IDC] {{x.rank}}</td>
 											<td ng-if="addForm.createdAt.show">{{x.joined}}</td>
 											<td ng-if="addForm.lastTrained.show">{{(x.trainAtRisk == null) ? '-- N/A --' : x.lastTrainedDiff}}
 											<!--<br ng-if="x.trainAtRisk != null"><br ng-if="x.trainAtRisk != null">{{(x.trainAtRisk == null) ? '' : getTime(x.trainAtRisk)}}<br ng-if="x.trainAtRisk != null">{{(x.trainAtRisk == null) ? '' : getDate(x.trainAtRisk)}}--></td>
@@ -229,7 +229,7 @@
 										<tr ng-class="{'danger': x.banned}">
 											<td ng-if="addForm.name.show">{{x.name}}</td>
 											<td ng-if="addForm.promoTag.show">[{{x.promoTag}}]</td>
-											<td ng-if="addForm.rank.show">[HIT] {{x.rank}}</td>
+											<td ng-if="addForm.rank.show">[IDC] {{x.rank}}</td>
 											<td ng-if="addForm.createdAt.show">{{x.joined}}</td>
 											<td ng-if="addForm.lastTrained.show">{{(x.trainAtRisk == null) ? '-- N/A --' : x.lastTrainedDiff}}
 											<!--<br ng-if="x.trainAtRisk != null"><br ng-if="x.trainAtRisk != null">{{(x.trainAtRisk == null) ? '' : getTime(x.trainAtRisk)}}<br ng-if="x.trainAtRisk != null">{{(x.trainAtRisk == null) ? '' : getDate(x.trainAtRisk)}}--></td>
