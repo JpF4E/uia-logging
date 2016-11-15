@@ -5,13 +5,13 @@ angular.module('starter', [])
 })
 
 .constant('API_ENDPOINT', {
-  url: 'https://hit-portal.herokuapp.com/api'
+  url: 'https://idc-portal.herokuapp.com/api'
   //url: 'http://127.0.0.1:8080/api'
   //  For a simulator use: url: 'http://127.0.0.1:8080/api'
 })
 
 .constant('HOME_ENDPOINT', {
-  url: 'https://hit-portal.herokuapp.com/'
+  url: 'https://idc-portal.herokuapp.com/'
   //url: 'http://127.0.0.1:8080/'
   //  For a simulator use: url: 'http://127.0.0.1:8080/api'
 });
